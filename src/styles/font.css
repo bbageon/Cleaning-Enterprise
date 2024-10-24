@@ -1,0 +1,124 @@
+/* ===== TITLE & CONTENT ===== */
+
+/* 제목 */
+.title {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* 부제목 */
+.sub-title {
+    font-size: 1.175rem;
+    font-weight: 600;
+}
+
+/* 부가설명 제목 */
+.info-title {
+    font-size: 1rem;
+    color: var(--gray1-color);
+}
+
+/* 청소업체 대표 서비스 */
+.flagship-service-wrap {
+    display: flex;
+    align-items: center;
+}
+
+.flagship-service {
+    color: var(--gray1-color);
+    position: relative;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+.flagship-service::after {
+    content: '';
+    height: 12px;
+    width: 1px;
+    background-color: var(--gray1-color);
+    transform: translateY(-50%);
+    position: absolute;
+    top: 50%;
+    right: -8px;
+}
+.flagship-service:last-child {
+    margin-left: 8px;
+}
+.flagship-service:last-child::after {
+    display: none;
+}
+
+/* 별점 */
+.rating {
+    font-weight: 600;
+}
+
+.start {
+    text-align: start;
+}
+
+.end {
+    text-align: end;
+}
+
+.required::before {
+    vertical-align: super;
+    content: '*';
+    color: var(--red-color);
+}
+
+
+/* ===== FONT ===== */
+.maximum {
+    font-size: 1.25rem;
+}
+
+.large {
+    font-size: 1.125rem;
+}
+
+.medium {
+    font-size: 1rem;
+}
+
+.small {
+    font-size: 0.875rem;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.strike-through-text {
+    text-decoration: line-through;
+    color: var(--gray3-color);
+}
+
+
+/* ===== COLOR ===== */
+.gray1 {
+    color: var(--gray1-color);
+}
+
+.gray2 {
+    color: var(--gray2-color);
+}
+
+.gray3 {
+    color: var(--gray3-color);
+}
+
+.gray4 {
+    color: var(--gray4-color);
+}
+
+.red {
+    color: var(--red-color);
+}
+
+.green {
+    color: var(--green-color);
+}
+
+.orange {
+    color: var(--orange-color);
+}

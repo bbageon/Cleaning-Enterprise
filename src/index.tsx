@@ -1,19 +1,41 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import { BrowserRouter as Router } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+// React Query
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+// Context
+import { CustomProvider } from './context/CustomContext';
+
+// Styles
+import './index.css';
+import './styles/colors.css';
+import './styles/font.css';
+
+// React-Query
+const queryClient = new QueryClient();
+
+const rootElement = document.getElementById('root');
+
+if (rootElement) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <CustomProvider>
+          <App />
+          {/* React Query Devtools: 추후 삭제 */}
+          <ReactQueryDevtools />
+        </CustomProvider>
+      </Router>
+    </QueryClientProvider>
+  );
+} else {
+  console.error('index.tsx: Root Element not found.');
+}
+
 reportWebVitals();
