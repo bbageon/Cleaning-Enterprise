@@ -1,8 +1,17 @@
-const MainPresenter = () => {
+import { MainLayout } from "../../../../components";
+
+const MainPresenter = ({
+    moveSchedule,
+}) => {
     return (
-        <div className="main-container">
-            메인 페이지
-        </div>
+        <MainLayout>
+            <div
+                className="main-container"
+                onClick={moveSchedule}
+            >
+                
+            </div>
+        </MainLayout>
     )
 }
 

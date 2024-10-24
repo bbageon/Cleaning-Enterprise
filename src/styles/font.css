@@ -1,4 +1,8 @@
 /* ===== TITLE & CONTENT ===== */
+/* 변수 */
+:root {
+    --layout-title-font: 30px;
+}
 
 /* 제목 */
 .title {

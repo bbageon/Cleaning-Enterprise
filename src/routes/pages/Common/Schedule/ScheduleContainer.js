@@ -1,18 +1,18 @@
 import { useCustomContext } from "../../../../context/CustomContext";
-import MainPresenter from "./MainPresenter"
+import SchedulePresenter from "./SchedulePresenter"
 
-const MainContainer = () => {
+const ScheduleContainer = () => {
     const { navigate } = useCustomContext();
 
     const moveSchedule = () => {
-        navigate(`schedule`);
+        navigate(`/`);
     }
 
     return (
-        <MainPresenter
+        <SchedulePresenter
             moveSchedule={moveSchedule}
         />
     )
 }
 
-export default MainContainer;
+export default ScheduleContainer;

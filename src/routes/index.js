@@ -5,7 +5,10 @@ import { ScrollToTop } from "../components"
  * 페이지
  * --
  */
-import { Main } from "./pages";
+import {
+    Main,
+    Schedule,
+} from "./pages";
 
 const Router = () => {
     return (
@@ -15,6 +18,10 @@ const Router = () => {
                 <Route
                     path='/'
                     element={<Main />}
+                />
+                <Route
+                    path='/schedule'
+                    element={<Schedule />}
                 />
             </Routes>
         </div>

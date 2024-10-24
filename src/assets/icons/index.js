@@ -1,0 +1,10 @@
+export { ReactComponent as ChatRoomIcon } from './chatroom.svg';
+export { ReactComponent as DashBoardIcon } from './dashboard.svg';
+export { ReactComponent as EmplayeeManageIcon } from './employee_manage.svg';
+export { ReactComponent as EstimateIcon } from './estimate.svg';
+export { ReactComponent as ListIcon } from './list.svg';
+export { ReactComponent as ProfileIcon } from './profile.svg';
+export { ReactComponent as RecentIcon } from './recent.svg';
+export { ReactComponent as ReviewIcon } from './review.svg';
+export { ReactComponent as ScheduleManageIcon } from './schedule_manage.svg';
+export { ReactComponent as LogOutIcon } from './logout.svg';

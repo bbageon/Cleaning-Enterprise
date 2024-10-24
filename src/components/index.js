@@ -1,3 +1,10 @@
+/**
+ * Layout Components
+ * --
+ */
+export {
+    MainLayout,
+} from './Layout';
 
 /**
  * Navigation Components
