@@ -11,6 +11,7 @@ import {
     LogOutIcon,
 } from '../../../assets/icons';
 
+
 import './MainNav.css';
 
 const MainNav = () => {

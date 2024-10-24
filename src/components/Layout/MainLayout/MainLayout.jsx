@@ -8,9 +8,11 @@ const MainLayout = ({
 }) => {
     return (
         <div className="layout">
-            <MainHeader />
             <MainNav />
-            {children}
+            <MainHeader />
+            <article>
+                {children}
+            </article>
         </div>
     )
 }

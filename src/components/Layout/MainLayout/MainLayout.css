@@ -2,4 +2,12 @@
     width: 100%;
     height: 100%;
     background-color: #EFEFEF;
+    overflow-y: scroll;
+}
+
+.layout article {
+    width: calc(100% - 15%);
+    height: calc(100% - 80px);
+    padding: 10px;
+    float: right;
 }

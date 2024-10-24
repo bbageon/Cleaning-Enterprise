@@ -1,4 +1,6 @@
-import './MainHeader.css'
+import './MainHeader.css';
+import { SearchIcon } from '../../../assets/icons';
+import Profile from '../../../assets/profile.png';
 
 const MainHeader = () => {
     return (
@@ -7,12 +9,15 @@ const MainHeader = () => {
                 요청 목록
             </div>
             <ul className='header-nav'>
-                <li>search</li>
+                <li className='search'>
+                    <SearchIcon />
+                    <span>search</span>
+                </li>
                 <li>any texts</li>
                 <li>any texts</li>
                 <li>any texts</li>
                 <li className="profile-image">
-                    <img src="" alt="" />
+                    <img src={Profile} alt="" />
                 </li>
                 <li className="profile-info">
                     <span className='name'>김건우님</span>

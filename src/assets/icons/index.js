@@ -8,3 +8,4 @@ export { ReactComponent as RecentIcon } from './recent.svg';
 export { ReactComponent as ReviewIcon } from './review.svg';
 export { ReactComponent as ScheduleManageIcon } from './schedule_manage.svg';
 export { ReactComponent as LogOutIcon } from './logout.svg';
+export { ReactComponent as SearchIcon } from './search.svg';
