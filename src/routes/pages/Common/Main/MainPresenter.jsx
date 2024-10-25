@@ -1,15 +1,15 @@
 import { MainLayout } from "../../../../components";
 
 const MainPresenter = ({
-    moveSchedule,
 }) => {
     return (
-        <MainLayout>
+        <MainLayout
+            page='메인 화면'
+        >
             <div
                 className="main-container"
-                onClick={moveSchedule}
             >
-                
+
             </div>
         </MainLayout>
     )

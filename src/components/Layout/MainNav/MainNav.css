@@ -28,7 +28,7 @@
     display: flex;
     flex-direction: column;
 
-    gap: 40px;
+    gap: 10px;
 }
 
 .nav-container .main-nav li {
@@ -37,15 +37,21 @@
     gap: 10px;
 
     position: relative;
+    padding: 20px;
 
     cursor: pointer;
+}
+
+.nav-container .main-nav li.current-page {
+    background-color: #C2C5FF21;
+    border-radius: 10px;
 }
 
 .nav-container .main-nav li.divide::after {
     content: '';
     position: absolute;
     width: 100%;
-    bottom: -20px;
+    bottom: -5px;
     left: 0;
 
     border-top: 1px solid #C2C5FF30;

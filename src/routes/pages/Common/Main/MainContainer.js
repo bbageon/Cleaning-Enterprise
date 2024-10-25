@@ -2,15 +2,8 @@ import { useCustomContext } from "../../../../context/CustomContext";
 import MainPresenter from "./MainPresenter"
 
 const MainContainer = () => {
-    const { navigate } = useCustomContext();
-
-    const moveSchedule = () => {
-        navigate(`schedule`);
-    }
-
     return (
         <MainPresenter
-            moveSchedule={moveSchedule}
         />
     )
 }

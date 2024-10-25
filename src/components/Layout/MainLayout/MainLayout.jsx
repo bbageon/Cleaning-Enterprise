@@ -5,10 +5,13 @@ import './MainLayout.css';
 
 const MainLayout = ({
     children,
+    page,
 }) => {
     return (
         <div className="layout">
-            <MainNav />
+            <MainNav
+                page={page}
+            />
             <MainHeader />
             <article>
                 {children}

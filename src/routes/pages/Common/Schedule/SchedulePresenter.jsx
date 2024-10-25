@@ -23,10 +23,10 @@ const SchedulePresenter = ({
         {
             title:
                 <div className='calculate schedule'>
-                    <div className='sub-text'>540,000원</div>
+                    <div className='sub-text'>240,000원</div>
                     <div className='main-text'>
-                        <span>정산완료</span>
-                        <span>12건</span>
+                        <span>정산예정</span>
+                        <span>7건</span>
                     </div>
                 </div>,
             start: new Date('2024-10-23T13:45:00-05:00'),
@@ -38,7 +38,9 @@ const SchedulePresenter = ({
     const localizer = momentLocalizer(moment);
 
     return (
-        <MainLayout>
+        <MainLayout
+            page={'일정 관리'}
+        >
             <Calendar
                 backgroundColor={'#fff'}
                 localizer={localizer}
