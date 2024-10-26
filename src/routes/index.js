@@ -1,5 +1,7 @@
-import { Route, Routes } from "react-router-dom"
-import { ScrollToTop } from "../components"
+import { Route, Routes } from "react-router-dom";
+import { ScrollToTop } from "../components";
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 
 /**
  * 페이지
@@ -17,6 +19,29 @@ import {
 } from "./pages";
 
 const Router = () => {
+    const socketRef = useState(null);
+
+    useEffect(() => {
+        socketRef.current = io('ws://localhost:4200/cleaning_chat', {
+            transports: ['websocket'],
+            reconnectionAttempts: 3,
+        });
+
+        const socket = socketRef.current;
+
+        socket.on('connect', () => {
+            console.log('Connected to WebSocket server');
+        });
+
+        socket.on('disconnect', () => {
+            console.log('Disconnected from WebSocket server');
+        });
+
+        return () => {
+            socket.disconnect();
+        }
+    }, []);
+
     return (
         <div className="app">
             <ScrollToTop />
@@ -29,7 +54,7 @@ const Router = () => {
                 {/* 대화방 관리 */}
                 <Route
                     path='/chatroom'
-                    element={<ChatRoom />}
+                    element={<ChatRoom socketRef={socketRef} />}
                 />
                 {/* 리뷰 관리 및 청소 내역 */}
                 <Route

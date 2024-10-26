@@ -977,3 +977,8 @@ button.rbc-input::-moz-focus-inner {
 .rbc-event.rbc-selected {
     background-color: transparent;
 }
+
+.rbc-event {
+    position: relative;
+    z-index: -2;
+}
