@@ -80,9 +80,19 @@ const ChatRoomContainer = ({
         }
     }, []);
 
+    const sendMessage = () => {
+        if (!chatMessage.length) return;
+
+        alert(chatMessage);
+        setChatMessage('');
+    }
+
     return (
         <ChatRoomPresenter
+            chatMessage={chatMessage}
+            setChatMessage={setChatMessage}
 
+            sendMessage={sendMessage}
         />
     )
 }

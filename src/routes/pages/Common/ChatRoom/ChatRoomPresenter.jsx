@@ -1,9 +1,13 @@
 import { MainLayout } from '../../../../components';
 
 import './ChatRoom.css';
+import { ChatBody } from './components/ChatBody';
 
 const ChatRoomPresenter = ({
+    chatMessage,
+    setChatMessage,
 
+    sendMessage,
 }) => {
     return (
         <MainLayout
@@ -11,7 +15,12 @@ const ChatRoomPresenter = ({
             title='대화방'
             className='translucent'
         >
-            
+            <ChatBody
+                chatMessage={chatMessage}
+                setChatMessage={setChatMessage}
+
+                sendMessage={sendMessage}
+            />
         </MainLayout>
     )
 }
