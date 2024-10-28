@@ -16,7 +16,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
     children,
     page = '',
     isShowSidebar = true,
-    tabList,
+    tabList = new CSidebarTab(),
 }) => {
     return (
         <div className="layout">

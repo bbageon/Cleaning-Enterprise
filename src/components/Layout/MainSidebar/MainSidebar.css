@@ -44,8 +44,13 @@
     background-color: #222327;
 }
 
+.main-sidebar .contents {
+    padding: 5px;
+}
+
 .main-sidebar .contents .tab.visible {
     display: inline-block;
+    width: 100%;
 }
 
 .main-sidebar .contents .tab.invisible {

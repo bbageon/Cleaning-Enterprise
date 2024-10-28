@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useCustomContext } from "../../../../context/CustomContext";
 import SchedulePresenter from "./SchedulePresenter";
 import { ScheduleInfo } from "./components";
+import { getTimeFormat } from "../../../../api/API";
 
 const ScheduleContainer = () => {
     const { navigate } = useCustomContext();
@@ -10,7 +11,6 @@ const ScheduleContainer = () => {
             request_date: '13:33',
             quantity: 2,
             total_price: 50000,
-            request_status: '결제 완료',
             clean_address: '부산 사상구 주례로 47',
             clean_address_detail: '상세주소',
         },
@@ -18,7 +18,6 @@ const ScheduleContainer = () => {
             request_date: '13:33',
             quantity: 2,
             total_price: 50000,
-            request_status: '결제 완료',
             clean_address: '부산 사상구 주례로 47',
             clean_address_detail: '상세주소',
         },
@@ -26,7 +25,6 @@ const ScheduleContainer = () => {
             request_date: '13:33',
             quantity: 2,
             total_price: 45000,
-            request_status: '결제 완료',
             clean_address: '부산 사상구 주례로 47',
             clean_address_detail: '상세주소',
         },
@@ -36,7 +34,6 @@ const ScheduleContainer = () => {
             request_date: '14:33',
             quantity: 2,
             total_price: 60000,
-            request_status: '결제 완료',
             clean_address: '부산 사상구 주례로 47',
             clean_address_detail: '상세주소',
         },
@@ -44,7 +41,6 @@ const ScheduleContainer = () => {
             request_date: '15:25',
             quantity: 2,
             total_price: 50000,
-            request_status: '결제 완료',
             clean_address: '부산 사상구 주례로 47',
             clean_address_detail: '상세주소',
         },
@@ -52,7 +48,6 @@ const ScheduleContainer = () => {
             request_date: '13:33',
             quantity: 2,
             total_price: 48000,
-            request_status: '결제 완료',
             clean_address: '부산 사상구 주례로 47',
             clean_address_detail: '상세주소',
         },
@@ -62,7 +57,6 @@ const ScheduleContainer = () => {
             request_date: '11:33',
             quantity: 2,
             total_price: 60000,
-            request_status: '결제 완료',
             clean_address: '부산 사상구 주례로 47',
             clean_address_detail: '상세주소',
         },
@@ -70,7 +64,6 @@ const ScheduleContainer = () => {
             request_date: '12:25',
             quantity: 2,
             total_price: 50000,
-            request_status: '결제 완료',
             clean_address: '부산 사상구 주례로 47',
             clean_address_detail: '상세주소',
         },
@@ -78,7 +71,6 @@ const ScheduleContainer = () => {
             request_date: '13:33',
             quantity: 2,
             total_price: 48000,
-            request_status: '결제 완료',
             clean_address: '부산 사상구 주례로 47',
             clean_address_detail: '상세주소',
         },
@@ -96,7 +88,10 @@ const ScheduleContainer = () => {
                         }
                     })
                 },
-                children: <ScheduleInfo scheduleInfos={beforeAccept} />,
+                children: <ScheduleInfo
+                    scheduleInfos={beforeAccept}
+                    type='beforeAccept'
+                />,
             },
             {
                 title: '진행중',
@@ -108,7 +103,10 @@ const ScheduleContainer = () => {
                         }
                     })
                 },
-                children: <ScheduleInfo scheduleInfos={cleaning} />,
+                children: <ScheduleInfo
+                    scheduleInfos={cleaning}
+                    type='cleaning'
+                />,
             },
             {
                 title: '청소 완료',
@@ -120,14 +118,19 @@ const ScheduleContainer = () => {
                         }
                     })
                 },
-                children: <ScheduleInfo scheduleInfos={cleanDone} />,
+                children: <ScheduleInfo
+                    scheduleInfos={cleanDone}
+                    type='cleanDone'
+                />,
             },
         ],
         current_tab: '수락전',
     })
 
     const onSelected = (e) => {
-        console.log(e.slots[0])
+        const time = getTimeFormat(e.slots[0]);
+
+        // 시간에 맞는 청소요청 정보 가져오기
     }
 
     return (

@@ -931,8 +931,16 @@ button.rbc-input::-moz-focus-inner {
 }
 
 .rbc-today {
-    /* z-index: 10;
-    background-color: #eaf6ff66; */
+    position: relative;
+}
+
+.rbc-today::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #E5EEFE50;
+
     border: 3px solid #1765FA !important;
 }
 
@@ -981,4 +989,8 @@ button.rbc-input::-moz-focus-inner {
 .rbc-event {
     position: relative;
     z-index: -2;
+}
+
+.rbc-btn-group:first-child {
+    display: none;
 }

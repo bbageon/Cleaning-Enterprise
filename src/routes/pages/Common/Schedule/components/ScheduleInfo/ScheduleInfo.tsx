@@ -3,10 +3,17 @@ import './ScheduleInfo.css';
 
 interface ScheduleInfoProps {
     scheduleInfos: Array<CScheduleInfo>;
+    type: string;
 }
 
+/**
+ * 
+ * @param type: 'beforeAccept', 'cleaning', 'cleanDone'
+ * @returns 
+ */
 export const ScheduleInfo: React.FC<ScheduleInfoProps> = ({
     scheduleInfos,
+    type = 'beforeAccept',
 }) => {
     console.log(scheduleInfos)
     return (
@@ -23,7 +30,12 @@ export const ScheduleInfo: React.FC<ScheduleInfoProps> = ({
                                 <div className="menu-info">
                                     <span>메뉴{quantity}개</span>
                                     <span>{total_price?.toLocaleString()}원</span>
-                                    <span>{request_status}</span>
+                                    {type === 'beforeAccept' &&
+                                        <span>수락전</span>}
+                                    {type === 'cleaning' &&
+                                        <span>진행중</span>}
+                                    {type === 'cleanDone' &&
+                                        <span>청소 완료</span>}
                                 </div>
                                 <div className="sub-menu-info">
                                     메뉴 1 / 메뉴 2 / 메뉴 3

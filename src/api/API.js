@@ -1,6 +1,11 @@
 import ApiManager from './ApiManager';
 const $http = new ApiManager();
 
+export const getTimeFormat = (dateFormat) => {
+  const date = new Date(dateFormat);
+  return Math.floor(date.getTime() / 1000);
+}
+
 const parameterToPath = (path, params = {}) => {
   const keys = Object.keys(params);
   let newStr = path;

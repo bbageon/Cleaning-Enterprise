@@ -1,6 +1,7 @@
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import { MainLayout } from '../../../../components';
+import { CalendarToolBar } from './components/CalendarToolBar';
 
 import './Schedule.css';
 
@@ -82,6 +83,18 @@ const SchedulePresenter = ({
             start: new Date('2024-10-01T13:45:00-05:00'),
             end: new Date('2024-10-01T14:00:00-05:00')
         },
+        {
+            title:
+                <div className='calculate schedule'>
+                    <div className='sub-text'>240,000원</div>
+                    <div className='main-text'>
+                        <span>정산예정</span>
+                        <span>7건</span>
+                    </div>
+                </div>,
+            start: new Date('2024-10-27T13:45:00-05:00'),
+            end: new Date('2024-10-27T14:00:00-05:00')
+        },
     ];
 
     moment.locale('ko-KR');
@@ -97,13 +110,14 @@ const SchedulePresenter = ({
                 localizer={localizer}
                 startAccessor='start'
                 endAccessor='end'
-                // components={{
-                //     toolbar: () => (<></>)
-                // }}
+                tooltipAccessor='renderable'
                 events={events}
                 draggableAccessor={(event) => true}
                 views={['month']}
                 onSelectSlot={onSelected}
+                components={{
+                    toolbar: CalendarToolBar
+                }}
                 selectable
             />
         </MainLayout>

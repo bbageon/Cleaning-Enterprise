@@ -1,0 +1,1 @@
+export { ChatRoomBG } from './chatroom_bg.png';
