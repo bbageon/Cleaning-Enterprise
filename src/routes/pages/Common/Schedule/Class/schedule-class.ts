@@ -2,7 +2,7 @@ import React from "react";
 
 export class CScheduleInfo {
     // 요청 날짜
-    request_date: string = '13:33';
+    request_date: number = 0;
 
     // 메뉴 개수
     quantity: number = 0;

@@ -1,28 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCustomContext } from "../../../../context/CustomContext";
 import SchedulePresenter from "./SchedulePresenter";
 import { ScheduleInfo } from "./components";
-import { getTimeFormat } from "../../../../api/API";
+import API, { getTimeFormat } from "../../../../api/API";
 
 const ScheduleContainer = () => {
     const { navigate } = useCustomContext();
     const [beforeAccept, setBeforeAccept] = useState([
         {
-            request_date: '13:33',
+            request_date: 172990409,
             quantity: 2,
             total_price: 50000,
             clean_address: '부산 사상구 주례로 47',
             clean_address_detail: '상세주소',
         },
         {
-            request_date: '13:33',
+            request_date: 172990409,
             quantity: 2,
             total_price: 50000,
             clean_address: '부산 사상구 주례로 47',
             clean_address_detail: '상세주소',
         },
         {
-            request_date: '13:33',
+            request_date: 172990409,
             quantity: 2,
             total_price: 45000,
             clean_address: '부산 사상구 주례로 47',
@@ -31,21 +31,21 @@ const ScheduleContainer = () => {
     ]);
     const [cleaning, setCleaning] = useState([
         {
-            request_date: '14:33',
+            request_date: 12949503,
             quantity: 2,
             total_price: 60000,
             clean_address: '부산 사상구 주례로 47',
             clean_address_detail: '상세주소',
         },
         {
-            request_date: '15:25',
+            request_date: 12949503,
             quantity: 2,
             total_price: 50000,
             clean_address: '부산 사상구 주례로 47',
             clean_address_detail: '상세주소',
         },
         {
-            request_date: '13:33',
+            request_date: 12949503,
             quantity: 2,
             total_price: 48000,
             clean_address: '부산 사상구 주례로 47',
@@ -54,21 +54,21 @@ const ScheduleContainer = () => {
     ]);
     const [cleanDone, setCleanDone] = useState([
         {
-            request_date: '11:33',
+            request_date: 123484357,
             quantity: 2,
             total_price: 60000,
             clean_address: '부산 사상구 주례로 47',
             clean_address_detail: '상세주소',
         },
         {
-            request_date: '12:25',
+            request_date: 123484357,
             quantity: 2,
             total_price: 50000,
             clean_address: '부산 사상구 주례로 47',
             clean_address_detail: '상세주소',
         },
         {
-            request_date: '13:33',
+            request_date: 123484357,
             quantity: 2,
             total_price: 48000,
             clean_address: '부산 사상구 주례로 47',
@@ -80,6 +80,7 @@ const ScheduleContainer = () => {
         tabs: [
             {
                 title: '수락전',
+                type: 'beforeAccept',
                 onClick: () => {
                     setTabs(prev => {
                         return {
@@ -88,13 +89,10 @@ const ScheduleContainer = () => {
                         }
                     })
                 },
-                children: <ScheduleInfo
-                    scheduleInfos={beforeAccept}
-                    type='beforeAccept'
-                />,
             },
             {
                 title: '진행중',
+                type: 'cleaning',
                 onClick: () => {
                     setTabs(prev => {
                         return {
@@ -103,13 +101,10 @@ const ScheduleContainer = () => {
                         }
                     })
                 },
-                children: <ScheduleInfo
-                    scheduleInfos={cleaning}
-                    type='cleaning'
-                />,
             },
             {
                 title: '청소 완료',
+                type: 'cleanDone',
                 onClick: () => {
                     setTabs(prev => {
                         return {
@@ -118,19 +113,48 @@ const ScheduleContainer = () => {
                         }
                     })
                 },
-                children: <ScheduleInfo
-                    scheduleInfos={cleanDone}
-                    type='cleanDone'
-                />,
             },
         ],
         current_tab: '수락전',
-    })
+    });
 
-    const onSelected = (e) => {
-        const time = getTimeFormat(e.slots[0]);
+    const getScheduleInfos = (type) => {
+        switch (type) {
+            case 'beforeAccept':
+                return beforeAccept;
+            case 'cleaning':
+                return cleaning;
+            case 'cleanDone':
+                return cleanDone;
+            default:
+                return [];
+        }
+    };
+
+    useEffect(() => {
+        setTabs((prev) => ({
+            ...prev,
+            tabs: prev.tabs.map((tab) => ({
+                ...tab,
+                children: (
+                    <ScheduleInfo
+                        scheduleInfos={getScheduleInfos(tab.type)}
+                        type={tab.type}
+                    />
+                ),
+            })),
+        }));
+    }, [beforeAccept, cleaning, cleanDone]);
+
+    const onSelected = async (e) => {
+        const date = getTimeFormat(e.slots[0]);
 
         // 시간에 맞는 청소요청 정보 가져오기
+        const result = await API.getDateRequestClean(date);
+
+        setBeforeAccept(result.data.beforeAccept);
+        setCleaning(result.data.cleaning);
+        setCleanDone(result.data.cleanDone);
     }
 
     return (

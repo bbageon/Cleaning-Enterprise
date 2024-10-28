@@ -715,6 +715,11 @@ const API = {
   getCompanyRequestClean: (company_id) => $http.get(parameterToPath('/request_clean/company/:company_id', { company_id })),
 
   /**
+   * 요청 목록 특정 날짜의 청소요청 조회
+   */
+  getDateRequestClean: (date) => $http.get(parameterToPath('/request_clean/date/:date', { date })),
+
+  /**
    * 청소요청 수정
   */
   putRequestClean: (request_clean_id, body) => $http.put(parameterToPath('/request_clean/:request_clean_id', { request_clean_id }), body),

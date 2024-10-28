@@ -991,6 +991,6 @@ button.rbc-input::-moz-focus-inner {
     z-index: -2;
 }
 
-.rbc-btn-group:first-child {
+/* .rbc-btn-group:first-child {
     display: none;
-}
+} */

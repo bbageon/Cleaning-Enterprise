@@ -116,9 +116,9 @@ const SchedulePresenter = ({
                 draggableAccessor={(event) => true}
                 views={['month']}
                 onSelectSlot={onSelected}
-                components={{
-                    toolbar: CalendarToolBar
-                }}
+                // components={{
+                //     toolbar: CalendarToolBar
+                // }}
                 selectable
             />
         </MainLayout>

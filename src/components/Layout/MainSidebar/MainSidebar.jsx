@@ -5,8 +5,6 @@ const MainSidebar = ({
 }) => {
     const { tabs, current_tab } = tabList;
 
-    console.log(tabs)
-
     return (
 
         <div className="main-sidebar">
@@ -14,8 +12,6 @@ const MainSidebar = ({
                 {
                     tabs?.map(tab => {
                         const { title, onClick } = tab;
-                        console.log(title);
-                        console.log(current_tab);
                         return (
                             <div
                                 className={`tab ${title === current_tab ? 'select' : ''}`}

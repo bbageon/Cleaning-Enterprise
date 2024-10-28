@@ -24,7 +24,13 @@ export const ScheduleInfo: React.FC<ScheduleInfoProps> = ({
                     return (
                         <div className="schedule-info">
                             <div className="date">
-                                {request_date}
+                                {
+                                    new Date(request_date * 1000).toLocaleTimeString('ko-KR', {
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        hour12: false,
+                                    })
+                                }
                             </div>
                             <div className="info">
                                 <div className="menu-info">
