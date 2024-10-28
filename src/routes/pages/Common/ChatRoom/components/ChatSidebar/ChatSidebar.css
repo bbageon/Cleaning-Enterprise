@@ -1,0 +1,162 @@
+.chat-room-sidebar {
+    width: 18%;
+    height: calc(100% - 80px);
+    float: right;
+}
+
+.chat-room-sidebar .rooftop {
+    width: fit-content;
+    font-size: 18px;
+    background-color: #3A3B41;
+    color: #ffffffcc;
+
+    position: relative;
+
+    padding: 10px 30px 10px 10px;
+
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.chat-room-sidebar .rooftop::after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 0;
+    width: 0;
+    height: 0;
+
+    border-bottom: 30px solid #3A3B41;
+    border-top: 8px solid transparent;
+    border-left: 20px solid #3A3B41;
+    border-right: 10px solid transparent;
+}
+
+.chat-room-sidebar .content {
+    width: 100%;
+    height: calc(100% - 16px);
+    background-color: #3A3B41;
+    color: white;
+    padding: 10px;
+}
+
+.chat-room-sidebar .content .chat-room-info {
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+
+    width: 100%;
+}
+
+.chat-room-sidebar .content .chat-room-info.selected {
+    background-color: #484855;
+}
+
+.chat-room-sidebar .content .chat-room-info::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 100%;
+    border: 1px solid #616162;
+}
+
+/* 채팅방 목록 css */
+
+.chat-room-sidebar .content .chat-room-info .info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+
+    padding: 8px 10px;
+}
+
+.chat-room-sidebar .content .chat-room-info .info .name {
+    color: white;
+    font-size: 18px;
+}
+
+.chat-room-sidebar .content .chat-room-info .info {
+    color: #EDEEEF;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+/* 읽지 않은 메시지 css */
+.chat-room-sidebar .content .chat-room-info .info .not-read-count {
+    background-color: #E9292D;
+    padding: 5px;
+    border-radius: 50%;
+    font-size: 12px;
+}
+
+
+/* 채팅방 상태 css */
+.chat-room-sidebar .content .chat-room-info .info:last-child {
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+}
+
+.chat-room-sidebar .content .chat-room-info .info .status-circle {
+    position: relative;
+
+    width: 1rem;
+    height: 1rem;
+
+    border-radius: 50%;
+}
+
+.chat-room-sidebar .content .chat-room-info .info .status-circle.DONE {
+    background-color: #50BF77;
+}
+
+.chat-room-sidebar .content .chat-room-info .info .status-circle.CLEANING {
+    background-color: #E5AE16;
+}
+
+.chat-room-sidebar .content .chat-room-info .info .status-circle.ERROR {
+    background-color: #EE1516;
+}
+
+.chat-room-sidebar .content .chat-room-info .info .status-circle.NEW {
+    background-color: #3192F1;
+}
+
+.chat-room-sidebar .content .chat-room-info .info .status-circle::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 0.25rem;
+    height: 0.25rem;
+
+    border-radius: 50%;
+
+    background-color: white;
+}
+
+.chat-room-sidebar .content .chat-room-info .info .status.DONE {
+    color: #50BF77;
+}
+
+.chat-room-sidebar .content .chat-room-info .info .status.CLEANING {
+    color: #E5AE16;
+}
+
+.chat-room-sidebar .content .chat-room-info .info .status.ERROR {
+    color: #EE1516;
+}
+
+.chat-room-sidebar .content .chat-room-info .info .status.NEW {
+    color: #3192F1;
+}

@@ -26,6 +26,7 @@ const ChatRoomContainer = ({
         //     message: `안녕하세요 김재모 입니다. 무엇을 도와드릴까요 ?`,
         // },
     ])
+    const [selectChatIndex, setSelectChatIndex] = useState(0);
 
     useEffect(() => {
         try {
@@ -93,6 +94,9 @@ const ChatRoomContainer = ({
             setChatMessage={setChatMessage}
 
             sendMessage={sendMessage}
+
+            selectChatIndex={selectChatIndex}
+            setSelectChatIndex={setSelectChatIndex}
         />
     )
 }

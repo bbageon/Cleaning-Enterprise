@@ -12,6 +12,7 @@ interface MainLayoutProps {
     isShowSidebar: boolean;
     tabList: CSidebarTab;
     className: string;
+    CustomSidebar: React.ReactNode;
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({
@@ -21,6 +22,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
     isShowSidebar = true,
     tabList = new CSidebarTab(),
     className = '',
+    CustomSidebar,
 }) => {
     return (
         <div className={`layout ${className}`}>
@@ -34,12 +36,13 @@ const MainLayout: React.FC<MainLayoutProps> = ({
             <article>
                 {children}
             </article>
-            {
-                isShowSidebar &&
-                <MainSidebar
-                    tabList={tabList}
-                />
-            }
+            {isShowSidebar && (
+                CustomSidebar ?
+                    (
+                        CustomSidebar
+                    ) :
+                    <MainSidebar tabList={tabList} />
+            )}
         </div>
     )
 }

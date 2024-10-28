@@ -20,3 +20,19 @@ export class CScheduleInfo {
     clean_address_detail: string = '상세주소';
 }
 
+export class CChatRoomInfo {
+    // 채팅방 이름
+    chat_room_name: string = '';
+
+    // 서브 이름
+    sub_name: string = '';
+
+    // 최신 채팅 날짜
+    updated_at: number = 172356432;
+
+    // 채팅 상태
+    status: string = '';
+
+    // 읽지 않은 메시지 수
+    not_read_count: number = 0;
+}
