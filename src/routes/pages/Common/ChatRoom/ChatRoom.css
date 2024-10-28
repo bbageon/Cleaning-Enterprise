@@ -1,0 +1,20 @@
+.layout.translucent {
+    background: #EFEFEF50;
+}
+
+
+.layout.translucent::before {
+    content: '';
+    background-image: url(../../../../assets/bg/chat_room_bg.png);
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    z-index: -1;
+    filter: blur(20px);
+    transform: scale(1.5);
+}
+
+.header-nav li.translucent,
+.header-nav .profile-info span.name-english.translucent {
+    color: white;
+}

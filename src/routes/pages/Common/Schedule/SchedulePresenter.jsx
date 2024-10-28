@@ -102,7 +102,8 @@ const SchedulePresenter = ({
 
     return (
         <MainLayout
-            page={'일정 관리'}
+            page='일정 관리'
+            title='요청 목록'
             tabList={tabList}
         >
             <Calendar

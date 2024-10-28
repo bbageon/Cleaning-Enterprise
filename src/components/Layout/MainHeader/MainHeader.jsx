@@ -2,26 +2,29 @@ import './MainHeader.css';
 import { SearchIcon } from '../../../assets/icons';
 import Profile from '../../../assets/profile.png';
 
-const MainHeader = () => {
+const MainHeader = ({
+    title,
+    className = '',
+}) => {
     return (
         <header className="header-container">
             <div className="header-title title">
-                요청 목록
+                {title}
             </div>
             <ul className='header-nav'>
                 <li className='search'>
                     <SearchIcon />
-                    <span>search</span>
+                    <span className={className}>search</span>
                 </li>
-                <li>any texts</li>
-                <li>any texts</li>
-                <li>any texts</li>
+                <li className={className}>any texts</li>
+                <li className={className}>any texts</li>
+                <li className={className}>any texts</li>
                 <li className="profile-image">
                     <img src={Profile} alt="" />
                 </li>
                 <li className="profile-info">
                     <span className='name'>김건우님</span>
-                    <span className='name-engilsh'>Kim Guenwoo</span>
+                    <span className={`name-english ${className}`}>Kim Guenwoo</span>
                 </li>
             </ul>
         </header>

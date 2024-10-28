@@ -7,7 +7,9 @@ const ChatRoomPresenter = ({
 }) => {
     return (
         <MainLayout
-            page={'대화방 관리'}
+            page='대화방 관리'
+            title='대화방'
+            className='translucent'
         >
             
         </MainLayout>
