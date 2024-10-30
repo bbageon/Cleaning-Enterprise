@@ -21,6 +21,9 @@ export class CScheduleInfo {
 }
 
 export class CChatRoomInfo {
+    // 채팅방 아이디
+    room_id: number = -1;
+
     // 채팅방 이름
     chat_room_name: string = '';
 
@@ -35,4 +38,12 @@ export class CChatRoomInfo {
 
     // 읽지 않은 메시지 수
     not_read_count: number = 0;
+}
+
+export class CChatMessage {
+    // 발신자
+    sender: string = '';
+
+    // 메시지
+    message: string = '';
 }

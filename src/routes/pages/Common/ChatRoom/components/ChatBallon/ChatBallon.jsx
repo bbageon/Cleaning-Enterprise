@@ -1,13 +1,15 @@
 import './ChatBallon.css';
 
 const ChatBallon = ({
-    chatMessages
+    clientId,
+    chatMessages,
 }) => {
     return (
         chatMessages?.map(msg => {
             const { message, sender } = msg;
+            
             return (
-                <div className={`chat-message ${sender}`}>
+                <div className={`chat-message ${clientId === sender ? 'my' : 'other'}`}>
                     {message}
                 </div>
             )

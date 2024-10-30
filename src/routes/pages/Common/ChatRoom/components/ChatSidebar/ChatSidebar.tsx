@@ -1,10 +1,11 @@
 import { getTimeFormat } from '../../../../../../api/API';
 import { ImageIcon, SendIcon } from '../../../../../../assets/icons';
-import { CChatRoomInfo } from '../../../Schedule/Class/schedule-class';
+import { CChatMessage, CChatRoomInfo } from '../../../Schedule/Class/schedule-class';
 import './ChatSidebar.css';
 
 interface ChatSidebarProps {
     roomInfos: Array<CChatRoomInfo>;
+    selectChatRoom: (room_id: number) => void;
     selectChatIndex: number,
     setSelectChatIndex: (index: number) => void,
 }
@@ -18,9 +19,12 @@ const chatStatus: Record<string, string> = {
 
 const ChatSidebar: React.FC<ChatSidebarProps> = ({
     roomInfos,
+    selectChatRoom,
+
     selectChatIndex,
     setSelectChatIndex,
 }) => {
+    
     return (
         <div className="chat-room-sidebar">
             <div className="rooftop">
@@ -28,12 +32,15 @@ const ChatSidebar: React.FC<ChatSidebarProps> = ({
             </div>
             <div className="content">
                 {
-                    roomInfos.map((roomInfo, idx) => {
-                        const { chat_room_name, sub_name, updated_at, status, not_read_count } = roomInfo;
+                    roomInfos?.map((roomInfo, idx) => {
+                        const { room_id, chat_room_name, sub_name, updated_at, status, not_read_count } = roomInfo;
                         return (
                             <div
                                 className={`chat-room-info ${selectChatIndex === idx ? 'selected' : ''}`}
-                                onClick={() => setSelectChatIndex(idx)}
+                                onClick={() => {
+                                    setSelectChatIndex(idx);
+                                    selectChatRoom(room_id);
+                                }}
                             >
                                 <div className="info">
                                     <span className="name">{chat_room_name}</span>

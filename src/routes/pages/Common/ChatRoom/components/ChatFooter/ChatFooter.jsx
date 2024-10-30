@@ -2,6 +2,7 @@ import { ImageIcon, SendIcon } from '../../../../../../assets/icons';
 import './ChatFooter.css';
 
 const ChatFooter = ({
+    inputChatRef,
     chatMessage,
     setChatMessage,
 
@@ -10,6 +11,7 @@ const ChatFooter = ({
     return (
         <div className="chat-room-footer">
             <input
+                ref={inputChatRef}
                 type="text"
                 className='chat-input'
                 value={chatMessage}

@@ -34,7 +34,7 @@
 
 .chat-room-sidebar .content {
     width: 100%;
-    height: calc(100% - 16px);
+    height: calc(100% - 38px);
     background-color: #3A3B41;
     color: white;
     padding: 10px;

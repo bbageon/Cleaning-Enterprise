@@ -3,10 +3,15 @@ import { ChatFooter } from "../ChatFooter";
 import './ChatBody.css';
 
 const ChatBody = ({
+    inputChatRef,
     chatMessage,
     setChatMessage,
 
     sendMessage,
+
+    clientId,
+    chatRef,
+    chatList,
 }) => {
     const chatMessages = [
         {
@@ -21,13 +26,18 @@ const ChatBody = ({
 
     return (
         <div className="chat-room-body">
-            <div className="chat-messages">
+            <div
+                className="chat-messages"
+                ref={chatRef}
+            >
                 <ChatBallon
-                    chatMessages={chatMessages}
+                    clientId={clientId}
+                    chatMessages={chatList}
                 />
             </div>
 
             <ChatFooter
+                inputChatRef={inputChatRef}
                 chatMessage={chatMessage}
                 setChatMessage={setChatMessage}
 
