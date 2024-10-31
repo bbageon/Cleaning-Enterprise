@@ -4,6 +4,7 @@
  */
 export {
     MainLayout,
+    MainContent,
 } from './Layout';
 
 /**

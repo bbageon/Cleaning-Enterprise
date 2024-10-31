@@ -8,6 +8,10 @@
 .layout article {
     width: calc(100% - 15% - 18%);
     height: calc(100% - 80px);
-    padding: 10px;
+    padding: 30px;
     float: left;
+}
+
+.layout.overflow {
+    overflow-y: hidden;
 }

@@ -1,0 +1,21 @@
+.request-clean-title-container {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+
+    padding: 1.5rem;
+
+    background-color: #FFFFFF;
+
+    margin-bottom: 1rem;;
+}
+
+.request-clean-title-info {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+
+    gap: 1rem;
+}
