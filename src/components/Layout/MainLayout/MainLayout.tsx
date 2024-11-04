@@ -9,31 +9,45 @@ interface MainLayoutProps {
     children: React.ReactNode;
     page: string;
     title: string;
-    isShowSidebar: boolean;
-    tabList: CSidebarTab;
     className: string;
+    articleStyle: object;
+
+    isShowSidebar: boolean;
     CustomSidebar: React.ReactNode;
+    tabList: CSidebarTab;
+
+    isShowHeader: boolean;
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({
     children,
     page = '',
     title = '',
-    isShowSidebar = true,
-    tabList = new CSidebarTab(),
     className = '',
+    articleStyle = {},
+
+    isShowSidebar = true,
     CustomSidebar,
+    tabList = new CSidebarTab(),
+
+    isShowHeader = true,
 }) => {
     return (
         <div className={`layout ${className}`}>
             <MainNav
                 page={page}
             />
-            <MainHeader
-                title={title.length ? title : page}
-                className='translucent'
-            />
-            <article>
+            {
+                isShowHeader &&
+                <MainHeader
+                    title={title.length ? title : page}
+                    className='translucent'
+                />
+            }
+            <article
+                className={isShowHeader ? '' : 'no-header'}
+                style={articleStyle}
+            >
                 {children}
             </article>
             {isShowSidebar && (
@@ -41,7 +55,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({
                     (
                         CustomSidebar
                     ) :
-                    <MainSidebar tabList={tabList} />
+                    <MainSidebar
+                        tabList={tabList}
+                        className={isShowHeader ? '' : 'no-header'}
+                    />
             )}
         </div>
     )

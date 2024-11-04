@@ -1,6 +1,10 @@
 import ApiManager from './ApiManager';
 const $http = new ApiManager();
 
+export const getToday = () => {
+  return Math.floor(Date.now() / 1000);
+}
+
 export const getTimeFormat = (dateFormat) => {
   const date = new Date(dateFormat);
   return Math.floor(date.getTime() / 1000);
@@ -40,6 +44,11 @@ const API = {
    * 고객 카카오 로그인
    */
   postAuthUserKakaoSignin: (body) => $http.post('/auth/user/kakao/signin', body),
+
+  /**
+   * 고객 네이버 로그인
+   */
+  postAuthUserNaverSignin: (body) => $http.post('/auth/user/naver/signin', body),
 
 
   /**
@@ -372,7 +381,7 @@ const API = {
   /**
    * 장바구니 삭제
    */
-  deleteCart: (cart_id) => $http.put(parameterToPath('/cart/:cart_id', { cart_id })),
+  deleteCart: (cart_id) => $http.delete(parameterToPath('/cart/:cart_id', { cart_id })),
 
 
   /**
@@ -414,7 +423,7 @@ const API = {
   /**
    * 장바구니 목록 삭제
    */
-  deleteCartList: (cart_list_id) => $http.put(parameterToPath('/cart_list/:cart_list_id', { cart_list_id })),
+  deleteCartList: (cart_list_id) => $http.delete(parameterToPath('/cart_list/:cart_list_id', { cart_list_id })),
 
 
   /**
@@ -456,7 +465,7 @@ const API = {
   /**
    * 리뷰 삭제
    */
-  deleteReview: (review_id) => $http.put(parameterToPath('/review/:review_id', { review_id })),
+  deleteReview: (review_id) => $http.delete(parameterToPath('/review/:review_id', { review_id })),
 
 
   /**
@@ -493,7 +502,7 @@ const API = {
   /**
    * 리뷰 이미지 삭제
    */
-  deleteReviewImage: (review_image_id) => $http.put(parameterToPath('/review_image/:review_image_id', { review_image_id })),
+  deleteReviewImage: (review_image_id) => $http.delete(parameterToPath('/review_image/:review_image_id', { review_image_id })),
 
 
   // /**
@@ -713,6 +722,11 @@ const API = {
    * 청소업체 청소요청 조회
    */
   getCompanyRequestClean: (company_id) => $http.get(parameterToPath('/request_clean/company/:company_id', { company_id })),
+
+  /**
+   * 요청 목록 청소요청 조회(1년 단위)
+   */
+  getYearRequestClean: (today) => $http.get(parameterToPath('/request_clean/schedule/:today', { today })),
 
   /**
    * 요청 목록 특정 날짜의 청소요청 조회

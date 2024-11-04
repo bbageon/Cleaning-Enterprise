@@ -66,4 +66,6 @@
     position: absolute;
     bottom: 0;
     padding: 30px 20px;
+
+    cursor: pointer;
 }

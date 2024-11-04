@@ -16,3 +16,7 @@
     padding: 10px;
     float: left;
 }
+
+.layout article.no-header {
+    height: 100%;
+}

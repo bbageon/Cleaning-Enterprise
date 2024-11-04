@@ -1,9 +1,10 @@
+import { MainLayout } from '../../../../components';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
-import { MainLayout } from '../../../../components';
 import { CalendarToolBar } from './components/CalendarToolBar';
 
 import './Schedule.css';
+import { ScheduleSidebar } from './components/ScheduleSidebar';
 
 const SchedulePresenter = ({
     onSelected,
@@ -105,22 +106,27 @@ const SchedulePresenter = ({
             page='일정 관리'
             title='요청 목록'
             tabList={tabList}
+            isShowHeader={false}
+            CustomSidebar={<ScheduleSidebar />}
+            articleStyle={{ width: 'calc(100% - 15% - 15%)' }}
         >
-            <Calendar
-                backgroundColor={'#fff'}
-                localizer={localizer}
-                startAccessor='start'
-                endAccessor='end'
-                tooltipAccessor='renderable'
-                events={events}
-                draggableAccessor={(event) => true}
-                views={['month']}
-                onSelectSlot={onSelected}
-                // components={{
-                //     toolbar: CalendarToolBar
-                // }}
-                selectable
-            />
+            <div className='schedule-calendar'>
+                <Calendar
+                    backgroundColor={'#fff'}
+                    localizer={localizer}
+                    startAccessor='start'
+                    endAccessor='end'
+                    tooltipAccessor='renderable'
+                    events={events}
+                    draggableAccessor={(event) => true}
+                    views={['month']}
+                    onSelectSlot={onSelected}
+                    components={{
+                        toolbar: CalendarToolBar
+                    }}
+                    selectable
+                />
+            </div>
         </MainLayout>
     )
 }

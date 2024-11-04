@@ -9,6 +9,10 @@
     color: white;
 }
 
+.main-sidebar.no-header {
+    height: 100%;
+}
+
 .main-sidebar .tabs {
     display: flex;
     justify-content: space-around;

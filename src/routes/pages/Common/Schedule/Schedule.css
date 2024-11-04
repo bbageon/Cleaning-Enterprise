@@ -914,6 +914,11 @@ button.rbc-input::-moz-focus-inner {
 /*# sourceMappingURL=react-big-calendar.css.map */
 
 /* Custom */
+.schedule-calendar {
+    width: 100%;
+    height: 100%;
+}
+
 .rbc-day-bg,
 .rbc-header {
     background-color: white;
@@ -994,3 +999,41 @@ button.rbc-input::-moz-focus-inner {
 /* .rbc-btn-group:first-child {
     display: none;
 } */
+
+.schedule-calendar .rbc-btn-group {
+    display: flex;
+    gap: 20px;
+}
+
+.schedule-calendar .rbc-btn-group button {
+    border-radius: 20px !important;
+    padding: 10px 20px;
+    background-color: #ffffff66;
+    border: 1px solid #a3a3a3;
+    box-shadow: 0 1px 4px #00000019;
+    color: black;
+    cursor: pointer;
+}
+
+.schedule-calendar .rbc-btn-group button:nth-child(2),
+.schedule-calendar .rbc-btn-group button:nth-child(3) {
+    text-indent: -9999px;
+    position: relative;
+}
+
+.schedule-calendar .rbc-btn-group button:nth-child(2)::after {
+    content: '<';
+}
+
+.schedule-calendar .rbc-btn-group button:nth-child(3)::after {
+    content: '>';
+}
+
+.schedule-calendar .rbc-btn-group button:nth-child(2)::after,
+.schedule-calendar .rbc-btn-group button:nth-child(3)::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-indent: 0;
+}

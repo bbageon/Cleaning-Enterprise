@@ -2,12 +2,13 @@ import './MainSidebar.css';
 
 const MainSidebar = ({
     tabList,
+    className = '',
 }) => {
     const { tabs, current_tab } = tabList;
 
     return (
 
-        <div className="main-sidebar">
+        <div className={`main-sidebar ${className}`}>
             <div className="tabs">
                 {
                     tabs?.map(tab => {

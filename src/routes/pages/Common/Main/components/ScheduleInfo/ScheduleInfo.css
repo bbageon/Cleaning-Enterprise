@@ -1,0 +1,54 @@
+.schedule-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+
+    position: relative;
+
+    padding: 10px 0;
+}
+
+.schedule-info::after {
+    content: '';
+    position: absolute;
+    width: 85%;
+    height: 100%;
+    padding: 0 10px;
+    border-bottom: 1px solid #C2C5FF21;
+}
+
+.schedule-info .date {
+    font-size: 24px;
+    padding: 10px;
+}
+
+.schedule-info .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+
+    font-size: 11px;
+    word-break: keep-all;
+}
+
+.schedule-info .info .menu-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.schedule-info .info .menu-info span:first-child {
+    font-size: 12px;
+}
+
+.schedule-info .info .menu-info span:last-child {
+    text-align: center;
+    border: 1px solid white;
+    padding: 1px;
+}
+
+.schedule-info .info .sub-menu-info {
+    color: #969696;
+}
