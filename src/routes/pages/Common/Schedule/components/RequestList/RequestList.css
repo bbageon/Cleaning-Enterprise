@@ -1,0 +1,33 @@
+.request-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    width: 100%;
+}
+
+.request-list .request-wrap,
+.request-list .request-wrap .request-elements {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    position: relative;
+}
+
+.request-list .request-wrap .request-date {
+    margin-bottom: 10px;
+}
+
+.request-list .request-wrap .request-date::after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 1.25rem;
+
+    width: 100%;
+    height: 1px;
+    background-color: #43434F;
+}

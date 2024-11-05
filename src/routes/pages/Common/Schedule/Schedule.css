@@ -921,7 +921,7 @@ button.rbc-input::-moz-focus-inner {
 
 .rbc-day-bg,
 .rbc-header {
-    background-color: white;
+    background-color: #DBD7D9;
 }
 
 .rbc-header {
@@ -944,9 +944,9 @@ button.rbc-input::-moz-focus-inner {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: #E5EEFE50;
+    background-color: #ffffff7f;
 
-    border: 3px solid #1765FA !important;
+    border-radius: 10px;
 }
 
 .asdf {
@@ -959,11 +959,13 @@ button.rbc-input::-moz-focus-inner {
 }
 
 .calculate.complete {
-    --show-color: #30B131;
+    --show-color: #4E976726;
+    --text-color: #00A036;
 }
 
 .calculate.schedule {
-    --show-color: #F97C2A;
+    --show-color: #CD970026;
+    --text-color: #CD9700;
 }
 
 .calculate {
@@ -973,18 +975,52 @@ button.rbc-input::-moz-focus-inner {
     margin-bottom: 5px;
 }
 
+.calculate .calculate-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+
+    position: relative;
+
+    padding: 6px 10px 6px 12px;
+    background-color: var(--show-color);
+
+    border: 1px solid var(--show-color);
+    border-radius: 2px;
+}
+
+.calculate .calculate-text::before {
+    content: '';
+
+    position: absolute;
+    top: 50%;
+    left: 0;
+
+    transform: translateY(-50%);
+
+    width: 2px;
+    height: 80%;
+
+    margin-left: 4px;
+
+    background-color: var(--text-color);
+    border-radius: 2px;
+}
+
 .calculate .sub-text {
-    align-self: flex-end;
-    color: var(--show-color);
+    color: var(--text-color);
     font-weight: bold;
 }
 
 .calculate .main-text {
     display: flex;
-    justify-content: space-between;
-    border: 1px solid var(--show-color);
-    color: var(--show-color);
-    padding: 3px 5px;
+    gap: 10px;
+    color: var(--text-color);
+}
+
+.bold {
+    font-weight: bold;
 }
 
 .rbc-event.rbc-selected {
@@ -1002,17 +1038,24 @@ button.rbc-input::-moz-focus-inner {
 
 .schedule-calendar .rbc-btn-group {
     display: flex;
-    gap: 20px;
 }
 
 .schedule-calendar .rbc-btn-group button {
-    border-radius: 20px !important;
+    border-radius: 15px !important;
     padding: 10px 20px;
     background-color: #ffffff66;
     border: 1px solid #a3a3a3;
     box-shadow: 0 1px 4px #00000019;
     color: black;
     cursor: pointer;
+}
+
+.schedule-calendar .rbc-btn-group button:nth-child(1) {
+    margin-right: 20px;
+}
+
+.schedule-calendar .rbc-btn-group button:nth-child(2) {
+    margin-right: 10px;
 }
 
 .schedule-calendar .rbc-btn-group button:nth-child(2),
@@ -1036,4 +1079,34 @@ button.rbc-input::-moz-focus-inner {
     left: 50%;
     transform: translate(-50%, -50%);
     text-indent: 0;
+}
+
+.rbc-header {
+    padding: 10px 0;
+}
+
+.rbc-month-view {
+    border-radius: 20px;
+}
+
+.rbc-day-bg,
+.rbc-month-row,
+.rbc-header {
+    border: none !important;
+}
+
+.rbc-month-header .rbc-header:first-child {
+    border-top-left-radius: 20px;
+}
+
+.rbc-month-view .rbc-month-row:last-child .rbc-row-bg .rbc-day-bg:first-child {
+    border-bottom-left-radius: 20px;
+}
+
+.rbc-month-header .rbc-header:last-child {
+    border-top-right-radius: 20px;
+}
+
+.rbc-month-view .rbc-month-row:last-child .rbc-row-bg .rbc-day-bg:last-child {
+    border-bottom-right-radius: 20px;
 }

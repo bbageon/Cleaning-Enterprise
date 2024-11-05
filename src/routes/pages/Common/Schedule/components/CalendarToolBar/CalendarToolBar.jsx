@@ -3,10 +3,23 @@ import './CalendarToolBar.css';
 export const CalendarToolBar = ({
     date,
     onNavigate,
+    changeMonth,
 }) => {
 
     const navigate = (action) => {
         onNavigate(action);
+
+        const newDate = new Date(date);
+        if (action === 'TODAY') {
+            newDate.setFullYear(new Date().getFullYear());
+            newDate.setMonth(new Date().getMonth());
+        } else if (action === 'PREV') {
+            newDate.setMonth(newDate.getMonth() - 1);
+        } else if (action === 'NEXT') {
+            newDate.setMonth(newDate.getMonth() + 1);
+        }
+        changeMonth(newDate.getFullYear(), newDate.getMonth() + 1);
+
     }
 
     return (

@@ -10,6 +10,10 @@ export const getTimeFormat = (dateFormat) => {
   return Math.floor(date.getTime() / 1000);
 }
 
+export const getDate = (timestamp) => {
+  return new Date(timestamp * 1000);
+}
+
 const parameterToPath = (path, params = {}) => {
   const keys = Object.keys(params);
   let newStr = path;
@@ -727,6 +731,11 @@ const API = {
    * 요청 목록 청소요청 조회(1년 단위)
    */
   getYearRequestClean: (today) => $http.get(parameterToPath('/request_clean/schedule/:today', { today })),
+
+  /**
+   * 특정 기간의 청소요청 조회
+   */
+  getPeriodRequestClean: (first_date, last_date) => $http.get(parameterToPath('/request_clean/schedule/:first_date/:last_date', { first_date, last_date })),
 
   /**
    * 요청 목록 특정 날짜의 청소요청 조회

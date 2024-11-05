@@ -41,7 +41,7 @@
 
 .custom-rbc-toolbar .right-side .btn-group button:nth-child(1) {
     background-color: #ffffffb2;
-    padding: 10px 40px 10px 20px;
+    padding: 0px 40px 0px 20px;
     border-radius: 20px;
     box-shadow: 0 0 4px #00000066;
 }
@@ -50,7 +50,7 @@
     display: flex;
 
     background-color: transparent;
-    padding: 10px 40px 10px 20px;
+    padding: 0px 40px 0px 20px;
     border-radius: 20px;
 }
 
@@ -60,4 +60,12 @@
     border-radius: 20px;
     color: white;
     text-align: center;
+}
+
+.custom-rbc-toolbar .right-side .btn-group button:nth-child(3) span {
+    font-size: 18px;
+}
+
+.custom-rbc-toolbar .right-side .btn-group button span:nth-child(2) {
+    color: #00000099;
 }

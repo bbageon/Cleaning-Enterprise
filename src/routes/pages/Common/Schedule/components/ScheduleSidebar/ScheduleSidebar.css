@@ -1,7 +1,54 @@
 .schedule-sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
     width: 15%;
     height: 100%;
+
+    padding: 30px 10px 10px 10px;
+
     background-color: #2C2C2F;
-    
+
     float: right;
+
+    color: white;
+    font-weight: bold;
+}
+
+.schedule-sidebar .profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #C2C5FF26;
+
+    padding: 10px 15px;
+
+    width: 100%;
+    height: fit-content;
+
+    border-radius: 10px;
+}
+
+.schedule-sidebar .profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.schedule-sidebar .profile .user-profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.schedule-sidebar .profile .user-profile-info .name {
+    font-size: 18px;
+}
+
+.schedule-sidebar .profile .user-profile-info .english-name {
+    color: #ffffffcc;
+    font-size: 14px;
 }
