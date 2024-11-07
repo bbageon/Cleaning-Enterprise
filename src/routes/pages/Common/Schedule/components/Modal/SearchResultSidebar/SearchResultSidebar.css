@@ -1,0 +1,141 @@
+.search-result-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    width: 100%;
+    margin-top: 20px;
+}
+
+.sidebar-card-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    /* width: 100%; */
+    min-width: 70px;
+
+    padding: 10px;
+
+    border-radius: 10px;
+
+    text-align: left;
+    font-weight: bold;
+
+    background-color: #C2C5FF26;
+
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
+
+.sidebar-card::-webkit-scrollbar {
+    display: none;
+}
+
+.sidebar-card div:nth-child(even) {
+    font-weight: lighter;
+}
+
+.sidebar-card.content {
+    background-color: transparent;
+    padding: 0;
+}
+
+.sidebar-card.row {
+    flex-direction: row;
+}
+
+.sidebar-card.fit {
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+}
+
+.sidebar-card.can-add:hover::after {
+    content: '+';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 100%;
+    height: 100%;
+
+    background-color: #474552cc;
+
+    border-radius: 10px;
+
+    font-size: 4rem;
+
+    cursor: pointer;
+}
+
+.sidebar-card.can-cancel:hover::after {
+    content: '-';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 100%;
+    height: 100%;
+
+    background-color: #474552cc;
+
+    border-radius: 10px;
+
+    font-size: 4rem;
+
+    cursor: pointer;
+}
+
+
+.plus-employee-text {
+    font-size: 4rem;
+}
+
+.point-cursor {
+    cursor: pointer;
+}
+
+.assignment-buttons {
+    display: flex;
+    gap: 10px;
+
+    width: 100%;
+}
+
+.assignment-buttons button {
+    width: 100%;
+
+    padding: 10px 0;
+
+    background-color: #DFDDDE;
+
+    border: none;
+    border-radius: 10px;
+}
+
+.assignment-buttons button.assignment {
+    background-color: #3D3A47;
+
+    color: white;
+}

@@ -48,7 +48,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({
                 className={isShowHeader ? '' : 'no-header'}
                 style={articleStyle}
             >
-                {children}
+                <div className="article-wrap">
+                    {children}
+                </div>
             </article>
             {isShowSidebar && (
                 CustomSidebar ?

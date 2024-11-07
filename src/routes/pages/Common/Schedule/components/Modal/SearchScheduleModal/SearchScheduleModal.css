@@ -1,0 +1,91 @@
+.search-schedule-modal {
+    display: flex;
+    justify-content: flex-end;
+
+    position: absolute;
+
+    width: 100%;
+
+    padding: 1rem;
+
+    z-index: 10;
+}
+
+.search-schedule-modal .start-schedule,
+.search-schedule-modal .end-schedule {
+    padding: 1.5rem 2rem 2.5rem 2rem;
+    background-color: white;
+}
+
+.search-schedule-modal .start-schedule {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.search-schedule-modal .end-schedule {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.search-schedule-modal .start-schedule span,
+.search-schedule-modal .end-schedule span {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    margin-bottom: 10px;
+}
+
+
+/* Calendar */
+.search-schedule-modal .rbc-month-view,
+.search-schedule-modal .rbc-day-bg,
+.search-schedule-modal .rbc-header {
+    border: 1px solid #fff0;
+    background-color: transparent;
+}
+
+.search-schedule-modal .rbc-button-link {
+    border: 1px solid #fff0;
+    font-size: 16px;
+}
+
+.search-schedule-modal .rbc-button-link:hover {
+    border: 1px solid #000;
+    border-radius: 50%;
+}
+
+.search-schedule-modal .rbc-day-bg {
+
+    border: 1px solid #fff0;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.search-schedule-modal .rbc-day-bg:hover {
+    border: 1px solid #000 !important;
+    border-radius: 50%;
+}
+
+.search-schedule-modal .rbc-date-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-schedule-modal .selected-start-date {
+    position: relative;
+    background-color: #0001;
+    border-radius: 50%;
+}
+
+.search-schedule-modal .selected-end-date {
+    position: relative;
+    background-color: #0006;
+    border-radius: 50%;
+}
+
+.search-schedule-modal .rbc-off-range-bg,
+.search-schedule-modal .rbc-off-range {
+    visibility: hidden;
+}

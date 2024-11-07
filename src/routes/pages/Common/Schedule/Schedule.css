@@ -1036,51 +1036,6 @@ button.rbc-input::-moz-focus-inner {
     display: none;
 } */
 
-.schedule-calendar .rbc-btn-group {
-    display: flex;
-}
-
-.schedule-calendar .rbc-btn-group button {
-    border-radius: 15px !important;
-    padding: 10px 20px;
-    background-color: #ffffff66;
-    border: 1px solid #a3a3a3;
-    box-shadow: 0 1px 4px #00000019;
-    color: black;
-    cursor: pointer;
-}
-
-.schedule-calendar .rbc-btn-group button:nth-child(1) {
-    margin-right: 20px;
-}
-
-.schedule-calendar .rbc-btn-group button:nth-child(2) {
-    margin-right: 10px;
-}
-
-.schedule-calendar .rbc-btn-group button:nth-child(2),
-.schedule-calendar .rbc-btn-group button:nth-child(3) {
-    text-indent: -9999px;
-    position: relative;
-}
-
-.schedule-calendar .rbc-btn-group button:nth-child(2)::after {
-    content: '<';
-}
-
-.schedule-calendar .rbc-btn-group button:nth-child(3)::after {
-    content: '>';
-}
-
-.schedule-calendar .rbc-btn-group button:nth-child(2)::after,
-.schedule-calendar .rbc-btn-group button:nth-child(3)::after {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-indent: 0;
-}
-
 .rbc-header {
     padding: 10px 0;
 }
@@ -1109,4 +1064,10 @@ button.rbc-input::-moz-focus-inner {
 
 .rbc-month-view .rbc-month-row:last-child .rbc-row-bg .rbc-day-bg:last-child {
     border-bottom-right-radius: 20px;
+}
+
+.schedule-container,
+.schedule-wrap {
+    width: 100%;
+    height: 100%;
 }

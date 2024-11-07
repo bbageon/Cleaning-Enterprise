@@ -283,6 +283,7 @@ const MainContainer = () => {
 
     const onSelected = async (e) => {
         try {
+            console.log(e)
             const date = getTimeFormat(e.slots[0]);
 
             // 시간에 맞는 청소요청 정보 가져오기

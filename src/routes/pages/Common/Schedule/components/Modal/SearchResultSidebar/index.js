@@ -1,0 +1,1 @@
+export { SearchResultSidebar } from './SearchResultSidebar';

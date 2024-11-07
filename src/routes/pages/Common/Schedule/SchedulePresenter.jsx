@@ -1,25 +1,14 @@
 import { MainLayout } from '../../../../components';
 import { Calendar, momentLocalizer, dateFnsLocalizer } from 'react-big-calendar';
-import moment from 'moment';
 
-import { format, parse, startOfWeek, getDay } from 'date-fns';
-import ko from 'date-fns/locale/ko';
-import { CalendarToolBar } from './components/CalendarToolBar';
+import { CalendarToolBar } from './components/Calendar/CalendarToolBar';
+
+import { ScheduleSidebar } from './components/Calendar/ScheduleSidebar';
+import { SearchScheduleModal } from './components/Modal/SearchScheduleModal';
+import { ScheduleCalendar } from './components/Calendar/ScheduleCalendar';
+import { SearchModal } from './components/Modal/SearchModal';
 
 import './Schedule.css';
-import { ScheduleSidebar } from './components/ScheduleSidebar';
-
-const locales = {
-    'ko': ko,
-};
-
-const localizer = dateFnsLocalizer({
-    format,
-    parse,
-    startOfWeek,
-    getDay,
-    locales,
-});
 
 const SchedulePresenter = ({
     onSelected,
@@ -30,14 +19,28 @@ const SchedulePresenter = ({
 
     requestList,
     changeMonth,
+
+    showSearchModal,
+
+    currentStartDate,
+    currentEndDate,
+    selectDate,
+    selectMonth,
+    selectSearchDay,
+
+    customDayPropGetter,
+    toggleSearchModal,
+
+    search,
+    isSearchResult,
+    setIsSearchResult,
+
+    searchDate,
 }) => {
     // moment.locale('ko-KR');
     // const localizer = momentLocalizer(moment);
 
-    const formats = {
-        dayFormat: (date, culture, localizer) =>
-            localizer.format(date, 'E', culture), // 'E'는 한 글자 요일 ('월', '화' 등)
-    };
+
 
     return (
         <MainLayout
@@ -48,28 +51,41 @@ const SchedulePresenter = ({
             CustomSidebar={
                 <ScheduleSidebar
                     requestList={requestList}
+                    isSearchResult={isSearchResult}
                 />
             }
             articleStyle={{ width: 'calc(100% - 15% - 15%)' }}
         >
-            <div className='schedule-calendar'>
-                <Calendar
-                    backgroundColor={'#fff'}
-                    localizer={localizer}
-                    startAccessor='start'
-                    endAccessor='end'
-                    tooltipAccessor='renderable'
-                    events={events}
-                    draggableAccessor={(event) => true}
-                    views={['month']}
-                    culture='ko'
-                    formats={formats}
-                    onSelectSlot={onSelected}
-                    components={{
-                        toolbar: (props) => <CalendarToolBar {...props} changeMonth={changeMonth} />
-                    }}
-                    selectable
-                />
+            <div className="schedule-container">
+                <div className="schedule-wrap">
+                    {
+                        isSearchResult ?
+                            <SearchModal
+                                searchDate={searchDate}
+                                setIsSearchResult={setIsSearchResult}
+                            /> :
+                            <ScheduleCalendar
+                                events={events}
+                                onSelected={onSelected}
+
+                                changeMonth={changeMonth}
+
+                                showSearchModal={showSearchModal}
+                                currentStartDate={currentStartDate}
+                                currentEndDate={currentEndDate}
+
+                                selectDate={selectDate}
+                                selectMonth={selectMonth}
+                                selectSearchDay={selectSearchDay}
+
+                                customDayPropGetter={customDayPropGetter}
+                                toggleSearchModal={toggleSearchModal}
+
+                                search={search}
+                            />
+
+                    }
+                </div>
             </div>
         </MainLayout>
     )

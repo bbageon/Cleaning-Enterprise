@@ -156,6 +156,10 @@ body,
   height: 100%;
 }
 
+button {
+  cursor: pointer;
+}
+
 /* 폰트 초기화 */
 @font-face {
   font-family: 'NanumGothic';

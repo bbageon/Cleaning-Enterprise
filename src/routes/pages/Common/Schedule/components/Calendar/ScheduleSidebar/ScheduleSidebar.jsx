@@ -1,9 +1,11 @@
-import Profile from '../../../../../../assets/profile.png';
+import Profile from '../../../../../../../assets/profile.png';
+import { SearchResultSidebar } from '../../Modal/SearchResultSidebar';
 import { RequestList } from '../RequestList/RequestList';
 import './ScheduleSidebar.css';
 
 export const ScheduleSidebar = ({
     requestList,
+    isSearchResult,
 }) => {
 
     return (
@@ -15,9 +17,14 @@ export const ScheduleSidebar = ({
                     <div className="english-name">Kim Guenwoo</div>
                 </div>
             </div>
-            <RequestList
-                requestList={requestList}
-            />
+            {
+                isSearchResult ?
+                    <SearchResultSidebar
+                    /> :
+                    <RequestList
+                        requestList={requestList}
+                    />
+            }
         </div>
     )
 }

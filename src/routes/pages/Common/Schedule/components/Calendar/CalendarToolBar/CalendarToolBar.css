@@ -15,6 +15,10 @@
     font-size: 24px;
 }
 
+.custom-rbc-toolbar .right-side {
+    position: relative;
+}
+
 .custom-rbc-toolbar .right-side .btn-group {
     display: flex;
     gap: 40px;
@@ -68,4 +72,49 @@
 
 .custom-rbc-toolbar .right-side .btn-group button span:nth-child(2) {
     color: #00000099;
+}
+
+.custom-rbc-toolbar .rbc-btn-group {
+    display: flex;
+}
+
+.custom-rbc-toolbar .rbc-btn-group button {
+    border-radius: 15px !important;
+    padding: 10px 20px;
+    background-color: #ffffff66;
+    border: 1px solid #a3a3a3;
+    box-shadow: 0 1px 4px #00000019;
+    color: black;
+    cursor: pointer;
+}
+
+.custom-rbc-toolbar .rbc-btn-group button:nth-child(1) {
+    margin-right: 20px;
+}
+
+.custom-rbc-toolbar .rbc-btn-group button:nth-child(2) {
+    margin-right: 10px;
+}
+
+.custom-rbc-toolbar .rbc-btn-group button:nth-child(2),
+.custom-rbc-toolbar .rbc-btn-group button:nth-child(3) {
+    text-indent: -9999px;
+    position: relative;
+}
+
+.custom-rbc-toolbar .rbc-btn-group button:nth-child(2)::after {
+    content: '<';
+}
+
+.custom-rbc-toolbar .rbc-btn-group button:nth-child(3)::after {
+    content: '>';
+}
+
+.custom-rbc-toolbar .rbc-btn-group button:nth-child(2)::after,
+.custom-rbc-toolbar .rbc-btn-group button:nth-child(3)::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-indent: 0;
 }

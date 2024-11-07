@@ -1,0 +1,12 @@
+.search-toolbar {
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+}
+
+.search-toolbar button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}

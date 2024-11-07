@@ -2,125 +2,135 @@ import { useEffect, useState } from "react";
 import { useCustomContext } from "../../../../context/CustomContext";
 import SchedulePresenter from "./SchedulePresenter";
 import { ScheduleInfo } from "./components";
+import moment from "moment";
+
 import API, { getDate, getTimeFormat, getToday } from "../../../../api/API";
 
 const ScheduleContainer = () => {
     const { navigate } = useCustomContext();
-    const [beforeAccept, setBeforeAccept] = useState([
-        {
-            request_date: 172990409,
-            quantity: 2,
-            total_price: 50000,
-            clean_address: '부산 사상구 주례로 47',
-            clean_address_detail: '상세주소',
-        },
-        {
-            request_date: 172990409,
-            quantity: 2,
-            total_price: 50000,
-            clean_address: '부산 사상구 주례로 47',
-            clean_address_detail: '상세주소',
-        },
-        {
-            request_date: 172990409,
-            quantity: 2,
-            total_price: 45000,
-            clean_address: '부산 사상구 주례로 47',
-            clean_address_detail: '상세주소',
-        },
-    ]);
-    const [cleaning, setCleaning] = useState([
-        {
-            request_date: 12949503,
-            quantity: 2,
-            total_price: 60000,
-            clean_address: '부산 사상구 주례로 47',
-            clean_address_detail: '상세주소',
-        },
-        {
-            request_date: 12949503,
-            quantity: 2,
-            total_price: 50000,
-            clean_address: '부산 사상구 주례로 47',
-            clean_address_detail: '상세주소',
-        },
-        {
-            request_date: 12949503,
-            quantity: 2,
-            total_price: 48000,
-            clean_address: '부산 사상구 주례로 47',
-            clean_address_detail: '상세주소',
-        },
-    ]);
-    const [cleanDone, setCleanDone] = useState([
-        {
-            request_date: 123484357,
-            quantity: 2,
-            total_price: 60000,
-            clean_address: '부산 사상구 주례로 47',
-            clean_address_detail: '상세주소',
-        },
-        {
-            request_date: 123484357,
-            quantity: 2,
-            total_price: 50000,
-            clean_address: '부산 사상구 주례로 47',
-            clean_address_detail: '상세주소',
-        },
-        {
-            request_date: 123484357,
-            quantity: 2,
-            total_price: 48000,
-            clean_address: '부산 사상구 주례로 47',
-            clean_address_detail: '상세주소',
-        },
-    ]);
 
-    const [tabList, setTabs] = useState({
-        tabs: [
-            {
-                title: '수락전',
-                type: 'beforeAccept',
-                onClick: () => {
-                    setTabs(prev => {
-                        return {
-                            ...prev,
-                            current_tab: '수락전'
-                        }
-                    })
-                },
-            },
-            {
-                title: '진행중',
-                type: 'cleaning',
-                onClick: () => {
-                    setTabs(prev => {
-                        return {
-                            ...prev,
-                            current_tab: '진행중'
-                        }
-                    })
-                },
-            },
-            {
-                title: '청소 완료',
-                type: 'cleanDone',
-                onClick: () => {
-                    setTabs(prev => {
-                        return {
-                            ...prev,
-                            current_tab: '청소 완료'
-                        }
-                    })
-                },
-            },
-        ],
-        current_tab: '수락전',
-    });
+    /**
+     * @deprecated 일정관리 페이지
+     */
+    // 수락전, 진행중, 청소완료 목록을 보여주기 위한 state
+    // const [beforeAccept, setBeforeAccept] = useState([
+    //     {
+    //         request_date: 172990409,
+    //         quantity: 2,
+    //         total_price: 50000,
+    //         clean_address: '부산 사상구 주례로 47',
+    //         clean_address_detail: '상세주소',
+    //     },
+    //     {
+    //         request_date: 172990409,
+    //         quantity: 2,
+    //         total_price: 50000,
+    //         clean_address: '부산 사상구 주례로 47',
+    //         clean_address_detail: '상세주소',
+    //     },
+    //     {
+    //         request_date: 172990409,
+    //         quantity: 2,
+    //         total_price: 45000,
+    //         clean_address: '부산 사상구 주례로 47',
+    //         clean_address_detail: '상세주소',
+    //     },
+    // ]);
+    // const [cleaning, setCleaning] = useState([
+    //     {
+    //         request_date: 12949503,
+    //         quantity: 2,
+    //         total_price: 60000,
+    //         clean_address: '부산 사상구 주례로 47',
+    //         clean_address_detail: '상세주소',
+    //     },
+    //     {
+    //         request_date: 12949503,
+    //         quantity: 2,
+    //         total_price: 50000,
+    //         clean_address: '부산 사상구 주례로 47',
+    //         clean_address_detail: '상세주소',
+    //     },
+    //     {
+    //         request_date: 12949503,
+    //         quantity: 2,
+    //         total_price: 48000,
+    //         clean_address: '부산 사상구 주례로 47',
+    //         clean_address_detail: '상세주소',
+    //     },
+    // ]);
+    // const [cleanDone, setCleanDone] = useState([
+    //     {
+    //         request_date: 123484357,
+    //         quantity: 2,
+    //         total_price: 60000,
+    //         clean_address: '부산 사상구 주례로 47',
+    //         clean_address_detail: '상세주소',
+    //     },
+    //     {
+    //         request_date: 123484357,
+    //         quantity: 2,
+    //         total_price: 50000,
+    //         clean_address: '부산 사상구 주례로 47',
+    //         clean_address_detail: '상세주소',
+    //     },
+    //     {
+    //         request_date: 123484357,
+    //         quantity: 2,
+    //         total_price: 48000,
+    //         clean_address: '부산 사상구 주례로 47',
+    //         clean_address_detail: '상세주소',
+    //     },
+    // ]);
 
+    // const [tabList, setTabs] = useState({
+    //     tabs: [
+    //         {
+    //             title: '수락전',
+    //             type: 'beforeAccept',
+    //             onClick: () => {
+    //                 setTabs(prev => {
+    //                     return {
+    //                         ...prev,
+    //                         current_tab: '수락전'
+    //                     }
+    //                 })
+    //             },
+    //         },
+    //         {
+    //             title: '진행중',
+    //             type: 'cleaning',
+    //             onClick: () => {
+    //                 setTabs(prev => {
+    //                     return {
+    //                         ...prev,
+    //                         current_tab: '진행중'
+    //                     }
+    //                 })
+    //             },
+    //         },
+    //         {
+    //             title: '청소 완료',
+    //             type: 'cleanDone',
+    //             onClick: () => {
+    //                 setTabs(prev => {
+    //                     return {
+    //                         ...prev,
+    //                         current_tab: '청소 완료'
+    //                     }
+    //                 })
+    //             },
+    //         },
+    //     ],
+    //     current_tab: '수락전',
+    // });
+
+
+    // 달력에 청소요청을 표시하기 위한 state
     const [events, setEvents] = useState([]);
-    const [eventDatas, setEventDatas] = useState([]);
 
+
+    // 사이드바에 청소요청을 표시하기 위한 state
     const [requestList, setRequestList] = useState([
         {
             date: '11월 4일',
@@ -226,25 +236,35 @@ const ScheduleContainer = () => {
             ]
         },
     ]);
+
+    // 청소요청을 임시로 담아놓기 위한 state
+    const [eventDatas, setEventDatas] = useState([]);
     const [requestListDatas, setRequestListDatas] = useState([]);
 
-    const getScheduleInfos = (type) => {
-        switch (type) {
-            case 'beforeAccept':
-                return beforeAccept;
-            case 'cleaning':
-                return cleaning;
-            case 'cleanDone':
-                return cleanDone;
-            default:
-                return [];
-        }
-    };
 
+    /**
+     * @deprecated 일정관리 페이지
+     */
+    // 가져온 청소요청이 수락전, 진행중, 청소완료 어디에 포함되는지 판단하는 함수
+    // const getScheduleInfos = (type) => {
+    //     switch (type) {
+    //         case 'beforeAccept':
+    //             return beforeAccept;
+    //         case 'cleaning':
+    //             return cleaning;
+    //         case 'cleanDone':
+    //             return cleanDone;
+    //         default:
+    //             return [];
+    //     }
+    // };
+
+    // 처음 페이지가 로딩되면 달력과 사이드바에 띄울 요청을 가지고 온다.
     useEffect(() => {
         (
             async () => {
                 try {
+                    // 달력에 띄우는건 오늘 날짜를 기준으로 1년 전까지의 요청만 가져온다.
                     const today = getToday();
                     const result = await API.getYearRequestClean(today);
 
@@ -254,6 +274,7 @@ const ScheduleContainer = () => {
 
                     setEventDatas(result.data);
 
+                    // 사이드바에 띄우는건 오늘 날짜에 해당하는 달의 1일 ~ 마지막 날까지의 요청만 가져온다.
                     const sidebarToday = new Date();
                     changeMonth(sidebarToday.getFullYear(), sidebarToday.getMonth() + 1);
                 } catch (e) {
@@ -263,9 +284,9 @@ const ScheduleContainer = () => {
         )()
     }, []);
 
+    // 달력에 띄울 요청을 가지고 왔을 때 이를 실제로 사용자에게 보여주는 state에 담기위한 작업
     useEffect(() => {
         eventDatas.forEach(data => {
-            console.log(data)
             const { start_clean_date, end_clean_date, request_status, count, total_price_sum } = data;
 
             setEvents(prev => {
@@ -290,6 +311,7 @@ const ScheduleContainer = () => {
         });
     }, [eventDatas]);
 
+    // 달력에 띄울 요청을 가지고 왔을 때 이를 실제로 사용자에게 보여주는 state에 담기위한 작업
     useEffect(() => {
         const request_data = {};
 
@@ -333,34 +355,41 @@ const ScheduleContainer = () => {
         setRequestList(formattedRequestList);
     }, [requestListDatas]);
 
-    useEffect(() => {
-        setTabs((prev) => ({
-            ...prev,
-            tabs: prev.tabs.map((tab) => ({
-                ...tab,
-                children: (
-                    <ScheduleInfo
-                        scheduleInfos={getScheduleInfos(tab.type)}
-                        type={tab.type}
-                    />
-                ),
-            })),
-        }));
-    }, [beforeAccept, cleaning, cleanDone]);
+    /**
+     * @deprecated 일정관리 페이지
+     */
+    // // 수락전, 진행중, 청소완료를 실제로 사용자에게 보여주기 위한 작업
+    // useEffect(() => {
+    //     setTabs((prev) => ({
+    //         ...prev,
+    //         tabs: prev.tabs.map((tab) => ({
+    //             ...tab,
+    //             children: (
+    //                 <ScheduleInfo
+    //                     scheduleInfos={getScheduleInfos(tab.type)}
+    //                     type={tab.type}
+    //                 />
+    //             ),
+    //         })),
+    //     }));
+    // }, [beforeAccept, cleaning, cleanDone]);
 
-    const onSelected = async (e) => {
-        const date = getTimeFormat(e.slots[0]);
+    // 달력 날짜 선택 시 해당 날짜에 대한 청소 요청을 가져온다.
+    // const onSelected = async (e) => {
+    //     const date = getTimeFormat(e.slots[0]);
 
-        // 시간에 맞는 청소요청 정보 가져오기
-        const result = await API.getDateRequestClean(date);
+    //     // 시간에 맞는 청소요청 정보 가져오기
+    //     const result = await API.getDateRequestClean(date);
 
-        setBeforeAccept(result.data.beforeAccept);
-        setCleaning(result.data.cleaning);
-        setCleanDone(result.data.cleanDone);
-    }
+    //     setBeforeAccept(result.data.beforeAccept);
+    //     setCleaning(result.data.cleaning);
+    //     setCleanDone(result.data.cleanDone);
+    // }
 
-    const last_day_each_date = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
+    const last_day_each_date = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // 1월 ~ 12월까지의 마지막 날을 저장하는 배열
+
+    // 달력을 넘길 시 해당 월의 청소요청 정보를 가져오는 함수
     const changeMonth = async (year, month) => {
         try {
             const firstDate = getTimeFormat(`${year}.${month}.01`);
@@ -372,7 +401,6 @@ const ScheduleContainer = () => {
                 throw new Error(`[getPeriodRequestClean] API Error`);
             }
 
-            console.log(result.data);
             setRequestListDatas(result.data);
         } catch (e) {
             console.log(`[ScheduleContainer][changeMonth] Error : ${e.message}`);
@@ -380,16 +408,108 @@ const ScheduleContainer = () => {
 
     }
 
+    /**
+     * 날짜 검색 관련
+     */
+    // 검색창을 띄우기 위한 state
+    const [showSearchModal, setShowSearchModal] = useState(false);
+    // 달력의 현재 월을 나타내는 state
+    const [currentStartMonth, setCurrentStartMonth] = useState(moment().month());
+    const [currentEndMonth, setCurrentEndMonth] = useState(moment().month());
+    // 시작일, 종료일을 나타내기 위한 state
+    const [selectedStartDate, setSelectedStartDate] = useState(-1);
+    const [selectedEndDate, setSelectedEndDate] = useState(-1);
+    // 달력의 현재 날짜를 나타내기 위한 state (날짜 선택 후 달력이 이동되는 것을 방지)
+    const [currentStartDate, setCurrentStartDate] = useState(new Date());
+    const [currentEndDate, setCurrentEndDate] = useState(new Date(currentStartDate.getFullYear(), currentStartDate.getMonth() + 1, currentStartDate.getDate()));
+
+    // 검색창을 띄우는 함수
+    const toggleSearchModal = () => {
+        setShowSearchModal(!showSearchModal);
+    }
+
+    /**
+     * @params type: 'start' or 'end'
+     */
+    const selectSearchDay = (day, type) => {
+        if (day.start === selectedStartDate) return;
+
+        if (selectedStartDate === -1) {
+            if (type === 'end') {
+                alert('시작일을 선택해주세요!');
+                return;
+            }
+
+            if (currentStartMonth !== moment(day.start).month()) return;
+        }
+
+        if (type === 'start' && (selectedStartDate === -1 || day.start < selectedStartDate)) setSelectedStartDate(day.start);
+        // if (type === 'start') setSelectedStartDate(day.start);
+        else setSelectedEndDate(day.start);
+    }
+
+    // 해당 월을 벗어난 날짜 숨기기
+    const customDayPropGetter = (date) => {
+        if (selectedStartDate && moment(date).isSame(selectedStartDate, 'day')) {
+            return {
+                className: 'selected-start-date', // 특정 CSS 클래스 추가
+            };
+        }
+        else if (selectedEndDate && moment(date).isSame(selectedEndDate, 'day')) {
+            return {
+                className: 'selected-end-date', // 특정 CSS 클래스 추가
+            };
+        }
+    }
+    
+    const selectMonth = (month, type) => {
+        if (type === 'start') setCurrentStartMonth(month);
+        else if (type === 'end') setCurrentEndMonth(month);
+    }
+
+    const selectDate = (date, type) => {
+        if (type === 'start') setCurrentStartDate(date);
+        else if (type === 'end') setCurrentEndDate(date);
+    }
+
+    /**
+     * 검색창 관련
+     */
+    const [isSearchResult, setIsSearchResult] = useState(true);
+    const [searchDate, setSearchDate] = useState(new Date());
+
+    const search = async () => {
+        setIsSearchResult(true);
+    }
+
     return (
         <SchedulePresenter
-            onSelected={onSelected}
+            // onSelected={onSelected}
 
-            tabList={tabList}
+            // tabList={tabList}
 
             events={events}
 
             requestList={requestList}
             changeMonth={changeMonth}
+
+            showSearchModal={showSearchModal}
+
+            currentStartDate={currentStartDate}
+            currentEndDate={currentEndDate}
+            selectDate={selectDate}
+
+            selectMonth={selectMonth}
+            selectSearchDay={selectSearchDay}
+
+            customDayPropGetter={customDayPropGetter}
+            toggleSearchModal={toggleSearchModal}
+
+            search={search}
+            isSearchResult={isSearchResult}
+            setIsSearchResult={setIsSearchResult}
+
+            searchDate={searchDate}
         />
     )
 }

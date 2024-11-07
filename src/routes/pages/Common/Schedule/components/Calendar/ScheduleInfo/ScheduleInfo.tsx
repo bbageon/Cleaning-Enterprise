@@ -1,4 +1,4 @@
-import { CScheduleInfo } from "../../Class/schedule-class";
+import { CScheduleInfo } from "../../../Class/schedule-class";
 import './ScheduleInfo.css';
 
 interface ScheduleInfoProps {

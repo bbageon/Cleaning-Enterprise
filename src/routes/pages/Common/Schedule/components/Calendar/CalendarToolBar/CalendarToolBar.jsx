@@ -1,9 +1,22 @@
+import { SearchScheduleModal } from '../../Modal/SearchScheduleModal';
 import './CalendarToolBar.css';
 
 export const CalendarToolBar = ({
     date,
     onNavigate,
     changeMonth,
+    toggleSearchModal,
+
+    showSearchModal,
+
+    currentStartDate,
+    currentEndDate,
+    selectDate,
+    selectMonth,
+    selectSearchDay,
+    customDayPropGetter,
+
+    search,
 }) => {
 
     const navigate = (action) => {
@@ -42,18 +55,29 @@ export const CalendarToolBar = ({
             </div>
             <div className="right-side">
                 <div className="btn-group">
-                    <button type="button">
+                    <button type="button" onClick={toggleSearchModal}>
                         <span>시작일</span>
                         <span>날짜 추가</span>
                     </button>
-                    <button type="button">
+                    <button type="button" onClick={toggleSearchModal}>
                         <span>종료일</span>
                         <span>날짜 추가</span>
                     </button>
-                    <button type="button">
+                    <button type="button" onClick={search}>
                         <span>검색</span>
                     </button>
                 </div>
+                {
+                    showSearchModal &&
+                    <SearchScheduleModal
+                        currentStartDate={currentStartDate}
+                        currentEndDate={currentEndDate}
+                        selectDate={selectDate}
+                        selectMonth={selectMonth}
+                        selectSearchDay={selectSearchDay}
+                        customDayPropGetter={customDayPropGetter}
+                    />
+                }
             </div>
         </div>
     )

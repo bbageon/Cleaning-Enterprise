@@ -1,0 +1,42 @@
+.search-modal {
+    width: 100%;
+    background-color: #ffffff7f;
+    border-radius: 20px;
+
+    padding: 20px;
+}
+
+.search-modal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.search-modal .modal-header .search-date {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.search-modal .modal-header .search-date .date {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.search-modal .modal-header .search-date button {
+    border: none;
+    background-color: transparent;
+    font-size: 18px;
+}
+
+.search-modal .modal-header .search-close {
+    cursor: pointer;
+}
+
+.search-modal .modal-header .schedule-ticket {
+    display: flex;
+    flex-direction: column;
+}
