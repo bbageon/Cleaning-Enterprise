@@ -1,12 +1,13 @@
 .chat-message {
-    min-width: 40%;
-    max-width: 40%;
-    width: 40%;
+    /* min-width: 40%; */
+    max-width: 50%;
+    width: fit-content;
     padding: 1rem;
     border-radius: 20px;
     color: white;
 
     box-shadow: 0 4px 4px #0000000f;
+    line-height: 1.25rem;
 }
 
 .chat-message.my {

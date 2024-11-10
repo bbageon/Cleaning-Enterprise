@@ -66,6 +66,7 @@ const ChatRoomPresenter = ({
                     setSelectChatIndex={setSelectChatIndex}
                 />
             }
+            isShowHeader={false}
         >
             <ChatBody
                 inputChatRef={inputChatRef}

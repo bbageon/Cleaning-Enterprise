@@ -61,7 +61,7 @@ const Router = () => {
 
 
     useEffect(() => {
-        socketRef.current = io('ws://localhost:4200/cleaning_chat', {
+        socketRef.current = io(`${process.env.REACT_APP_CHAT_SERVER}/cleaning_chat`, {
             transports: ['websocket'],
             reconnectionAttempts: 3,
         });
