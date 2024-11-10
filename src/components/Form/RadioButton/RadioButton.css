@@ -1,0 +1,31 @@
+.radio-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.radio-button-container .radio-button-left label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.radio-button-container .radio-button-left input[type='radio'] {
+    appearance: none;
+
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    border: 2px solid var(--border-color);
+    transition: border 0.3s ease-in-out;
+}
+
+.radio-button-container .radio-button-left input[type='radio']:checked {
+    border: 10px solid var(--primary-color);
+}
+
+.radio-button-container .radio-button-left input[type='radio']:focus-visible {
+    outline-offset: max(2px, 0.1rem);
+    outline: max(2px, 0.1rem) dotted #FFFFFF;
+}

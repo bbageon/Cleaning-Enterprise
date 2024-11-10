@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import RequestCleanPresenter from "./RequestCleanPresenter";
-import { useGetCompanyRequestClean, useUpdateRequestClean } from "../../../../hooks/RequestCleanHooks";
+import { useGetCompanyRequestClean } from "../../../../hooks/RequestCleanHooks";
 import { RequestInfo } from "./components/RequestInfo/RequestInfo";
 import { API } from "../../../../api";
 

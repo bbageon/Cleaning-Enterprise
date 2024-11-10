@@ -27,6 +27,9 @@ const RequestCleanPresenter = ({
             page={'청소 요청 목록'}
             tabList={tabList}
             className='overflow'
+            isShowHeader={false}
+            isRight={true}
+            isFull={true}
         >
             <RequestList
                 activeCardId={activeCardId}

@@ -9,35 +9,58 @@ interface MainLayoutProps {
     children: React.ReactNode;
     page: string;
     title: string;
-    isShowSidebar: boolean;
     tabList: CSidebarTab;
     className: string;
+
+    // 사이드바
+    isShowSidebar: boolean;
+    isRight: boolean;
+    isFull: boolean;
+
+    // 헤더
+    isShowHeader: boolean;
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({
     children,
     page = '',
     title = '',
-    isShowSidebar = true,
     tabList = new CSidebarTab(),
     className = '',
+
+    // 사이드바
+    isShowSidebar = true,
+    isRight,
+    isFull,
+
+    // 헤더
+    isShowHeader = true,
 }) => {
     return (
         <div className={`layout ${className}`}>
             <MainNav
                 page={page}
             />
-            <MainHeader
-                title={title.length ? title : page}
-                className='translucent'
-            />
-            <article>
+            {
+                isShowHeader &&
+                <MainHeader
+                    title={title.length ? title : page}
+                    className='translucent'
+                />
+            }
+            <article
+                style={{
+                    height: isFull ? '100%' : ''
+                }}
+            >
                 {children}
             </article>
             {
                 isShowSidebar &&
                 <MainSidebar
+                    isFull={isFull}
                     tabList={tabList}
+                    isRight={isRight}
                 />
             }
         </div>

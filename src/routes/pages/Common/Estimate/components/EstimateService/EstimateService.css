@@ -1,0 +1,44 @@
+.estimate-item-container .estimate-service-form-container {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+.estimate-item-container .estimate-service-form-container > :nth-child(1),
+.estimate-item-container .estimate-service-form-container > :nth-child(2),
+.estimate-item-container .estimate-service-form-container > :nth-child(4) {
+    margin-bottom: 0.75rem;
+}
+.estimate-item-container .estimate-service-form-container > :nth-child(3) {
+    margin-bottom: 0.5rem;
+}
+
+/* EstimateServiceInput&EstimateDropdown 컴포넌트 */
+.estimate-item-container .estimate-service-form {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.estimate-item-container .estimate-service-form input, select {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    color: #000000;
+    border-radius: 8px;
+    border: 1px solid var(--gray3-color);
+    outline: none;
+}
+.estimate-item-container .estimate-service-form input::placeholder {
+    color: var(--gray3-color);
+}
+.estimate-item-container .estimate-service-form select option:disabled {
+    color: var(--gray3-color);
+}
+
+/* RadioButton 컴포넌트 */
+.estimate-item-container .estimate-service-radio-button {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}

@@ -2,12 +2,21 @@ import './MainSidebar.css';
 
 const MainSidebar = ({
     tabList,
+    isRight,
+    isFull,
 }) => {
     const { tabs, current_tab } = tabList;
 
     return (
 
-        <div className="main-sidebar">
+        <div
+            className="main-sidebar"
+            style={{
+                height: isFull ? '100%' : '',
+                borderTopLeftRadius: isRight ? '0' : '',
+                borderTopRightRadius: isRight ? '0' : '',
+            }}
+        >
             <div className="tabs">
                 {
                     tabs?.map((tab, index) => {
