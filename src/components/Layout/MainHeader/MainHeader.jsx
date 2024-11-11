@@ -5,9 +5,13 @@ import Profile from '../../../assets/profile.png';
 const MainHeader = ({
     title,
     className = '',
+    isShow = true,
 }) => {
     return (
-        <header className="header-container">
+        <header
+            className="header-container"
+            style={{ display: isShow ? 'flex' : 'none'}}
+        >
             <div className="header-title title">
                 {title}
             </div>

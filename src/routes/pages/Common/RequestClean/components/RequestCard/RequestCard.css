@@ -1,0 +1,53 @@
+.request-clean-card-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.request-clean-card-container .request-card-container {
+    width: 100%;
+
+    background-color: #FFFFFF;
+    padding: 1.5rem;
+}
+
+.request-clean-card-container .request-card-title {
+    width: 50%;
+
+    padding-bottom: 1.5rem;
+
+    border-bottom: 1px solid var(--gray2-color);
+}
+
+.request-clean-card-container .request-card-info-box {
+    width: 50%;
+
+    padding: 1.5rem 0.5rem 2rem 0.5rem;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.request-clean-card-container .request-card-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.request-clean-card-container .request-card-service-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.request-clean-card-container .request-card-button-wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.request-clean-card-container .request-card-button-wrap button {
+    border: none;
+    background-color: transparent;
+}

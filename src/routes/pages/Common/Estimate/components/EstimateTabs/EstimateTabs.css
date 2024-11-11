@@ -1,0 +1,33 @@
+.estimate-item-container .estimate-tabs-button-container {
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.estimate-tabs-button-container button {
+    width: 50%;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-size: 0.9rem;
+    padding-bottom: 0.5rem;
+}
+
+/* 견적서 탭 */
+/* .estimate-button {
+
+} */
+
+/* 견적서 컨텐츠 */
+.estimate-content-container {
+    width: 100%;
+}
+
+.estimate-content-container .estimate-content-top {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--gray3-color);
+}

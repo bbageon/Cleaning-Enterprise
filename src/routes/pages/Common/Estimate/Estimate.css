@@ -1,0 +1,26 @@
+.estimate-container {
+    display: grid;
+    gap: 20px;
+
+    width: 100%;
+    height: 100%;
+}
+
+.estimate-container.column {
+    grid-template-columns: 1fr 1fr;
+}
+.estimate-container.row {
+    grid-template-rows: 0.4fr 0.6fr;
+}
+
+.estimate-item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: #FFFFFF;
+
+    border-radius: 12px;
+
+    padding: 20px;
+}
