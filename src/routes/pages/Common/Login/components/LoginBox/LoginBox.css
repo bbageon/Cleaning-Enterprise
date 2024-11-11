@@ -1,0 +1,88 @@
+.form-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 1.5rem;
+}
+
+.form-wrap .title {
+    color: white;
+    font-size: 3rem;
+}
+
+.form-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    width: 90%;
+}
+
+.form-wrap input {
+    width: 100%;
+    min-height: 50px;
+
+    padding: 0 20px;
+
+    border-radius: 10px;
+
+    background-color: #C2C5FF26;
+    border: none;
+
+    font-size: 1.25rem;
+}
+
+.form-wrap input:focus {
+    outline: none;
+    animation: bounce 0.1s ease-in-out;
+}
+
+@keyframes bounce {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.form-wrap button {
+    background-color: transparent;
+    border: none;
+
+    font-size: 1.25rem;
+}
+
+.form-wrap input,
+.form-wrap button {
+    color: white;
+}
+
+.form-wrap .form-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.form-wrap .form-buttons button:first-child {
+    position: relative;
+}
+/* 
+.form-wrap .form-buttons button:first-child::after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    right: -12.5%;
+
+    width: 2px;
+    height: 100%;
+
+    background-color: white;
+} */

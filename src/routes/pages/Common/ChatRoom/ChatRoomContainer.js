@@ -40,7 +40,7 @@ const ChatRoomContainer = ({
                     const id = `${process.env.REACT_APP_TEST_COMPANY_ID}`
                     const company = await API.getOneCompany(id);
                     if (company.status !== 200) throw new Error(`[ChatRoomListContainer] [useEffect] Error`);
-                    console.log(company.data.company_name)
+                    
                     setClientId(company.data.company_name);
                     setSender(company.data.company_name);
 
@@ -94,10 +94,6 @@ const ChatRoomContainer = ({
             const { data } = chatInfo;
 
             // setSender('고길동');
-            console.log(clientId)
-            console.log(data.company.company_name);
-            console.log(data.user.name);
-            console.log(data)
             setSender(data.company.company_name);
             setReceiver(data.user.name);
 
@@ -116,12 +112,9 @@ const ChatRoomContainer = ({
     const sendMessage = () => {
         if (!chatMessage.length) return;
 
-        console.log(currentRoomInfo)
         const { room_id, chat_room_id } = currentRoomInfo;
 
         if (chat_room_id === -1) return;
-
-        console.log('123')
 
         socketRef.current.emit('chatMessage', {
             room_id,

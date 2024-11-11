@@ -475,11 +475,12 @@ const ScheduleContainer = () => {
     /**
      * 검색창 관련
      */
-    const [isSearchResult, setIsSearchResult] = useState(true);
+    const [isSearchResult, setIsSearchResult] = useState(false);
     const [searchDate, setSearchDate] = useState(new Date());
 
     const search = async () => {
         setIsSearchResult(true);
+        setShowSearchModal(false);
     }
 
     return (

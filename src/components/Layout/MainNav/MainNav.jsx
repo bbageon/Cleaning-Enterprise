@@ -28,7 +28,7 @@ const MainNav = ({
             <ul className="main-nav">
                 <li
                     className={`${page === '메인 화면' ? 'current-page' : ''}`}
-                    onClick={() => { navigate('/') }}
+                    onClick={() => { navigate('/main') }}
                 >
                     <DashBoardIcon />
                     메인 화면

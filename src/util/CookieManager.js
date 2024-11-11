@@ -16,7 +16,6 @@ export default class CookieManager {
      * @params value 저장할 데이터
      */
     setCookie(name, value, options) {
-        console.log(process.env.REACT_APP_COOKIE)
         return this.cookies.set(name, value, {...options, domain: `${process.env.REACT_APP_COOKIE}`});
     }
 

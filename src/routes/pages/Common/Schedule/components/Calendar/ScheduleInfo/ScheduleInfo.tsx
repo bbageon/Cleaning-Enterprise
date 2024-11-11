@@ -15,7 +15,7 @@ export const ScheduleInfo: React.FC<ScheduleInfoProps> = ({
     scheduleInfos,
     type = 'beforeAccept',
 }) => {
-    console.log(scheduleInfos)
+    
     return (
         <>
             {

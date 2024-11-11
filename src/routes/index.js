@@ -16,6 +16,7 @@ import {
     Company,
     Estimate,
     RequestClean,
+    Login,
 } from "./pages";
 import { cookie } from "../util";
 
@@ -87,7 +88,11 @@ const Router = () => {
             <Routes>
                 {/* 메인 화면 */}
                 <Route
-                    path='/'
+                    path="/"
+                    element={<Login />}
+                />
+                <Route
+                    path='/main'
                     element={<Main />}
                 />
                 {/* 대화방 관리 */}

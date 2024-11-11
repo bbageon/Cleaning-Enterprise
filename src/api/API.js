@@ -54,6 +54,11 @@ const API = {
    */
   postAuthUserNaverSignin: (body) => $http.post('/auth/user/naver/signin', body),
 
+  /**
+   * 직원 로그인
+   */
+  postEmployeeSignin: (body) => $http.post('/auth/employee/signin', body),
+
 
   /**
    * ====================
