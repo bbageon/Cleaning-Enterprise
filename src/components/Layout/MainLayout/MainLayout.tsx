@@ -34,8 +34,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({
     tabList = new CSidebarTab(),
     isShowHeader = true,
     isShowSidebar = true,
+    isFull,
+    isRight,
 
-    
 }) => {
     return (
         <div className={`layout ${className}`}>
@@ -63,10 +64,11 @@ const MainLayout: React.FC<MainLayoutProps> = ({
                         CustomSidebar
                     ) :
                     <MainSidebar
+                        isRight={isRight}
                         isFull={isFull}
-                    tabList={tabList}
+                        tabList={tabList}
                         className={isShowHeader ? '' : 'no-header'}
-                />
+                    />
             )}
         </div>
     )
