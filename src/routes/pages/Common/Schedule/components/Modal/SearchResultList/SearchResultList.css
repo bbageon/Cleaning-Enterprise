@@ -2,6 +2,12 @@
     width: 100%;
 
     border-radius: 20px;
+
+    margin-top: 10px;
+}
+
+.search-result-list .search-result .search-result-title {
+    font-size: 28px;
 }
 
 .search-result-list .search-result-info {
@@ -40,6 +46,26 @@
 
 .search-result-list .search-result-info .result-info .result-service-info {
     color: #8e8e8e;
+}
+
+.request.complete {
+    --show-color: #4E976726;
+    --text-color: #00A036;
+}
+
+.request.schedule {
+    --show-color: #CD970026;
+    --text-color: #CD9700;
+}
+
+.search-result-list .search-result-info .result-info .result-service-info .request {
+    margin-right: 10px;
+    padding: 5px;
+
+    background-color: var(--show-color);
+    color: var(--text-color);
+
+    border-radius: 5px;
 }
 
 .search-result-list .search-result-info .result-info .result-service-list {

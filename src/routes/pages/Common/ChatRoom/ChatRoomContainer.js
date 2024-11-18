@@ -40,7 +40,7 @@ const ChatRoomContainer = ({
                     const id = `${process.env.REACT_APP_TEST_COMPANY_ID}`
                     const company = await API.getOneCompany(id);
                     if (company.status !== 200) throw new Error(`[ChatRoomListContainer] [useEffect] Error`);
-                    
+
                     setClientId(company.data.company_name);
                     setSender(company.data.company_name);
 
@@ -77,6 +77,14 @@ const ChatRoomContainer = ({
                             }
                         ]
                     });
+
+                    setChatRoomList((prevChatRoomList) =>
+                        prevChatRoomList.map((room, idx) =>
+                            idx === selectChatIndex
+                                ? { ...room, last_chat_message: messageInfo.message }
+                                : room
+                        )
+                    );
                 });
             }
         )()

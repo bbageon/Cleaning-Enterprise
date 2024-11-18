@@ -475,7 +475,7 @@ const ScheduleContainer = () => {
     /**
      * 검색창 관련
      */
-    const [isSearchResult, setIsSearchResult] = useState(false);
+    const [isSearchResult, setIsSearchResult] = useState(true);
     const [searchDate, setSearchDate] = useState(new Date());
 
     const search = async () => {

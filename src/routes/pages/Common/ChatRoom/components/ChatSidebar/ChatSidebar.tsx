@@ -33,7 +33,7 @@ const ChatSidebar: React.FC<ChatSidebarProps> = ({
             <div className="content">
                 {
                     roomInfos?.map((roomInfo, idx) => {
-                        const { room_id, chat_room_name, sub_name, updated_at, status, not_read_count } = roomInfo;
+                        const { room_id, chat_room_name, last_chat_message, updated_at, status, not_read_count } = roomInfo;
                         return (
                             <div
                                 className={`chat-room-info ${selectChatIndex === idx ? 'selected' : ''}`}
@@ -54,7 +54,7 @@ const ChatSidebar: React.FC<ChatSidebarProps> = ({
                                     </span>
                                 </div>
                                 <div className="info">
-                                    <span className="sub-name">{sub_name}</span>
+                                    <span className="sub-name">{last_chat_message}</span>
                                     <span className="not-read-count">{not_read_count}</span>
                                 </div>
                                 <div className="info">

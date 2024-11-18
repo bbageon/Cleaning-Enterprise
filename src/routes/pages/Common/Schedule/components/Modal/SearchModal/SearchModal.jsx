@@ -9,36 +9,49 @@ export const SearchModal = ({
 }) => {
     const testList = [
         {
-            time: '13:22',
-            address: '경상남도 양산시 물금읍 범구로 14, 101동 4101호',
-            service_count: 3,
-            total_service_price: 20000,
-            services: [
-                '김재모의 슈퍼 청소',
-                '김재모의 닦기',
-                '김재모의 세척'
+            date: '2024년 10월 4일',
+            requests: [
+                {
+                    time: '13:22',
+                    address: '경상남도 양산시 물금읍 범구로 14, 101동 4101호',
+                    service_count: 3,
+                    total_service_price: 20000,
+                    status: 'DONE',
+                    services: [
+                        '김재모의 슈퍼 청소',
+                        '김재모의 닦기',
+                        '김재모의 세척'
+                    ]
+                },
             ]
         },
         {
-            time: '13:22',
-            address: '경상남도 양산시 물금읍 범구로 14, 101동 4101호',
-            service_count: 3,
-            total_service_price: 20000,
-            services: [
-                '김재모의 슈퍼 청소',
-                '김재모의 닦기',
-                '김재모의 세척'
-            ]
-        },
-        {
-            time: '13:22',
-            address: '경상남도 양산시 물금읍 범구로 14, 101동 4101호',
-            service_count: 3,
-            total_service_price: 20000,
-            services: [
-                '김재모의 슈퍼 청소',
-                '김재모의 닦기',
-                '김재모의 세척'
+            date: '2024년 10월 5일',
+            requests: [
+                {
+                    time: '13:22',
+                    address: '경상남도 양산시 물금읍 범구로 14, 101동 4101호',
+                    service_count: 3,
+                    total_service_price: 20000,
+                    status: 'CALCELED',
+                    services: [
+                        '김재모의 슈퍼 청소',
+                        '김재모의 닦기',
+                        '김재모의 세척'
+                    ]
+                },
+                {
+                    time: '13:22',
+                    address: '경상남도 양산시 물금읍 범구로 14, 101동 4101호',
+                    service_count: 3,
+                    total_service_price: 20000,
+                    status: 'PAY_WAITING',
+                    services: [
+                        '김재모의 슈퍼 청소',
+                        '김재모의 닦기',
+                        '김재모의 세척'
+                    ]
+                },
             ]
         },
     ]
