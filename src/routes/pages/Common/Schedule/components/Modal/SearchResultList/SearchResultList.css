@@ -14,14 +14,14 @@
     display: flex;
     /* justify-content: space-between; */
     align-items: center;
-    gap: 80px;
+    gap: 40px;
 
     position: relative;
     border-radius: 10px;
 
     width: 100%;
 
-    padding: 20px;
+    padding: 20px 20px 20px 40px;
 }
 
 .search-result-list .search-result-info:first-child {

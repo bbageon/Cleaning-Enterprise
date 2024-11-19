@@ -316,7 +316,7 @@ const ScheduleContainer = () => {
         const request_data = {};
 
         requestListDatas.forEach(data => {
-            const { start_clean_date, request_status, count, total_price_sum } = data;
+            const { start_clean_date, request_status, request_count, total_price_sum } = data;
 
             // 날짜 포맷팅 (예: 'MM월 DD일' 형식)
             const current_date = new Date(start_clean_date);
@@ -335,7 +335,7 @@ const ScheduleContainer = () => {
                             <div className='main-text'>
                                 <span>{request_status === 'DONE' ? '정산완료' : '정산예정'}</span>
                                 <span>
-                                    <span>{parseInt(count).toLocaleString()}</span>
+                                    <span>{parseInt(request_count).toLocaleString()}</span>
                                     건
                                 </span>
                             </div>
@@ -401,7 +401,13 @@ const ScheduleContainer = () => {
                 throw new Error(`[getPeriodRequestClean] API Error`);
             }
 
-            setRequestListDatas(result.data);
+            const uniqueData = result.data.filter(
+                (item, index, array) =>
+                    array.findIndex(i => i.request_status === item.request_status) === index
+            );
+
+            setRequestListDatas(uniqueData);
+
         } catch (e) {
             console.log(`[ScheduleContainer][changeMonth] Error : ${e.message}`);
         }
@@ -416,7 +422,7 @@ const ScheduleContainer = () => {
     // 달력의 현재 월을 나타내는 state
     const [currentStartMonth, setCurrentStartMonth] = useState(moment().month());
     const [currentEndMonth, setCurrentEndMonth] = useState(moment().month());
-    // 시작일, 종료일을 나타내기 위한 state
+    // 달력에서 선택한 시작일, 종료일을 나타내기 위한 state
     const [selectedStartDate, setSelectedStartDate] = useState(-1);
     const [selectedEndDate, setSelectedEndDate] = useState(-1);
     // 달력의 현재 날짜를 나타내기 위한 state (날짜 선택 후 달력이 이동되는 것을 방지)
@@ -426,6 +432,8 @@ const ScheduleContainer = () => {
     // 검색창을 띄우는 함수
     const toggleSearchModal = () => {
         setShowSearchModal(!showSearchModal);
+        setSelectedStartDate(-1);
+        setSelectedEndDate(-1);
     }
 
     /**
@@ -461,7 +469,7 @@ const ScheduleContainer = () => {
             };
         }
     }
-    
+
     const selectMonth = (month, type) => {
         if (type === 'start') setCurrentStartMonth(month);
         else if (type === 'end') setCurrentEndMonth(month);
@@ -475,10 +483,107 @@ const ScheduleContainer = () => {
     /**
      * 검색창 관련
      */
-    const [isSearchResult, setIsSearchResult] = useState(true);
+    const [isSearchResult, setIsSearchResult] = useState(false);
     const [searchDate, setSearchDate] = useState(new Date());
 
+    // 정산완료, 정산 에정 보여주는 티켓
+    const [scheduleTicket, setScheduleTicket] = useState({});
+    const [completeTicket, setCompleteTicket] = useState({});
+
+    // 검색 결과를 저장하는 배열
+    const [searchResult, setSearchResult] = useState([]);
+
     const search = async () => {
+        if (selectedStartDate === -1) {
+            alert('날짜를 선택해주세요');
+            return;
+        }
+
+        const firstDate = getTimeFormat(selectedStartDate);
+        const lastDate = getTimeFormat(selectedEndDate === -1 ? selectedStartDate : selectedEndDate);
+        const result = await API.getSearchPeriodRequestClean(firstDate, lastDate);
+        if (result.status !== 200) {
+            console.log(`[ScheduleContainer][search] Error : ${result.message}`);
+            return;
+        }
+
+        const searchData = result.data;
+
+        // 정산 티켓 
+        const processedDates = new Set();
+        let scheduleTicketData = {
+            count: 0,
+            total_price: 0,
+        };
+        let completeTicketData = {
+            count: 0,
+            total_price: 0,
+        };
+
+        searchData.map(data => {
+            const dateKey = new Date(data.request_date * 1000).toISOString().split('T')[0];
+
+            data.request_status === 'DONE' ?
+                completeTicketData = {
+                    count: completeTicketData.count + (processedDates.has(dateKey) ? 1 : 0),
+                    total_price: completeTicketData.total_price + data.total_price,
+                }
+                :
+                scheduleTicketData = {
+                    count: scheduleTicketData.count + (processedDates.has(dateKey) ? 1 : 0),
+                    total_price: scheduleTicketData.total_price + data.total_price,
+                }
+            processedDates.add(dateKey);
+        })
+
+        setScheduleTicket(scheduleTicketData);
+        setCompleteTicket(completeTicketData);
+
+        // 검색 결과
+        const searchResultData = [];
+
+        searchData.forEach(data => {
+            // request_date를 YYYY-MM-DD 형식으로 변환
+            const dateKey = new Date(data.request_date * 1000).toISOString().split('T')[0];
+
+            // searchResultData에서 동일한 dateKey를 가진 항목을 찾음
+            const existingEntry = searchResultData.find(entry => entry.date === dateKey);
+
+            if (existingEntry) {
+                // 동일한 dateKey가 있는 경우
+                const existingRequest = existingEntry.requests.find(
+                    request => request.request_clean_id === data.request_clean_id
+                );
+
+                if (existingRequest) {
+                    // 동일한 request_clean_id가 있는 경우 service 추가
+                    if (!existingRequest.service) {
+                        existingRequest.service = [];
+                    }
+                    existingRequest.service.push(data);
+                } else {
+                    const service = {
+                        service_name: data.service_name,
+                        service_default_price: 40000,
+                    }
+                    // 동일한 request_clean_id가 없으면 새로운 요청 추가
+                    existingEntry.requests.push({
+                        ...data,
+                        service: [service]
+                    });
+                }
+            } else {
+                // 동일한 dateKey가 없으면 새로운 항목 추가
+                searchResultData.push({
+                    date: dateKey,
+                    requests: [{ ...data, service: [data] }],
+                });
+            }
+        });
+
+        // console.log(searchResultData);
+        setSearchResult(searchResultData);
+
         setIsSearchResult(true);
         setShowSearchModal(false);
     }
@@ -511,6 +616,12 @@ const ScheduleContainer = () => {
             setIsSearchResult={setIsSearchResult}
 
             searchDate={searchDate}
+            selectedStartDate={selectedStartDate}
+            selectedEndDate={selectedEndDate}
+
+            scheduleTicket={scheduleTicket}
+            completeTicket={completeTicket}
+            searchResult={searchResult}
         />
     )
 }

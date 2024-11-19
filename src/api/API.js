@@ -743,6 +743,11 @@ const API = {
   getPeriodRequestClean: (first_date, last_date) => $http.get(parameterToPath('/request_clean/schedule/:first_date/:last_date', { first_date, last_date })),
 
   /**
+   * 특정 기간의 청소요청 조회
+   */
+  getSearchPeriodRequestClean: (first_date, last_date) => $http.get(parameterToPath('/request_clean/search/:first_date/:last_date', { first_date, last_date })),
+
+  /**
    * 요청 목록 특정 날짜의 청소요청 조회
    */
   getDateRequestClean: (date) => $http.get(parameterToPath('/request_clean/date/:date', { date })),
