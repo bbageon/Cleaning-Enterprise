@@ -1,4 +1,5 @@
 import { RadioButton, Textarea } from '../../../../../../components';
+import EstimateInput from '../EstimateInput/EstimateInput';
 import './EstimateService.css';
 
 /**
@@ -11,31 +12,6 @@ const ServiceCategory = {
     '전문/특수청소': 4,
     '사업장청소': 5,
     '건물관리': 6,
-};
-
-/**
- * Input
- */
-const EstimateServiceInput = ({
-    label,
-    placeholder,
-    value,
-    defaultValue,
-    id,
-    onChange,
-}) => {
-    return (
-        <div className='estimate-service-form'>
-            <span className='small'>{label}</span>
-            <input
-                id={id}
-                value={value}
-                placeholder={placeholder}
-                defaultValue={defaultValue}
-                onChange={onChange}
-            />
-        </div>
-    );
 };
 
 /**
@@ -74,30 +50,36 @@ const EstimateDropdown = ({
 };
 
 const EstimateService = ({
-    // EstimateServiceInput
+    // 서비스 설명
+    serviceInfos,
+    setServiceInfos,
 
-    // EstimateDropdown
-    selectedCategory,
-    setSelectedCategory,
-
-    // RadioButton
-    selectedUnit,
-    setSelectedUnit,
-
+    // 서비스 생성
+    handleCreateService,
 }) => {
 
     /* ===== VARIABLES ===== */
     const categories = Object.entries(ServiceCategory);
 
     /* ===== FUNCTION ===== */
+
+    // Input 핸들러
+    const handleInputChange = (field) => (e) => {
+        const value = field === 'servicePrice' ? e.target.value.replace(/[^0-9]/g, '') : e.target.value;
+        setServiceInfos((prev) => ({
+            ...prev,
+            [field]: value,
+        }));
+    };
+
+    // Dropdown 핸들러
     const handleCategoryChange = (e) => {
         const selectedValue = e.target.value;
 
-        if (selectedValue) {
-            setSelectedCategory(parseInt(selectedValue, 10));
-        } else {
-            setSelectedCategory(null);
-        }
+        setServiceInfos((prev) => ({
+            ...prev,
+            serviceCategory: selectedValue ? parseInt(selectedValue, 10) : '',
+        }));
     };
 
     /* ===== RENDER ===== */
@@ -112,8 +94,10 @@ const EstimateService = ({
             {/* 폼 */}
             <div className='estimate-service-form-container'>
                 {/* 서비스 이름 */}
-                <EstimateServiceInput
+                <EstimateInput
                     label={'서비스 이름'}
+                    placeholder={'서비스 이름을 작성해 주세요.'}
+                    setValue={handleInputChange('serviceName')}
                 />
 
                 {/* 카테고리 */}
@@ -121,17 +105,18 @@ const EstimateService = ({
                     label={'카테고리'}
                     placeholder={'카테고리를 선택해 주세요.'}
 
-                    selectedCategory={selectedCategory}
-                    setSelectedCategory={setSelectedCategory}
+                    selectedCategory={serviceInfos.serviceCategory}
+                    onChange={handleCategoryChange}
 
                     categories={categories}
-
-                    onChange={handleCategoryChange}
                 />
 
                 {/* 최소 가격 */}
-                <EstimateServiceInput
+                <EstimateInput
                     label={'최소 가격'}
+                    placeholder={'숫자만 입력해 주세요.'}
+                    type={'number'}
+                    setValue={handleInputChange('servicePrice')}
                 />
                 <div className='estimate-service-radio-button'>
                     <RadioButton
@@ -147,8 +132,13 @@ const EstimateService = ({
                                 }
                             ]
                         }
-                        selected={selectedUnit}
-                        setSelected={setSelectedUnit}
+                        selected={serviceInfos.serviceUnit}
+                        setSelected={(selected) =>
+                            setServiceInfos((prev) => ({
+                                ...prev,
+                                serviceUnit: selected,
+                            }))
+                        }
                         buttonWidth={'30px'}
                         buttonHeight={'30px'}
                     />
@@ -158,9 +148,31 @@ const EstimateService = ({
                 <div className='estimate-service-form'>
                     <span className='small'>서비스 설명</span>
                     <Textarea
-                        isCheckLength={false}
-                        height={'75px'}
+                        onChange={handleInputChange('serviceInfo')}
+                        value={serviceInfos.serviceInfo}
+                        maxLength={500}
+                        fontSize={'0.9rem'}
+                        height={'100px'}
                     />
+                </div>
+
+                {/* 서비스 버튼 */}
+                <div className='estimate-service-button'>
+                    <button
+                        style={{
+                            backgroundColor: '#1E90FF'
+                        }}
+                        onClick={handleCreateService}
+                    >
+                        서비스 추가
+                    </button>
+                    <button
+                        style={{
+                            backgroundColor: '#87CEEB'
+                        }}
+                    >
+                        서비스 불러오기
+                    </button>
                 </div>
             </div>
         </div>

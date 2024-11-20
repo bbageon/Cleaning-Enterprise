@@ -1,6 +1,6 @@
-import './MainContent.css';
+import './Content.css';
 
-const MainContent = ({
+const Content = ({
     children,
     gap,
     border,
@@ -22,4 +22,4 @@ const MainContent = ({
     );
 };
 
-export default MainContent;
+export default Content;

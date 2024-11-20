@@ -1,2 +1,2 @@
 export { default as MainLayout } from './MainLayout';
-export { default as MainContent } from './MainContent';
+export { default as Content } from './Content';

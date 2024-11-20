@@ -7,6 +7,7 @@ const Textarea = ({
 
     isCheckLength = true,
     maxLength,
+    fontSize,
 
     onChange,
 
@@ -20,6 +21,7 @@ const Textarea = ({
                 style={{
                     width: width,
                     height: height,
+                    fontSize: fontSize,
                 }}
                 value={value}
                 placeholder={placeholder}
@@ -30,7 +32,14 @@ const Textarea = ({
             {
                 isCheckLength ? (
                     <div className='end'>
-                        <span className={`textarea-count ${value.length === maxLength ? 'max' : ''} large gray1`}>{value.length} / {maxLength}</span>
+                        <span
+                            className={`textarea-count ${value?.length === maxLength ? 'max' : ''} large gray1`}
+                            style={{
+                                fontSize: fontSize,
+                            }}
+                        >
+                            {value?.length} / {maxLength}
+                        </span>
                     </div>
                 ) : (
                     null

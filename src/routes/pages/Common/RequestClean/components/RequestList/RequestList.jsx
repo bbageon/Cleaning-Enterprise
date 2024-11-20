@@ -1,6 +1,5 @@
 import './RequestList.css';
 import RequestCard from '../RequestCard/RequestCard';
-import { MainContent } from '../../../../../../components';
 
 const RequestList = ({
     activeCardId,

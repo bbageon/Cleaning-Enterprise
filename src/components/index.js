@@ -13,7 +13,7 @@ export {
  */
 export {
     MainLayout,
-    MainContent,
+    Content,
 } from './Layout';
 
 /**

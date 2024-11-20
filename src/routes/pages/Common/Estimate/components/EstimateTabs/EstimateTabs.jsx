@@ -7,13 +7,14 @@ import './EstimateTabs.css';
 const EstimateTab = ({
     label,
     isActive,
-    onClick, 
+    onClick,
 }) => {
     return (
         <button
             className='estimate-button'
             style={{
-                borderBottom: isActive ? '2.5px solid #000000' : ''
+                borderBottom: isActive ? '2.5px solid #000000' : '',
+                fontWeight: isActive ? '600' : '',
             }}
             onClick={onClick}
         >
@@ -31,12 +32,41 @@ const EstimateContent = ({
 }) => {
     return (
         <div className='estimate-content-container'>
+            
             <div className='estimate-content-top'>
                 <span className='bold large'>{title}</span>
                 <button
+                    className='download'
                     onClick={onClick}
                 >다운로드</button>
             </div>
+
+            <div className='estimate-content-list'>
+                <div className='estimate-content'>
+                    <span>김제모의 슈퍼 쓸기</span>
+                    <span>+ 2,500원</span>
+                </div>
+                <div className='estimate-content'>
+                    <span>김제모의 슈퍼 쓸기</span>
+                    <span>+ 2,500원</span>
+                </div>
+                <div className='estimate-content'>
+                    <span>김제모의 슈퍼 쓸기</span>
+                    <span>+ 2,500원</span>
+                </div>
+            </div>
+
+            <div
+                className='estimate-content'
+                style={{
+                    paddingTop: '1rem',
+                    paddingBottom: '0.5rem',
+                }}    
+            >
+                <span className='bold large'>총 금액</span>
+                <span className='bold large'>10,000원</span>
+            </div>
+            
         </div>
     );
 };
@@ -69,6 +99,8 @@ const EstimateTabs = ({
     /* ===== RENDER ===== */
     return (
         <div className='estimate-item-container'>
+
+            {/* 탭 */}
             <div className='estimate-tabs-button-container'>
                 {
                     tabs.map((tab, index) => (
@@ -81,7 +113,27 @@ const EstimateTabs = ({
                     ))
                 }
             </div>
+
+            {/* 탭 내용 표시 */}
             {tabs[activeTab].content}
+
+            {/* 서비스 버튼 */}
+            <div className='estimate-service-button'>
+                <button
+                    style={{
+                        backgroundColor: '#1E90FF'
+                    }}
+                >
+                    견적서 전송
+                </button>
+                <button
+                    style={{
+                        backgroundColor: '#87CEEB'
+                    }}
+                >
+                    견적서 저장
+                </button>
+            </div>
         </div>
     );
 };

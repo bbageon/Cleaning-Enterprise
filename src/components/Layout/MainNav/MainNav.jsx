@@ -23,7 +23,7 @@ const MainNav = ({
     return (
         <nav className="nav-container">
             <div className="nav-header title">
-                AVAVAV
+                CLEAN KONG
             </div>
             <ul className="main-nav">
                 <li

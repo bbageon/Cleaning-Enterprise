@@ -1,14 +1,15 @@
 .request-info {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 5px;
-
-    position: relative;
-
-    padding: 10px 0;
-
     width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    gap: 2rem;
+
+    padding: 1rem 1rem;
+
+    border-bottom: 1px solid rgba(194, 187, 255, 0.15);
 }
 
 .request-info.active {
@@ -16,26 +17,15 @@
     color: white;
 }
 
-.request-info::after {
-    content: '';
-    position: absolute;
-    width: 85%;
-    height: 100%;
-    padding: 0 10px;
-    border-bottom: 1px solid #C2C5FF21;
-}
-
 .request-info .date {
-    width: auto;
-    max-width: 40%;
     font-size: 24px;
-    padding: 10px;
 }
 
 .request-info .info {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    flex: 1;
     gap: 10px;
 
     font-size: 11px;
@@ -49,13 +39,14 @@
     gap: 5px;
 }
 
-.request-info .info .menu-info span:first-child {
-    font-size: 12px;
+.request-info .info .menu-info span:first-child,
+.request-info .info .menu-info span:nth-child(2) {
+    font-size: 0.85rem;
 }
 
 .request-info .info .menu-info span:last-child {
     text-align: center;
-    border: 1px solid white;
+    border: 1px solid #FFFFFF;
     padding: 1px;
 }
 
@@ -63,7 +54,13 @@
     color: #969696;
 }
 
-.request-info .address-info {
+.request-info .requirements-info {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.5rem;
+}
+
+.request-info .requirements-info span:first-child {
+    color: var(--gray3-color);
 }

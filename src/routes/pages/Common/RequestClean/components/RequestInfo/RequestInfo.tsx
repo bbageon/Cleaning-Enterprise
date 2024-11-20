@@ -23,6 +23,7 @@ export const RequestInfo: React.FC<RequestInfoProps> = ({
         <>
             {
                 requestInfos?.map(requestInfo => {
+                    console.log(requestInfo.services)
                     return (
                         <div
                             key={requestInfo.request_clean_id}
@@ -39,7 +40,7 @@ export const RequestInfo: React.FC<RequestInfoProps> = ({
                             </div>
                             <div className="info">
                                 <div className="menu-info">
-                                    <span>메뉴 {requestInfo.services.length}개</span>
+                                    <span>메뉴 {requestInfo?.services.length}개</span>
                                     <span>{requestInfo.total_price?.toLocaleString()}원</span>
                                     {type === 'beforeAccept' &&
                                         <span>수락 전</span>}

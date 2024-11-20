@@ -1,0 +1,41 @@
+.estimate-item-container .estimate-info-container {
+    width: 100%;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--gray3-color);
+    font-size: 0.85rem;
+}
+.estimate-item-container .estimate-info-container:last-child {
+    border-bottom: none;
+}
+
+.estimate-item-container .estimate-info-box {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.estimate-info-box .estimate-info-title {
+    width: 40%;
+}
+.estimate-info-box .estimate-info-content {
+    width: 60%;
+}
+
+.estimate-info-container .estimate-request-title {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+
+    padding-top: 2rem;
+}
+
+.estimate-info-container .estimate-image-container {
+    height: 100%;
+    max-width: 100%;
+}

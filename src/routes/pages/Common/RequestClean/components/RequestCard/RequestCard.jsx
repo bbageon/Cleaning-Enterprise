@@ -29,7 +29,7 @@ const RequestCard = ({
         updateRequest({
             request_clean_id: request.request_clean_id,
             body: {
-                request_status: 'CLEANING',
+                request_status: 'DONE',
             }
         }, {
             onError: () => {

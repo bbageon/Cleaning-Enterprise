@@ -12,11 +12,6 @@
     padding-bottom: 0.5rem;
 }
 
-/* 견적서 탭 */
-/* .estimate-button {
-
-} */
-
 /* 견적서 컨텐츠 */
 .estimate-content-container {
     width: 100%;
@@ -24,10 +19,41 @@
 
 .estimate-content-container .estimate-content-top {
     width: 100%;
-
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.75rem;
+}
+.estimate-content-top .download {
+    border: 1px solid var(--gray3-color);
+    outline: none;
+    background-color: transparent;
+    color: var(--gray3-color);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+.estimate-content-top .download:hover {
+    border: 1px solid var(--primary-color);
+    color: #FFFFFF;
+    background-color: var(--primary-color);
+    transition: 0.25s ease-in-out;
+}
 
-    padding-bottom: 1rem;
+.estimate-content-container .estimate-content-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-top: 1px solid var(--gray3-color);
     border-bottom: 1px solid var(--gray3-color);
+}
+.estimate-content-container .estimate-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    font-size: 0.85rem;
 }

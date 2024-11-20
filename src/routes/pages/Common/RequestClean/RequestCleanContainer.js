@@ -76,7 +76,6 @@ const RequestCleanContainer = () => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
                         setActiveCardId(Number(entry.target.getAttribute('data-id')));
-                        console.log(Number(entry.target.getAttribute('data-id')))
                     }
                 });
             },

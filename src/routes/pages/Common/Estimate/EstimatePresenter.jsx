@@ -1,45 +1,59 @@
 import './Estimate.css';
 import { MainLayout } from '../../../../components';
-import EstimateInfo from './components/EstimateInfo/EstimateInfo';
 import EstimateService from './components/EstimateService/EstimateService';
 import EstimateTabs from './components/EstimateTabs/EstimateTabs';
+import EstimateContent from './components/EstimateContent/EstimateContent';
 
 const EstimatePresenter = ({
-    // EstimateService - EstimateDropdown
-    selectedCategory,
-    setSelectedCategory,
+    isLoading,
 
-    // EstimateService - RadioButton
-    selectedUnit,
-    setSelectedUnit,
+    // 탭
+    tabList,
+
+    // 서비스 설명
+    serviceInfos,
+    setServiceInfos,
+
+    // 서비스 생성
+    handleCreateService,
+
+    // 선택된 견적서
+    selectedEstimate,
 }) => {
+
+    if (isLoading) return null;
+
+    /* ===== RENDER ===== */
     return (
         <MainLayout
             page={'견적서 요청 관리'}
+            tabList={tabList}
             className='overflow'
             isShowHeader={false}
             isRight={true}
             isFull={true}
         >
-            <div className='estimate-container column'>
-                <EstimateInfo
-
-                />
-                <div className='estimate-container row'>
-                    <EstimateTabs
-
+            {
+                selectedEstimate &&
+                <div className='estimate-container column'>
+                    <EstimateContent
+                        estimate={selectedEstimate}
                     />
-                    <EstimateService
-                        // EstimateService - EstimateDropdown
-                        selectedCategory={selectedCategory}
-                        setSelectedCategory={setSelectedCategory}
+                    <div className='estimate-container row'>
+                        <EstimateTabs
 
-                        // EstimateService - RadioButton
-                        selectedUnit={selectedUnit}
-                        setSelectedUnit={setSelectedUnit}
-                    />
+                        />
+                        <EstimateService
+                            // 서비스 설명
+                            serviceInfos={serviceInfos}
+                            setServiceInfos={setServiceInfos}
+
+                            // 서비스 생성
+                            handleCreateService={handleCreateService}
+                        />
+                    </div>
                 </div>
-            </div>
+            }
         </MainLayout>
     );
 };

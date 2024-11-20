@@ -1,0 +1,11 @@
+.estimate-item-container .estimate-service-form input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    color: #000000;
+    border-radius: 8px;
+    border: 1px solid var(--gray3-color);
+    outline: none;
+}
+.estimate-item-container .estimate-service-form input::placeholder {
+    color: var(--gray3-color);
+}

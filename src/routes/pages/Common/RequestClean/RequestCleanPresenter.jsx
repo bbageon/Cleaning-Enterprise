@@ -17,9 +17,7 @@ const RequestCleanPresenter = ({
 }) => {
 
     /* ===== FUNCTION ===== */
-    if (isLoading) {
-        return null;
-    }
+    if (isLoading) return null;
 
     /* ===== RENDER ===== */
     return (
