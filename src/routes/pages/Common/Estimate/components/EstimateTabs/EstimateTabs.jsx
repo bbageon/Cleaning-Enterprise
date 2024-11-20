@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './EstimateTabs.css';
+import { useDeleteEstimateServiceList, useGetOneEstimateServiceList } from '../../../../../../hooks/EstimateServiceListHooks';
+import formatPrice from '../../../../../../utils/priceUtils';
 
 /**
  * 견적서 탭
@@ -29,10 +31,29 @@ const EstimateTab = ({
 const EstimateContent = ({
     title,
     onClick,
+    estimateServiceList,
 }) => {
+
+    /* ===== VARIABLES ===== */
+    const totalPrice = estimateServiceList?.reduce((sum, service) => {
+        const servicePrice = service.price_per_meter === 0 ? service.price_per_time : service.price_per_meter;
+        return sum + servicePrice;
+    }, 0);
+
+    /* ===== MUTATE ===== */
+    const { mutate: deleteEstimateService } = useDeleteEstimateServiceList();
+
+    /* ===== FUNCTION ===== */
+    const handleDeleteService = (estimate_service_list_id) => {
+        // 낙관적 업데이트로 삭제 처리
+        deleteEstimateService(estimate_service_list_id);
+    };
+
+    /* ===== RENDER ===== */
     return (
         <div className='estimate-content-container'>
-            
+
+            {/* 타이틀 */}
             <div className='estimate-content-top'>
                 <span className='bold large'>{title}</span>
                 <button
@@ -40,60 +61,98 @@ const EstimateContent = ({
                     onClick={onClick}
                 >다운로드</button>
             </div>
-
-            <div className='estimate-content-list'>
-                <div className='estimate-content'>
-                    <span>김제모의 슈퍼 쓸기</span>
-                    <span>+ 2,500원</span>
-                </div>
-                <div className='estimate-content'>
-                    <span>김제모의 슈퍼 쓸기</span>
-                    <span>+ 2,500원</span>
-                </div>
-                <div className='estimate-content'>
-                    <span>김제모의 슈퍼 쓸기</span>
-                    <span>+ 2,500원</span>
-                </div>
-            </div>
-
-            <div
-                className='estimate-content'
-                style={{
-                    paddingTop: '1rem',
-                    paddingBottom: '0.5rem',
-                }}    
-            >
-                <span className='bold large'>총 금액</span>
-                <span className='bold large'>10,000원</span>
-            </div>
-            
+            {
+                title === '서비스 목록' ? (
+                    // 서비스 목록
+                    <>
+                        <div className='estimate-content-list'>
+                            {
+                                estimateServiceList?.map((service, index) => (
+                                    <div
+                                        key={index}
+                                        className='estimate-content'
+                                    >
+                                        <span>{service.service_name}</span>
+                                        <div>
+                                            <span>+ {formatPrice(service.price_per_meter === 0 ? service.price_per_time : service.price_per_meter)}원</span>
+                                            <button
+                                                className='estimate-delete'
+                                                onClick={() => handleDeleteService(service.estimate_service_list_id)}
+                                            >X</button>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                        <div
+                            className='estimate-content'
+                            style={{
+                                paddingTop: '1rem',
+                                paddingBottom: '0.5rem',
+                            }}
+                        >
+                            <span className='bold large'>총 금액</span>
+                            <span className='bold large'>{formatPrice(totalPrice)}원</span>
+                        </div>
+                    </>
+                ) : (
+                    // 견적서 내용
+                    <>
+                        <div className='estimate-content-list'>
+                            <div className='estimate-content'>
+                                <span>서비스 항목 {estimateServiceList?.length}건</span>
+                                <span>+ {formatPrice(totalPrice)}원</span>
+                            </div>
+                            <div className='estimate-content'>
+                                <span>출장비</span>
+                                <span>+ 2,500원</span>
+                            </div>
+                        </div>
+                        <div
+                            className='estimate-content'
+                            style={{
+                                paddingTop: '1rem',
+                                paddingBottom: '0.5rem',
+                            }}
+                        >
+                            <span className='bold large'>총 금액</span>
+                            <span className='bold large'>{formatPrice(totalPrice + 2500)}원</span>
+                        </div>
+                    </>
+                )
+            }
         </div>
     );
 };
 
 const EstimateTabs = ({
-
+    estimateServiceList,
 }) => {
+
+    /* ===== STATE ===== */
+    const [activeTab, setActiveTab] = useState(0);
+
     /* ===== VARIABLES ===== */
     const tabs = [
         {
             label: '견적서 내용',
             content:
+                // 견적서 내용
                 <EstimateContent
                     title='최종 견적서'
+                    estimateServiceList={estimateServiceList}
                 />,
         },
         {
             label: '서비스 목록',
             content:
+                // 서비스 목록
                 <EstimateContent
                     title='서비스 목록'
+                    estimateServiceList={estimateServiceList}
                 />,
         },
     ];
-
-    /* ===== STATE ===== */
-    const [activeTab, setActiveTab] = useState(0);
 
 
     /* ===== RENDER ===== */

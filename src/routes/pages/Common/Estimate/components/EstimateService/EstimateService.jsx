@@ -55,14 +55,13 @@ const EstimateService = ({
     setServiceInfos,
 
     // 서비스 생성
-    handleCreateService,
+    handleCreateEstimateService,
 }) => {
 
     /* ===== VARIABLES ===== */
     const categories = Object.entries(ServiceCategory);
 
     /* ===== FUNCTION ===== */
-
     // Input 핸들러
     const handleInputChange = (field) => (e) => {
         const value = field === 'servicePrice' ? e.target.value.replace(/[^0-9]/g, '') : e.target.value;
@@ -162,7 +161,7 @@ const EstimateService = ({
                         style={{
                             backgroundColor: '#1E90FF'
                         }}
-                        onClick={handleCreateService}
+                        onClick={handleCreateEstimateService}
                     >
                         서비스 추가
                     </button>

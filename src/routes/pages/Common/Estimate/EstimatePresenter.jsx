@@ -14,11 +14,14 @@ const EstimatePresenter = ({
     serviceInfos,
     setServiceInfos,
 
-    // 서비스 생성
-    handleCreateService,
+    // 견적서 서비스 리스트 생성
+    handleCreateEstimateService,
 
     // 선택된 견적서
     selectedEstimate,
+
+    // 견적서 서비스 리스트
+    estimateServiceList,
 }) => {
 
     if (isLoading) return null;
@@ -41,7 +44,9 @@ const EstimatePresenter = ({
                     />
                     <div className='estimate-container row'>
                         <EstimateTabs
+                            estimateId={selectedEstimate.estimate_id}
 
+                            estimateServiceList={estimateServiceList}
                         />
                         <EstimateService
                             // 서비스 설명
@@ -49,7 +54,7 @@ const EstimatePresenter = ({
                             setServiceInfos={setServiceInfos}
 
                             // 서비스 생성
-                            handleCreateService={handleCreateService}
+                            handleCreateEstimateService={handleCreateEstimateService}
                         />
                     </div>
                 </div>

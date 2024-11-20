@@ -4,7 +4,6 @@ export const EstimateInfo = ({
     estimateInfos,
     type = 'beforeReply',
     onCardClick,
-    selectedId,
 }) => {
 
     
@@ -14,7 +13,6 @@ export const EstimateInfo = ({
         <>
             {
                 estimateInfos?.map(estimateInfo => {
-                    console.log(selectedId)
                     return (
                         <div
                             key={estimateInfo.estimate_id}

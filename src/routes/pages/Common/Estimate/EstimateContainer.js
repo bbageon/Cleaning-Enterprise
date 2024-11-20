@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import EstimatePresenter from "./EstimatePresenter";
-import { useCreateService } from "../../../../hooks/ServiceHooks";
 import { useGetRequestEstimates } from "../../../../hooks/RequestEstimateHooks";
 import { EstimateInfo } from "./components/EstimateInfo/EstimateInfo";
+import { useCreateEstimateServiceList, useDeleteEstimateServiceList, useGetEstimateServiceLists } from "../../../../hooks/EstimateServiceListHooks";
 
 const EstimateContainer = () => {
 
@@ -14,6 +14,8 @@ const EstimateContainer = () => {
     const [completeReply, setCompleteReply] = useState([]);
     // 선택된 견적서
     const [selectedEstimate, setSelectedEstimate] = useState(null);
+    // 견적서 서비스 목록
+    const [filteredEstimateServiceList, setFilteredEstimateServiceList] = useState([]);
 
     // 탭
     const [tabList, setTabs] = useState({
@@ -54,17 +56,20 @@ const EstimateContainer = () => {
         serviceUnit: '',
         serviceInfo: '',
     });
-    /* ===== STORE ===== */
 
     /* ===== MUTATE ===== */
     // 서비스 생성
-    const { mutate: createService } = useCreateService();
+    const { mutate: createEstimateService } = useCreateEstimateServiceList();
+    const { mutate: deleteEstimateService } = useDeleteEstimateServiceList();
 
     /* ===== QUERY ===== */
     const { data: estimatesRes, isLoading: estimatesLoading, isError: estimatesError } = useGetRequestEstimates();
     const estimates = estimatesRes?.data || [];
 
-    const isLoading = estimatesLoading;
+    const { data: estimateServiceListRes, isLoading: estimateServiceListLoading, isError: estimateServiceListError } = useGetEstimateServiceLists();
+    const estimateServiceList = estimateServiceListRes?.data || [];
+
+    const isLoading = estimatesLoading || estimateServiceListLoading;
 
     /* ===== EFFECT ===== */
     useEffect(() => {
@@ -73,6 +78,15 @@ const EstimateContainer = () => {
             setCompleteReply(estimates.filter(estimate => estimate.estimate_status === 'ANSWER_COMPLETE'));
         }
     }, [isLoading, estimates]);
+
+    useEffect(() => {
+        if (!isLoading && estimateServiceList?.length) {
+            setFilteredEstimateServiceList(
+                estimateServiceList
+                    .filter(service => service.estimate_id === selectedEstimate?.estimate_id)
+            );
+        }
+    }, [isLoading, estimateServiceList, selectedEstimate]);
 
     useEffect(() => {
         setTabs((prev) => ({
@@ -84,7 +98,6 @@ const EstimateContainer = () => {
                         estimateInfos={getEstimateInfos(tab.type)}
                         type={tab.type}
                         onCardClick={handleEstimateClick}
-                        selectedId={selectedEstimate?.estimate_id}
                     />
                 ),
             })),
@@ -92,19 +105,21 @@ const EstimateContainer = () => {
     }, [beforeReply, completeReply]);
 
     /* ===== FUNCTION ===== */
-    // 서비스 생성
-    const handleCreateService = () => {
-        createService({
+    // 견적서 서비스 리스트 생성
+    const handleCreateEstimateService = () => {
+        createEstimateService({
+            estimate_id: selectedEstimate.estimate_id,
             company_id: 1,
             service_name: serviceInfos.serviceName,
-            service_content: serviceInfos.serviceInfo,
-            service_category: serviceInfos.serviceCategory,
-            service_image: 'test',
+            category: serviceInfos.serviceCategory,
             price_per_meter: serviceInfos.serviceUnit === 'AREA' ? Number(serviceInfos.servicePrice) : 0,
             price_per_time: serviceInfos.serviceUnit === 'TIME' ? Number(serviceInfos.servicePrice) : 0,
             service_default_price: Number(serviceInfos.servicePrice),
+            service_content: serviceInfos.serviceInfo,
         });
     };
+
+    // 견적서 서비스 리스트 생성
 
     // 탭 카테고리 구분
     const getEstimateInfos = (type) => {
@@ -135,11 +150,14 @@ const EstimateContainer = () => {
             serviceInfos={serviceInfos}
             setServiceInfos={setServiceInfos}
 
-            // 서비스 생성
-            handleCreateService={handleCreateService}
+            // 견적서 서비스 리스트 생성
+            handleCreateEstimateService={handleCreateEstimateService}
 
             // 견적서 클릭 핸들러
             selectedEstimate={selectedEstimate}
+
+            // 견적서 서비스 리스트
+            estimateServiceList={filteredEstimateServiceList}
         />
     );
 };
