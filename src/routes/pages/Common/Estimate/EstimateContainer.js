@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import EstimatePresenter from "./EstimatePresenter";
 import { useGetRequestEstimates } from "../../../../hooks/RequestEstimateHooks";
 import { EstimateInfo } from "./components/EstimateInfo/EstimateInfo";
-import { useCreateEstimateServiceList, useDeleteEstimateServiceList, useGetEstimateServiceLists } from "../../../../hooks/EstimateServiceListHooks";
+import { useCreateEstimateServiceList, useGetEstimateServiceLists } from "../../../../hooks/EstimateServiceListHooks";
 
 const EstimateContainer = () => {
 
@@ -60,7 +60,6 @@ const EstimateContainer = () => {
     /* ===== MUTATE ===== */
     // 서비스 생성
     const { mutate: createEstimateService } = useCreateEstimateServiceList();
-    const { mutate: deleteEstimateService } = useDeleteEstimateServiceList();
 
     /* ===== QUERY ===== */
     const { data: estimatesRes, isLoading: estimatesLoading, isError: estimatesError } = useGetRequestEstimates();

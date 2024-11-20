@@ -23,7 +23,7 @@ const EstimatePresenter = ({
     // 견적서 서비스 리스트
     estimateServiceList,
 }) => {
-
+    
     if (isLoading) return null;
 
     /* ===== RENDER ===== */
@@ -44,18 +44,23 @@ const EstimatePresenter = ({
                     />
                     <div className='estimate-container row'>
                         <EstimateTabs
-                            estimateId={selectedEstimate.estimate_id}
-
                             estimateServiceList={estimateServiceList}
+                            estimateStatus={selectedEstimate && selectedEstimate.estimate_status}
                         />
-                        <EstimateService
-                            // 서비스 설명
-                            serviceInfos={serviceInfos}
-                            setServiceInfos={setServiceInfos}
+                        {
+                            selectedEstimate?.estimate_status === 'ANSWER_COMPLETE' ? (
+                                null
+                            ) : (
+                                <EstimateService
+                                    // 서비스 설명
+                                    serviceInfos={serviceInfos}
+                                    setServiceInfos={setServiceInfos}
 
-                            // 서비스 생성
-                            handleCreateEstimateService={handleCreateEstimateService}
-                        />
+                                    // 서비스 생성
+                                    handleCreateEstimateService={handleCreateEstimateService}
+                                />
+                            )
+                        }
                     </div>
                 </div>
             }

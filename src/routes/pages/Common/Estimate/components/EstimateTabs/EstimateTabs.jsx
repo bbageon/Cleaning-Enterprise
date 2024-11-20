@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './EstimateTabs.css';
-import { useDeleteEstimateServiceList, useGetOneEstimateServiceList } from '../../../../../../hooks/EstimateServiceListHooks';
+import { useDeleteEstimateServiceList } from '../../../../../../hooks/EstimateServiceListHooks';
 import formatPrice from '../../../../../../utils/priceUtils';
 
 /**
@@ -32,6 +32,7 @@ const EstimateContent = ({
     title,
     onClick,
     estimateServiceList,
+    estimateStatus,
 }) => {
 
     /* ===== VARIABLES ===== */
@@ -75,10 +76,16 @@ const EstimateContent = ({
                                         <span>{service.service_name}</span>
                                         <div>
                                             <span>+ {formatPrice(service.price_per_meter === 0 ? service.price_per_time : service.price_per_meter)}원</span>
-                                            <button
-                                                className='estimate-delete'
-                                                onClick={() => handleDeleteService(service.estimate_service_list_id)}
-                                            >X</button>
+                                            {
+                                                estimateStatus === 'ANSWER_COMPLETE' ? (
+                                                    null
+                                                ) : (
+                                                    <button
+                                                        className='estimate-delete'
+                                                        onClick={() => handleDeleteService(service.estimate_service_list_id)}
+                                                    >X</button>
+                                                )
+                                            }
                                         </div>
                                     </div>
                                 ))
@@ -127,6 +134,7 @@ const EstimateContent = ({
 
 const EstimateTabs = ({
     estimateServiceList,
+    estimateStatus,
 }) => {
 
     /* ===== STATE ===== */
@@ -150,6 +158,7 @@ const EstimateTabs = ({
                 <EstimateContent
                     title='서비스 목록'
                     estimateServiceList={estimateServiceList}
+                    estimateStatus={estimateStatus}
                 />,
         },
     ];
