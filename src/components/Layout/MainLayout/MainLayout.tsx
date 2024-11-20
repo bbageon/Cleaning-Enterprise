@@ -11,6 +11,7 @@ interface MainLayoutProps {
     title: string;
     className: string;
     articleStyle: object;
+    articleWrapStyle: object;
 
     CustomSidebar: React.ReactNode;
     tabList: CSidebarTab;
@@ -29,6 +30,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
     title = '',
     className = '',
     articleStyle = {},
+    articleWrapStyle = {},
 
     CustomSidebar,
     tabList = new CSidebarTab(),
@@ -54,7 +56,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({
                 className={isShowHeader ? '' : 'no-header'}
                 style={articleStyle}
             >
-                <div className="article-wrap">
+                <div
+                    className="article-wrap"
+                    style={articleWrapStyle}
+                >
                     {children}
                 </div>
             </article>

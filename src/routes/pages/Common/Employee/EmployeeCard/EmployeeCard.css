@@ -1,0 +1,60 @@
+.employee-card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+
+    position: relative;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    height: 250px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem 2.25rem;
+
+    flex: 0 1 calc(16.75% - 1rem);
+    max-width: calc(16.75% - 1rem);
+    min-width: fit-content;
+    box-sizing: border-box;
+
+    transition: flex-grow 0.5s ease, transform 0.5s ease;
+}
+.employee-card-container:hover {
+    flex-grow: 1.1;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.employee-card-container .employee-card-select {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    border: 1px solid var(--gray1-color);
+    border-radius: 50%;
+    background-color: transparent;
+}
+
+.employee-card-container .employee-card-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.employee-card-container .employee-card-profile img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.employee-card-container .employee-card-info {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+}

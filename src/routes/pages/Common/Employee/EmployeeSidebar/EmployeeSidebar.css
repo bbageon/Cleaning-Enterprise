@@ -1,0 +1,176 @@
+.employee-sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+
+    width: 15%;
+    height: 100%;
+
+    padding: 30px 10px 10px 10px;
+
+    background-color: #2C2C2F;
+
+    float: right;
+
+    color: white;
+}
+
+/* 직원 프로필 */
+.employee-sidebar .profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #C2C5FF26;
+
+    padding: 10px 15px;
+
+    width: 100%;
+    height: fit-content;
+
+    border-radius: 10px;
+
+    font-weight: 600;
+}
+
+.employee-sidebar .profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.employee-sidebar .profile .user-profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.employee-sidebar .profile .user-profile-info .name {
+    font-size: 18px;
+}
+
+.employee-sidebar .profile .user-profile-info .english-name {
+    color: #ffffffcc;
+    font-size: 14px;
+}
+
+/* 기타 컴포넌트 공통 */
+.task-container {
+    width: 100%;
+}
+
+.task-container .title {
+    font-weight: 600;
+    font-size: 1rem;
+    padding-left: 1rem;
+}
+
+
+/* 업무 담당자 정보 */
+.task-container .task-profile {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    padding: 1.5rem 1rem;
+
+    gap: 1.5rem;
+
+    border-bottom: 1px solid rgba(194, 197, 255, 0.15);
+}
+.task-container .task-profile .employee-info {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* 직원 업무 요약 */
+.task-container.summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    text-wrap: nowrap;
+    align-content: flex-end;
+}
+.task-container .task-summary {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-left: 0.5rem;
+    flex-basis: 1;
+}
+.task-container .task-summary::before {
+    position: absolute;
+    content: '';
+    width: 5px;
+    height: 50px;
+    top: -5px;
+    left: -5px;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+.task-container .task-summary.blue::before {
+    background-color: #1E90FF;
+}
+.task-container .task-summary.yellow::before {
+    background-color: #F4B400;
+}
+.task-container .task-summary.green::before {
+    background-color: #46C872;
+}
+.task-container .task-summary span:first-child {
+    font-size: 0.75rem;
+    color: #A9A9A9;
+}
+
+/* 진행 업무 & 완료 업무 */
+.task-container .task-wrap,
+.task-container .task-box {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.task-container .task-wrap {
+    gap: 0.75rem;
+    padding-top: 1.5rem;
+}
+.task-container .task-box {
+    width: 100%;
+    background-color: rgba(194, 197, 255, 0.15);
+    border-radius: 10px;
+    gap: 0.25rem;
+    padding: 0.5rem 0.75rem;
+}
+.task-container .task-box .task-date {
+    font-size: 0.75rem;
+}
+.task-container .task-box .task-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+.task-container .task-box .task-status .working,
+.task-container .task-box .task-status .done {
+    background-color: rgba(120, 181, 225, 0.15);
+    border-radius: 6px;
+    padding: 0.25rem 0.5rem;
+}
+.task-container .task-box .task-status .working {
+    color: #F4B400;
+}
+.task-container .task-box .task-status .done {
+    color: #46C872;
+}
