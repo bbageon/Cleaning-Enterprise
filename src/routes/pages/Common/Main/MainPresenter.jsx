@@ -15,6 +15,9 @@ const MainPresenter = ({
         <MainLayout
             page='메인 화면'
             tabList={tabList}
+            isShowHeader={false}
+            isRight={true}
+            isFull={true}
         >
             <Calendar
                 backgroundColor={'#fff'}

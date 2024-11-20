@@ -130,7 +130,7 @@
     background-color: #3192F1;
 }
 
-.chat-room-sidebar .content .chat-room-info .info .status-circle::before {
+/* .chat-room-sidebar .content .chat-room-info .info .status-circle::before {
     content: '';
     position: absolute;
     top: 50%;
@@ -144,7 +144,7 @@
     border-radius: 50%;
 
     background-color: white;
-}
+} */
 
 .chat-room-sidebar .content .chat-room-info .info .status.DONE {
     color: #50BF77;

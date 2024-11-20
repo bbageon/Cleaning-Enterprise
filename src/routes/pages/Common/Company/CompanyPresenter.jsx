@@ -8,6 +8,9 @@ const CompanyPresenter = ({
     return (
         <MainLayout
             page={'업체 정보 관리'}
+            isShowHeader={false}
+            isRight={true}
+            isFull={true}
         >
 
         </MainLayout>

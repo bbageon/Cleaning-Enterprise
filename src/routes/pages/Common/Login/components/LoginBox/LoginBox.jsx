@@ -28,6 +28,7 @@ export const LoginBox = ({
                         if (e.key === 'Enter') login()
                     }}
                     value={signinUserInfo.id}
+                    autoFocus
                 />
                 <input
                     type="password"

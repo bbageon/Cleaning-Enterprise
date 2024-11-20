@@ -29,6 +29,13 @@
     flex-direction: column;
 
     gap: 10px;
+
+    max-height: 70%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+.nav-container .main-nav::-webkit-scrollbar {
+    display: none;
 }
 
 .nav-container .main-nav li {

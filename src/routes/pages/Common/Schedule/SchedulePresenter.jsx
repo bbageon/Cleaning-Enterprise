@@ -36,6 +36,11 @@ const SchedulePresenter = ({
     setIsSearchResult,
 
     searchDate,
+    selectedStartDate,
+    selectedEndDate,
+    scheduleTicket,
+    completeTicket,
+    searchResult,
 }) => {
     // moment.locale('ko-KR');
     // const localizer = momentLocalizer(moment);
@@ -62,7 +67,14 @@ const SchedulePresenter = ({
                         isSearchResult ?
                             <SearchModal
                                 searchDate={searchDate}
+                                selectedStartDate={selectedStartDate}
+                                selectedEndDate={selectedEndDate}
+
                                 setIsSearchResult={setIsSearchResult}
+
+                                scheduleTicket={scheduleTicket}
+                                completeTicket={completeTicket}
+                                searchResult={searchResult}
                             /> :
                             <ScheduleCalendar
                                 events={events}

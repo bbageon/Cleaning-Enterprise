@@ -8,6 +8,9 @@ const EmployeePresenter = ({
     return (
         <MainLayout
             page={'직원 관리'}
+            isShowHeader={false}
+            isRight={true}
+            isFull={true}
         >
             
         </MainLayout>

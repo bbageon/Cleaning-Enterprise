@@ -37,7 +37,8 @@
     cursor: pointer;
 }
 
-.search-modal .modal-header .schedule-ticket {
+.search-modal .schedule-ticket {
     display: flex;
-    flex-direction: column;
+    gap: 10px;
+    /* flex-direction: column; */
 }

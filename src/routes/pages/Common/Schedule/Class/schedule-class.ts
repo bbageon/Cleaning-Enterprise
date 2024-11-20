@@ -38,6 +38,9 @@ export class CChatRoomInfo {
 
     // 읽지 않은 메시지 수
     not_read_count: number = 0;
+
+    // 마지막 채팅 메시지
+    last_chat_message: string = '';
 }
 
 export class CChatMessage {
