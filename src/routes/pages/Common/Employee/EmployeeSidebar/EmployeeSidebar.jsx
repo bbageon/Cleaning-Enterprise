@@ -31,15 +31,15 @@ const TaskSummary = ({
 }) => {
     return (
         <div className='task-container summary'>
-            <div className='task-summary blue'>
+            <div className='task-summary bluebar'>
                 <span>총 수행 업무</span>
                 <span>186</span>
             </div>
-            <div className='task-summary yellow'>
+            <div className='task-summary yellowbar'>
                 <span>진행 업무</span>
                 <span>186</span>
             </div>
-            <div className='task-summary green'>
+            <div className='task-summary greenbar'>
                 <span>완료 업무</span>
                 <span>186</span>
             </div>

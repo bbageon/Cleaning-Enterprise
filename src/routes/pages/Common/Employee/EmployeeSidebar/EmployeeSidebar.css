@@ -119,13 +119,13 @@
     transform: translateX(-50%);
     border-radius: 2px;
 }
-.task-container .task-summary.blue::before {
+.task-container .task-summary.bluebar::before {
     background-color: #1E90FF;
 }
-.task-container .task-summary.yellow::before {
+.task-container .task-summary.yellowbar::before {
     background-color: #F4B400;
 }
-.task-container .task-summary.green::before {
+.task-container .task-summary.greenbar::before {
     background-color: #46C872;
 }
 .task-container .task-summary span:first-child {
