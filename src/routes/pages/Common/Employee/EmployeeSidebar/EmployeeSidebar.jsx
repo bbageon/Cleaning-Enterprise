@@ -6,7 +6,7 @@ import Profile from '../../../../../assets/profile.png';
  * --
  */
 const EmployeeInfo = ({
-
+    selectedEmployee,
 }) => {
     return (
         <div className='task-container'>
@@ -14,8 +14,8 @@ const EmployeeInfo = ({
             <div className='task-profile'>
                 <img src={Profile} alt='프로필 이미지' className='profile-image' />
                 <div className='employee-info'>
-                    <span>김건우</span>
-                    <span>청소팀/직원</span>
+                    <span>{selectedEmployee.name}</span>
+                    <span>{selectedEmployee.department}/{selectedEmployee.level}</span>
                 </div>
             </div>
         </div>
@@ -27,13 +27,13 @@ const EmployeeInfo = ({
  * --
  */
 const TaskSummary = ({
-
+    selectedEmployee,
 }) => {
     return (
         <div className='task-container summary'>
             <div className='task-summary bluebar'>
                 <span>총 수행 업무</span>
-                <span>186</span>
+                <span>{selectedEmployee.total_tasks}</span>
             </div>
             <div className='task-summary yellowbar'>
                 <span>진행 업무</span>
@@ -52,7 +52,7 @@ const TaskSummary = ({
  * --
  */
 const TaskProgress = ({
-
+    selectedEmployee,
 }) => {
     return (
         <div className='task-container'>
@@ -113,7 +113,7 @@ const TaskComplete = ({
 
 // EmployeeSidebar
 const EmployeeSidebar = ({
-
+    selectedEmployee,
 }) => {
 
     /* ===== RENDER ===== */
@@ -126,18 +126,23 @@ const EmployeeSidebar = ({
                     <div className="english-name">Kim Guenwoo</div>
                 </div>
             </div>
-            <EmployeeInfo
-
-            />
-            <TaskSummary
-
-            />
-            <TaskProgress
-
-            />
-            <TaskComplete
-
-            />
+            {
+                selectedEmployee &&
+                <>
+                    <EmployeeInfo
+                        selectedEmployee={selectedEmployee}
+                    />
+                    <TaskSummary
+                        selectedEmployee={selectedEmployee}
+                    />
+                    <TaskProgress
+                        selectedEmployee={selectedEmployee}
+                    />
+                    <TaskComplete
+                        selectedEmployee={selectedEmployee}
+                    />
+                </>
+            }
         </div>
     );
 };

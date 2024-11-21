@@ -1,10 +1,14 @@
 import './EmployeeCard.css';
 import Profile from '../../../../../assets/profile.png';
+import { useState } from 'react';
 
 const EmployeeCard = ({
     employee,
     onSelectEmployee,
+    isSelected,
 }) => {
+    /* ===== STATE ===== */
+
     /* ===== VARIABLES ===== */
     const Status = {
         'ABSENCE': '부재',
@@ -17,11 +21,11 @@ const EmployeeCard = ({
     /* ===== RENDER ===== */
     return (
         <div
-            className='employee-card-container'
-            onClick={() => {onSelectEmployee(employee)}}
+            className={`employee-card-container ${isSelected ? 'selected' : ''}`}
+            onClick={() => onSelectEmployee(employee)}
         >
             <button
-                className='employee-card-select'
+                className={`employee-card-select ${isSelected ? 'selected' : ''}`}
             >
 
             </button>

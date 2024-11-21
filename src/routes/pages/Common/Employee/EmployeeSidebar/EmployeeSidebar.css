@@ -14,6 +14,8 @@
     float: right;
 
     color: white;
+
+    overflow-y: auto;
 }
 
 /* 직원 프로필 */
@@ -148,7 +150,7 @@
     width: 100%;
     background-color: rgba(194, 197, 255, 0.15);
     border-radius: 10px;
-    gap: 0.25rem;
+    gap: 0.3rem;
     padding: 0.5rem 0.75rem;
 }
 .task-container .task-box .task-date {
@@ -158,6 +160,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 
     font-size: 0.8rem;
     font-weight: 600;

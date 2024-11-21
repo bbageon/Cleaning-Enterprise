@@ -15,6 +15,14 @@ const EmployeePresenter = ({
 
     // 선택된 직원
     selectedEmployee,
+
+    // 소속 선택
+    selectedDepartment,
+    setSelectedDepartment,
+
+    // 직급 선택
+    selectedLevel,
+    setSelectedLevel,
 }) => {
 
     if (isLoading) return null;
@@ -41,10 +49,18 @@ const EmployeePresenter = ({
         >
             <EmployeeHeader
                 employees={employees}
+                
+                selectedDepartment={selectedDepartment}
+                setSelectedDepartment={setSelectedDepartment}
+
+                selectedLevel={selectedLevel}
+                setSelectedLevel={setSelectedLevel}
+
             />
             <EmployeeList
                 employees={employees}
                 onSelectEmployee={onSelectEmployee}
+                selectedEmployee={selectedEmployee}
             />
         </MainLayout>
     )

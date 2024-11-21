@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useGetCompanyEmployee } from "../../../../hooks/EmployeeHooks";
 import EmployeePresenter from "./EmployeePresenter";
 
 const EmployeeContainer = () => {
     /* ===== STATE ===== */
-    const [employees, setEmployees] = useState([]);
-
     const [selectedEmployee, setSelectedEmployee] = useState(null);
+
+    const [selectedDepartment, setSelectedDepartment] = useState(null);
+    const [selectedLevel, setSelectedLevel] = useState(null);
 
     /* ===== VARIABLES ===== */
 
@@ -25,8 +26,6 @@ const EmployeeContainer = () => {
         setSelectedEmployee(employee);
     };
 
-    console.log(selectedEmployee);
-
     /* ===== RENDER ===== */
     return (
         <EmployeePresenter
@@ -40,6 +39,14 @@ const EmployeeContainer = () => {
 
             // 선택된 직원
             selectedEmployee={selectedEmployee}
+
+            // 소속 선택
+            selectedDepartment={selectedDepartment}
+            setSelectedDepartment={setSelectedDepartment}
+
+            // 직급 선택
+            selectedLevel={selectedLevel}
+            setSelectedLevel={setSelectedLevel}
         />
     )
 }

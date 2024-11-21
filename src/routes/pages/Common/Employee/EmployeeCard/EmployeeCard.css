@@ -19,6 +19,12 @@
 
     transition: flex-grow 0.5s ease, transform 0.5s ease;
 }
+.employee-card-container.selected {
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+    border: 2px solid var(--primary-color);
+    flex-grow: 1.1;
+    transform: scale(1.05);
+}
 .employee-card-container:hover {
     flex-grow: 1.1;
     transform: scale(1.05);
@@ -34,6 +40,10 @@
     border: 1px solid var(--gray1-color);
     border-radius: 50%;
     background-color: transparent;
+}
+.employee-card-container .employee-card-select.selected {
+    border: none;
+    background-color: var(--primary-color);
 }
 
 .employee-card-container .employee-card-profile {

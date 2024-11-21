@@ -4,6 +4,7 @@ import './EmployeeList.css';
 const EmployeeList = ({
     employees,
     onSelectEmployee,
+    selectedEmployee,
 }) => {
 
     /* ===== RENDER ===== */
@@ -15,6 +16,7 @@ const EmployeeList = ({
                         key={index}
                         employee={employee}
                         onSelectEmployee={onSelectEmployee}
+                        isSelected={selectedEmployee?.id === employee.id}
                     />
                 ))
             }
