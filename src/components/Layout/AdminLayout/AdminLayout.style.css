@@ -1,0 +1,32 @@
+.ant-menu-title-content,
+.ant-menu-submenu-arrow {
+    color: #FFFFFF !important;
+}
+
+.ant-menu-item-selected {
+    background-color: #3E3E3E !important;
+}
+
+.ant-menu-item-icon {
+    color: #FFFFFF !important;
+}
+
+.ant-menu-sub {
+    background-color: #707070 !important;
+}
+
+.ant-menu-item-group-title {
+    color: #FFFFFF !important;
+}
+
+
+.ant-menu::-webkit-scrollbar {
+    display: none;
+}
+
+.ant-menu {
+    -ms-overflow-style: none;
+    /* 인터넷 익스플로러 */
+    scrollbar-width: none;
+    /* 파이어폭스 */
+}

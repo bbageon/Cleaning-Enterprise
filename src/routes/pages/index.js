@@ -1,3 +1,4 @@
+/* ===== COMMON ===== */
 // 로그인
 export { default as Login } from './Common/Login';
 
@@ -24,3 +25,8 @@ export { default as Estimate } from './Common/Estimate';
 
 // 청소 요청 목록
 export { default as RequestClean } from './Common/RequestClean';
+
+
+
+/* ===== ADMIN ===== */
+export { default as AdminMain } from './Admin/Main';

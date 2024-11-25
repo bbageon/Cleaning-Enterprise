@@ -14,6 +14,7 @@ export {
  */
 export {
     MainLayout,
+    AdminLayout,
     Content,
 } from './Layout';
 

@@ -8,6 +8,7 @@ import { io } from "socket.io-client";
  * --
  */
 import {
+    // COMMON
     Main,
     ChatRoom,
     Review,
@@ -17,6 +18,9 @@ import {
     Estimate,
     RequestClean,
     Login,
+
+    // ADMIN
+    AdminMain,
 } from "./pages";
 import { cookie } from "../util";
 
@@ -86,6 +90,7 @@ const Router = () => {
         <div className="app">
             <ScrollToTop />
             <Routes>
+                {/* ===== COMMON ===== */}
                 {/* 메인 화면 */}
                 <Route
                     path="/"
@@ -129,6 +134,12 @@ const Router = () => {
                 <Route
                     path='/request_clean'
                     element={<RequestClean />}
+                />
+
+                {/* ===== ADMIN ===== */}
+                <Route
+                    path='/admin/main'
+                    element={<AdminMain />}
                 />
             </Routes>
         </div>
