@@ -7,10 +7,10 @@ export const RequestList = ({
     return (
         <div className="request-list">
             {
-                requestList?.map(request => {
+                requestList?.map((request, idx) => {
                     const { date, requests } = request;
                     return (
-                        <div className="request-wrap">
+                        <div className="request-wrap" key={idx}>
                             <div className="request-date">
                                 {date}
                             </div>

@@ -13,6 +13,8 @@ export const SearchModal = ({
     scheduleTicket,
     completeTicket,
     searchResult,
+
+    isSearchResult,
 }) => {
     const testList = [
         {
@@ -70,6 +72,7 @@ export const SearchModal = ({
         <>
             <CalendarToolBar
                 date={searchDate}
+                isSearchResult={isSearchResult}
             />
             <div className="search-modal">
                 <div className="modal-header">

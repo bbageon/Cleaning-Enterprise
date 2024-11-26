@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { ScrollToTop } from "../components";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
@@ -22,10 +22,12 @@ import {
     // ADMIN
     AdminMain,
 } from "./pages";
-import { cookie } from "../util";
+import { cookie, getCookie, isLogin } from "../util";
 
 const Router = () => {
     const socketRef = useState(null);
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const setCookies = (data) => {
         try {
@@ -33,7 +35,7 @@ const Router = () => {
                 throw new Error(`no has save cookie data`);
             }
 
-            cookie.setCookie('id', data?.user_id, {
+            cookie.setCookie('id', data?.company_id, {
                 path: '/',
             });
 
@@ -41,17 +43,17 @@ const Router = () => {
                 path: '/',
             });
 
-            cookie.setCookie('name', data?.name, {
-                path: '/',
-            });
+            // cookie.setCookie('name', data?.name, {
+            //     path: '/',
+            // });
 
-            cookie.setCookie('email', data?.email, {
-                path: '/',
-            });
+            // cookie.setCookie('email', data?.email, {
+            //     path: '/',
+            // });
 
-            cookie.setCookie('userType', data?.type, {
-                path: '/',
-            });
+            // cookie.setCookie('userType', data?.type, {
+            //     path: '/',
+            // });
         } catch (e) {
             console.error(e.message);
         }
@@ -86,6 +88,21 @@ const Router = () => {
         }
     }, []);
 
+    // 라우터 변경 감지 (로그인 확인용)
+    useEffect(() => {
+        const { pathname } = location;
+        if (pathname === '/') return;
+
+        // 만약 로그인 되어있지 않다면 메인 화면으로 이동
+        if (!isLogin()) {
+            alert(`로그인이 필요합니다`);
+            document.getElementById('root').style.visibility = 'hidden';
+            navigate('/')
+            document.getElementById('root').style.visibility = 'visible';
+            return;
+        }
+    }, [location]);
+
     return (
         <div className="app">
             <ScrollToTop />
@@ -94,7 +111,9 @@ const Router = () => {
                 {/* 메인 화면 */}
                 <Route
                     path="/"
-                    element={<Login />}
+                    element={<Login
+                        setCookies={setCookies}
+                    />}
                 />
                 <Route
                     path='/main'

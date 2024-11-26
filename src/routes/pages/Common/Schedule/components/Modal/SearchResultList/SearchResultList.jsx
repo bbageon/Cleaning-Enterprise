@@ -7,11 +7,11 @@ export const SearchResultList = ({
     return (
         <div className="search-result-list">
             {
-                results?.map(result => {
+                results?.map((result, idx) => {
                     const { date, requests } = result;
                     const search_date = date.split('-');
                     return (
-                        <div className="search-result">
+                        <div className="search-result" key={idx}>
                             <div className="search-result-title">
                                 {`
                                     ${search_date[0]}년  
@@ -27,7 +27,7 @@ export const SearchResultList = ({
                                     return (
                                         <div className='search-result-info'>
                                             <div className="result-time">
-                                                {time.getHours()}:{time.getMinutes()}
+                                                {time.getHours()}:{String(time.getMinutes()).padStart(2, '0')}
                                             </div>
                                             <div className="result-info">
                                                 <div className="result-address">

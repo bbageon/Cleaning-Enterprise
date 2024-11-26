@@ -5,6 +5,7 @@ import { ScheduleInfo } from "./components";
 import moment from "moment";
 
 import API, { getDate, getTimeFormat, getToday } from "../../../../api/API";
+import { getCookie } from "../../../../util";
 
 const ScheduleContainer = () => {
     const { navigate } = useCustomContext();
@@ -132,109 +133,109 @@ const ScheduleContainer = () => {
 
     // 사이드바에 청소요청을 표시하기 위한 state
     const [requestList, setRequestList] = useState([
-        {
-            date: '11월 4일',
-            requests: [
-                {
-                    element:
-                        <div className={`calculate complete`}>
-                            <div className="calculate-text">
-                                <div className='main-text'>
-                                    <span>정산완료</span>
-                                    <span>
-                                        <span>2</span>건
-                                    </span>
-                                </div>
-                                <div className='sub-text'>100,000원</div>
-                            </div>
-                        </div>
-                    // <div className={`calculate ${request_status === 'DONE' ? 'complete' : 'schedule'}`}>
-                    //     <div className="calculate-text">
-                    //         <div className='main-text'>
-                    //             <span>{request_status === 'DONE' ? '정산완료' : '정산예정'}</span>
-                    //             <span>{parseInt(count).toLocaleString()}건</span>
-                    //         </div>
-                    //         <div className='sub-text'>{parseInt(total_price_sum).toLocaleString()}원</div>
-                    //     </div>
-                    // </div>
-                },
-                {
-                    element:
-                        <div className={`calculate schedule`}>
-                            <div className="calculate-text">
-                                <div className='main-text'>
-                                    <span>정산예정</span>
-                                    <span>
-                                        <span>2</span>건
-                                    </span>
-                                </div>
-                                <div className='sub-text'>100,000원</div>
-                            </div>
-                        </div>
-                },
-            ]
-        },
-        {
-            date: '11월 6일',
-            requests: []
-        },
-        {
-            date: '11월 13일',
-            requests: [
-                {
-                    element:
-                        <div className={`calculate schedule`}>
-                            <div className="calculate-text">
-                                <div className='main-text'>
-                                    <span>정산예정</span>
-                                    <span>
-                                        <span>2</span>건
-                                    </span>
-                                </div>
-                                <div className='sub-text'>100,000원</div>
-                            </div>
-                        </div>
-                },
-            ]
-        },
-        {
-            date: '11월 23일',
-            requests: [
-                {
-                    element:
-                        <div className={`calculate schedule`}>
-                            <div className="calculate-text">
-                                <div className='main-text'>
-                                    <span>정산예정</span>
-                                    <span>
-                                        <span>2</span>건
-                                    </span>
-                                </div>
-                                <div className='sub-text'>100,000원</div>
-                            </div>
-                        </div>
-                },
-            ]
-        },
-        {
-            date: '11월 26일',
-            requests: [
-                {
-                    element:
-                        <div className={`calculate schedule`}>
-                            <div className="calculate-text">
-                                <div className='main-text'>
-                                    <span>정산예정</span>
-                                    <span>
-                                        <span>2</span>건
-                                    </span>
-                                </div>
-                                <div className='sub-text'>100,000원</div>
-                            </div>
-                        </div>
-                },
-            ]
-        },
+        // {
+        //     date: '11월 4일',
+        //     requests: [
+        //         {
+        //             element:
+        //                 <div className={`calculate complete`}>
+        //                     <div className="calculate-text">
+        //                         <div className='main-text'>
+        //                             <span>정산완료</span>
+        //                             <span>
+        //                                 <span>2</span>건
+        //                             </span>
+        //                         </div>
+        //                         <div className='sub-text'>100,000원</div>
+        //                     </div>
+        //                 </div>
+        //             // <div className={`calculate ${request_status === 'DONE' ? 'complete' : 'schedule'}`}>
+        //             //     <div className="calculate-text">
+        //             //         <div className='main-text'>
+        //             //             <span>{request_status === 'DONE' ? '정산완료' : '정산예정'}</span>
+        //             //             <span>{parseInt(count).toLocaleString()}건</span>
+        //             //         </div>
+        //             //         <div className='sub-text'>{parseInt(total_price_sum).toLocaleString()}원</div>
+        //             //     </div>
+        //             // </div>
+        //         },
+        //         {
+        //             element:
+        //                 <div className={`calculate schedule`}>
+        //                     <div className="calculate-text">
+        //                         <div className='main-text'>
+        //                             <span>정산예정</span>
+        //                             <span>
+        //                                 <span>2</span>건
+        //                             </span>
+        //                         </div>
+        //                         <div className='sub-text'>100,000원</div>
+        //                     </div>
+        //                 </div>
+        //         },
+        //     ],
+        // },
+        // {
+        //     date: '11월 6일',
+        //     requests: []
+        // },
+        // {
+        //     date: '11월 13일',
+        //     requests: [
+        //         {
+        //             element:
+        //                 <div className={`calculate schedule`}>
+        //                     <div className="calculate-text">
+        //                         <div className='main-text'>
+        //                             <span>정산예정</span>
+        //                             <span>
+        //                                 <span>2</span>건
+        //                             </span>
+        //                         </div>
+        //                         <div className='sub-text'>100,000원</div>
+        //                     </div>
+        //                 </div>
+        //         },
+        //     ]
+        // },
+        // {
+        //     date: '11월 23일',
+        //     requests: [
+        //         {
+        //             element:
+        //                 <div className={`calculate schedule`}>
+        //                     <div className="calculate-text">
+        //                         <div className='main-text'>
+        //                             <span>정산예정</span>
+        //                             <span>
+        //                                 <span>2</span>건
+        //                             </span>
+        //                         </div>
+        //                         <div className='sub-text'>100,000원</div>
+        //                     </div>
+        //                 </div>
+        //         },
+        //     ]
+        // },
+        // {
+        //     date: '11월 26일',
+        //     requests: [
+        //         {
+        //             element:
+        //                 <div className={`calculate schedule`}>
+        //                     <div className="calculate-text">
+        //                         <div className='main-text'>
+        //                             <span>정산예정</span>
+        //                             <span>
+        //                                 <span>2</span>건
+        //                             </span>
+        //                         </div>
+        //                         <div className='sub-text'>100,000원</div>
+        //                     </div>
+        //                 </div>
+        //         },
+        //     ]
+        // },
     ]);
 
     // 청소요청을 임시로 담아놓기 위한 state
@@ -493,6 +494,18 @@ const ScheduleContainer = () => {
     // 검색 결과를 저장하는 배열
     const [searchResult, setSearchResult] = useState([]);
 
+    /**
+     * 직원 관련
+     */
+    // 화면 출력을 위한 state
+    const [assignedEmployeeList, setAssignedEmployeeList] = useState([]);
+    const [nonAssignmentEmployeeList, setNonAssignmentEmployeeList] = useState([]);
+
+    // 실제 DB 반영을 위한 state
+    const [assignList, setAssignList] = useState([]);
+    const [nonAssignList, setNonAssignList] = useState([]);
+
+    // 검색 결과 가져오는 함수
     const search = async () => {
         if (selectedStartDate === -1) {
             alert('날짜를 선택해주세요');
@@ -501,13 +514,29 @@ const ScheduleContainer = () => {
 
         const firstDate = getTimeFormat(selectedStartDate);
         const lastDate = getTimeFormat(selectedEndDate === -1 ? selectedStartDate : selectedEndDate);
+        // 기간에 해당하는 청소 요청 가져오기
         const result = await API.getSearchPeriodRequestClean(firstDate, lastDate);
         if (result.status !== 200) {
-            console.log(`[ScheduleContainer][search] Error : ${result.message}`);
+            console.log(`[ScheduleContainer][serach][getSearchPeriodRequestClean] Error : ${result.message}`);
             return;
         }
 
         const searchData = result.data;
+        console.log(searchData);
+
+        // 배정된 직원 정보 가져오기
+        const company_id = getCookie('id');
+        console.log(company_id);
+        const employeeResult = await API.getPeriodCompanyEmployeeAssignment(firstDate, lastDate, company_id);
+        if (employeeResult.status !== 200) {
+            console.log(`[ScheduleContainer][search][getCompanyEmployee] Error : ${result.message}`);
+            return;
+        }
+        const { assignment_employee, non_assignment_employee } = employeeResult.data;
+
+        // 화면 출력을 위한 setState
+        setAssignedEmployeeList(assignment_employee);
+        setNonAssignmentEmployeeList(non_assignment_employee);
 
         // 정산 티켓 
         const processedDates = new Set();
@@ -622,6 +651,8 @@ const ScheduleContainer = () => {
             scheduleTicket={scheduleTicket}
             completeTicket={completeTicket}
             searchResult={searchResult}
+            assignedEmployeeList={assignedEmployeeList}
+            nonAssignmentEmployeeList={nonAssignmentEmployeeList}
         />
     )
 }

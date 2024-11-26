@@ -23,6 +23,7 @@ export const ScheduleCalendar = ({
     toggleSearchModal,
 
     search,
+    isSearchResult,
 }) => {
     const locales = {
         'ko': ko,
@@ -73,6 +74,7 @@ export const ScheduleCalendar = ({
                             toggleSearchModal={toggleSearchModal}
 
                             search={search}
+                            isSearchResult={isSearchResult}
                         />
                 }}
                 selectable

@@ -11,6 +11,7 @@ import {
     LogOutIcon,
 } from '../../../assets/icons';
 import { useCustomContext } from '../../../context/CustomContext';
+import { cookie } from '../../../util';
 
 
 import './MainNav.css';
@@ -19,6 +20,16 @@ const MainNav = ({
     page,
 }) => {
     const { navigate } = useCustomContext();
+
+    const logOut = () => {
+        cookie.remove('id', { path: '/' }, 1000);
+        cookie.remove('token', { path: '/' }, 1000);
+        // cookie.remove('name', { path: '/' }, 1000);
+        // cookie.remove('email', { path: '/' }, 1000);
+        // cookie.remove('userType', { path: '/' }, 1000);
+
+        navigate('/');
+    }
 
     return (
         <nav className="nav-container">
@@ -83,7 +94,10 @@ const MainNav = ({
                     청소 요청 목록
                 </li>
             </ul>
-            <div className="nav-footer">
+            <div
+                className="nav-footer"
+                onClick={logOut}
+            >
                 <LogOutIcon />
                 LogOut
             </div>

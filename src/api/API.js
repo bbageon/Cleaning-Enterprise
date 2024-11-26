@@ -329,7 +329,7 @@ const API = {
    * 견적서 생성
    */
   postRequestEstimate: (body) => $http.post('/estimate', body),
-  
+
   /**
    * 견적서 전체 조회
    */
@@ -840,6 +840,50 @@ const API = {
    * 견적서 서비스 목록 삭제
    */
   deleteEstimateServiceList: (estimate_service_list_id) => $http.delete(parameterToPath('/estimate_service_list/:estimate_service_list_id', { estimate_service_list_id })),
+
+
+  /**
+   * =====================
+   *       직 원 배 정
+   * =====================
+   * Hook 작성 완료
+   */
+  /**
+   * 직원 배정 생성
+   */
+  postEmployeeAssignment: (body) => $http.post('/employee_assignment', body),
+  /**
+   * 직원 배정 단일 조회
+   */
+  getOneEmployeeAssignment: (employee_assignment_id) => $http.get(parameterToPath('/employee_assignment/:employee_assignment_id', { employee_assignment_id })),
+  /**
+   * 청소요청 직원 배정 조회
+   */
+  getCompanyEmployeeAssignment: (request_clean_id) => $http.get(parameterToPath('/employee_assignment/request_clean/:request_clean_id', { request_clean_id })),
+  /**
+   * 직원의 직원 배정 조회
+   */
+  getEmployeeEmployeeAssignment: (employee_id) => $http.get(parameterToPath('/employee_assignment/employee/:employee_id', { employee_id })),
+  /**
+   * 청소업체 직원 배정 조회
+   */
+  getCompanyEmployeeAssignment: (company_id) => $http.get(parameterToPath('/employee_assignment/company/:company_id', { company_id })),
+  /**
+   * 특정 기간 청소요청의 청소업체 직원 배정 조회
+   */
+  getPeriodCompanyEmployeeAssignment: (first_date, last_date, company_id) => $http.get(parameterToPath('/employee_assignment/period/:first_date/:last_date/:company_id', { first_date, last_date, company_id })),
+  /**
+   * 청소업체 직원 배정 전체 조회
+   */
+  getEmployeeAssignment: () => $http.get('/employee_assignment'),
+  /**
+   * 직원 배정 수정
+   */
+  putOneEmployeeAssignment: (employee_assignment_id, body) => $http.put(parameterToPath('/employee_assignment/:employee_assignment_id', { employee_assignment_id }), body),
+  /**
+   * 직원 배정 삭제
+   */
+  deleteOneEmployeeAssignment: (employee_assignment_id) => $http.delete(parameterToPath('/employee_assignment/:employee_assignment_id', { employee_assignment_id })),
 
 
   /**

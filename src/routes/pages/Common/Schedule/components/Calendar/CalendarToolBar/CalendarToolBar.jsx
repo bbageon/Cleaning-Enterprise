@@ -17,6 +17,7 @@ export const CalendarToolBar = ({
     customDayPropGetter,
 
     search,
+    isSearchResult,
 }) => {
 
     const navigate = (action) => {
@@ -35,9 +36,11 @@ export const CalendarToolBar = ({
 
     }
 
+    console.log(isSearchResult)
+
     return (
         <div className="custom-rbc-toolbar">
-            <div className="left-side">
+            <div className="left-side" style={{visibility: isSearchResult ? 'hidden' : 'visible'}}>
                 <span className="rbc-btn-group">
                     <button type="button" onClick={navigate.bind(null, 'TODAY')}>
                         Today

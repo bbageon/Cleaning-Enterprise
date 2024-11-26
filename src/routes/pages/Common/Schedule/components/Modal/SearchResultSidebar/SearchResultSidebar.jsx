@@ -4,8 +4,13 @@ import './SearchResultSidebar.css'
 
 export const SearchResultSidebar = ({
     setIsSearchResult,
+    assignedEmployeeList,
+    nonAssignmentEmployeeList,
 }) => {
     const [showAssignmentEmployee, setShowAssignmentEmployee] = useState(false);
+
+    console.log(assignedEmployeeList);
+    console.log(nonAssignmentEmployeeList);
 
     return (
         <div className="search-result-sidebar">
@@ -26,14 +31,25 @@ export const SearchResultSidebar = ({
             <div className="sidebar-card-wrap">
                 <div className='sidebar-card-label'>배정 직원</div>
                 <div className="sidebar-card content row">
-                    <div className={`sidebar-card fit ${showAssignmentEmployee && 'can-cancel'}`}>
+                    {/* <div className={`sidebar-card fit ${showAssignmentEmployee && 'can-cancel'}`}>
                         <img src={ProfileBG} alt="" />
-                        <div>김건우</div>
+                        <div>김민준</div>
                     </div>
                     <div className={`sidebar-card fit ${showAssignmentEmployee && 'can-cancel'}`}>
                         <img src={ProfileBG} alt="" />
-                        <div>김건우</div>
-                    </div>
+                        <div>이서연</div>
+                    </div> */}
+                    {
+                        assignedEmployeeList?.map(employee => {
+                            const { employee_name } = employee;
+                            return (
+                                <div className={`sidebar-card fit ${showAssignmentEmployee && 'can-cancel'}`}>
+                                    <img src={ProfileBG} alt="" />
+                                    <div>{employee_name}</div>
+                                </div>
+                            )
+                        })
+                    }
                     {
                         !showAssignmentEmployee &&
                         <div
@@ -50,18 +66,29 @@ export const SearchResultSidebar = ({
                 <div className="sidebar-card-wrap">
                     <div className='sidebar-card-label'>배정 가능 직원</div>
                     <div className="sidebar-card content row">
-                        <div className="sidebar-card fit can-add">
+                        {/* <div className="sidebar-card fit can-add">
                             <img src={ProfileBG} alt="" />
-                            <div>김건우</div>
+                            <div>박지호</div>
                         </div>
                         <div className="sidebar-card fit can-add">
                             <img src={ProfileBG} alt="" />
-                            <div>김건우</div>
+                            <div>최유진</div>
                         </div>
                         <div className="sidebar-card fit can-add">
                             <img src={ProfileBG} alt="" />
-                            <div>김건우</div>
-                        </div>
+                            <div>정예준</div>
+                        </div> */}
+                        {
+                            nonAssignmentEmployeeList?.map(employee => {
+                                const { name } = employee;
+                                return (
+                                    <div className="sidebar-card fit can-add">
+                                        <img src={ProfileBG} alt="" />
+                                        <div>{name}</div>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                     <div className="assignment-buttons">
                         <button

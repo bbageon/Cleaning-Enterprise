@@ -6,6 +6,8 @@ import './ScheduleSidebar.css';
 export const ScheduleSidebar = ({
     requestList,
     isSearchResult,
+    assignedEmployeeList,
+    nonAssignmentEmployeeList,
 }) => {
 
     return (
@@ -20,6 +22,8 @@ export const ScheduleSidebar = ({
             {
                 isSearchResult ?
                     <SearchResultSidebar
+                        assignedEmployeeList={assignedEmployeeList}
+                        nonAssignmentEmployeeList={nonAssignmentEmployeeList}
                     /> :
                     <RequestList
                         requestList={requestList}

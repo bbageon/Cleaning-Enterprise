@@ -41,6 +41,8 @@ const SchedulePresenter = ({
     scheduleTicket,
     completeTicket,
     searchResult,
+    assignedEmployeeList,
+    nonAssignmentEmployeeList,
 }) => {
     // moment.locale('ko-KR');
     // const localizer = momentLocalizer(moment);
@@ -57,6 +59,8 @@ const SchedulePresenter = ({
                 <ScheduleSidebar
                     requestList={requestList}
                     isSearchResult={isSearchResult}
+                    assignedEmployeeList={assignedEmployeeList}
+                    nonAssignmentEmployeeList={nonAssignmentEmployeeList}
                 />
             }
             articleStyle={{ width: 'calc(100% - 15% - 15%)' }}
@@ -75,6 +79,8 @@ const SchedulePresenter = ({
                                 scheduleTicket={scheduleTicket}
                                 completeTicket={completeTicket}
                                 searchResult={searchResult}
+
+                                isSearchResult={isSearchResult}
                             /> :
                             <ScheduleCalendar
                                 events={events}
@@ -94,6 +100,7 @@ const SchedulePresenter = ({
                                 toggleSearchModal={toggleSearchModal}
 
                                 search={search}
+                                isSearchResult={isSearchResult}
                             />
 
                     }
