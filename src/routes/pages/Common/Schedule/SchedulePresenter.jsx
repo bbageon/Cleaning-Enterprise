@@ -41,8 +41,23 @@ const SchedulePresenter = ({
     scheduleTicket,
     completeTicket,
     searchResult,
-    assignedEmployeeList,
-    nonAssignmentEmployeeList,
+    searchResultOriginal,
+    assignedEmployees,
+    nonAssignedEmployees,
+
+    // 사이드바 관련
+    isSelectRequest,
+    selectedRequest,
+    handleSelectRequest,
+
+    // 직원 반영 관련 함수
+    handleUnAssignEmployee,
+    handleAssignEmployee,
+    handleAssign,
+    handleCancelAssign,
+
+    showAssignmentEmployee,
+    setShowAssignmentEmployee,
 }) => {
     // moment.locale('ko-KR');
     // const localizer = momentLocalizer(moment);
@@ -59,8 +74,19 @@ const SchedulePresenter = ({
                 <ScheduleSidebar
                     requestList={requestList}
                     isSearchResult={isSearchResult}
-                    assignedEmployeeList={assignedEmployeeList}
-                    nonAssignmentEmployeeList={nonAssignmentEmployeeList}
+                    assignedEmployees={assignedEmployees}
+                    nonAssignedEmployees={nonAssignedEmployees}
+
+                    isSelectRequest={isSelectRequest}
+                    selectedRequest={selectedRequest}
+
+                    handleUnAssignEmployee={handleUnAssignEmployee}
+                    handleAssignEmployee={handleAssignEmployee}
+                    handleAssign={handleAssign}
+                    handleCancelAssign={handleCancelAssign}
+
+                    showAssignmentEmployee={showAssignmentEmployee}
+                    setShowAssignmentEmployee={setShowAssignmentEmployee}
                 />
             }
             articleStyle={{ width: 'calc(100% - 15% - 15%)' }}
@@ -79,8 +105,11 @@ const SchedulePresenter = ({
                                 scheduleTicket={scheduleTicket}
                                 completeTicket={completeTicket}
                                 searchResult={searchResult}
+                                searchResultOriginal={searchResultOriginal}
 
                                 isSearchResult={isSearchResult}
+
+                                handleSelectRequest={handleSelectRequest}
                             /> :
                             <ScheduleCalendar
                                 events={events}

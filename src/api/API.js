@@ -859,7 +859,7 @@ const API = {
   /**
    * 청소요청 직원 배정 조회
    */
-  getCompanyEmployeeAssignment: (request_clean_id) => $http.get(parameterToPath('/employee_assignment/request_clean/:request_clean_id', { request_clean_id })),
+  getRequestEmployeeAssignment: (request_clean_id) => $http.get(parameterToPath('/employee_assignment/request_clean/:request_clean_id', { request_clean_id })),
   /**
    * 직원의 직원 배정 조회
    */
@@ -873,17 +873,25 @@ const API = {
    */
   getPeriodCompanyEmployeeAssignment: (first_date, last_date, company_id) => $http.get(parameterToPath('/employee_assignment/period/:first_date/:last_date/:company_id', { first_date, last_date, company_id })),
   /**
+   * 청소업체의 직원 중 배정되지 않은 직원 조회
+   */
+  getCompanyEmployeeNonAssignment: (company_id) => $http.get(parameterToPath('/employee_assignment/non_assign/:company_id', { company_id })),
+  /**
    * 청소업체 직원 배정 전체 조회
    */
   getEmployeeAssignment: () => $http.get('/employee_assignment'),
   /**
    * 직원 배정 수정
    */
-  putOneEmployeeAssignment: (employee_assignment_id, body) => $http.put(parameterToPath('/employee_assignment/:employee_assignment_id', { employee_assignment_id }), body),
+  putEmployeeAssignment: (employee_assignment_id, body) => $http.put(parameterToPath('/employee_assignment/:employee_assignment_id', { employee_assignment_id }), body),
   /**
    * 직원 배정 삭제
    */
-  deleteOneEmployeeAssignment: (employee_assignment_id) => $http.delete(parameterToPath('/employee_assignment/:employee_assignment_id', { employee_assignment_id })),
+  deleteEmployeeAssignment: (employee_assignment_id) => $http.delete(parameterToPath('/employee_assignment/:employee_assignment_id', { employee_assignment_id })),
+  /**
+   * 직원 배정 삭제(직원 아이디로 삭제)
+   */
+  deleteAssignmentEmployee: (employee_id) => $http.delete(parameterToPath('/employee_assignment/employee/:employee_id', { employee_id })),
 
 
   /**

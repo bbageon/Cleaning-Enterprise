@@ -3,6 +3,9 @@ import './SearchResultList.css';
 
 export const SearchResultList = ({
     results,
+    searchResultOriginal,
+
+    handleSelectRequest,
 }) => {
     return (
         <div className="search-result-list">
@@ -20,12 +23,15 @@ export const SearchResultList = ({
                                 `}
                             </div>
                             {
-                                requests?.map(request => {
+                                requests?.map((request, idx) => {
                                     const { request_date, clean_address, clean_address_detail, service, total_price, request_status } = request;
                                     const time = new Date(request_date);
-                                    console.log(service)
+                                    
                                     return (
-                                        <div className='search-result-info'>
+                                        <div
+                                            className='search-result-info'
+                                            onClick={() => handleSelectRequest(request)}
+                                        >
                                             <div className="result-time">
                                                 {time.getHours()}:{String(time.getMinutes()).padStart(2, '0')}
                                             </div>

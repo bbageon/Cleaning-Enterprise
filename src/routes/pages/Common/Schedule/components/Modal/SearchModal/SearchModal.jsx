@@ -13,9 +13,15 @@ export const SearchModal = ({
     scheduleTicket,
     completeTicket,
     searchResult,
+    searchResultOriginal,
 
     isSearchResult,
+
+    handleSelectRequest,
 }) => {
+    /**
+     * @deprecated 이전 탭 리스트
+     */
     const testList = [
         {
             date: '2024년 10월 4일',
@@ -137,6 +143,9 @@ export const SearchModal = ({
                 </div>
                 <SearchResultList
                     results={searchResult}
+                    searchResultOriginal={searchResultOriginal}
+
+                    handleSelectRequest={handleSelectRequest}
                 />
             </div >
         </>

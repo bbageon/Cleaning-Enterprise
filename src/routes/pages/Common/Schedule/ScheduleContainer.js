@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useCustomContext } from "../../../../context/CustomContext";
 import SchedulePresenter from "./SchedulePresenter";
 import { ScheduleInfo } from "./components";
 import moment from "moment";
 
 import API, { getDate, getTimeFormat, getToday } from "../../../../api/API";
-import { getCookie } from "../../../../util";
+import { cookie, getCookie } from "../../../../util";
 
 const ScheduleContainer = () => {
     const { navigate } = useCustomContext();
@@ -493,17 +493,32 @@ const ScheduleContainer = () => {
 
     // 검색 결과를 저장하는 배열
     const [searchResult, setSearchResult] = useState([]);
+    const [searchResultOriginal, setSearchResultOriginal] = useState([]);
+
+    // 검색 시 청소요청 결과 선택 여부
+    const [isSelectRequest, setIsSelectRequest] = useState(false);
+    // 선택한 청소요청
+    const [selectedRequest, setSelectedRequest] = useState(null);
+    const selectedRequestRef = useRef(null);
 
     /**
      * 직원 관련
      */
+    // 배정 직원 출력 여부 state
+    const [showAssignmentEmployee, setShowAssignmentEmployee] = useState(false);
+
+    // 초기 배정 상태 저장을 위한 state
+    const [initAssignEmlpoyeeList, setInitAssignEmployeeList] = useState([]);
+    const [initNonAssignEmployeeList, setInitNonAssignEmployeeList] = useState([]);
+
     // 화면 출력을 위한 state
-    const [assignedEmployeeList, setAssignedEmployeeList] = useState([]);
-    const [nonAssignmentEmployeeList, setNonAssignmentEmployeeList] = useState([]);
+    const [assignedEmployees, setAssignedEmployees] = useState([]);
+    const [nonAssignedEmployees, setNonAssignedEmployees] = useState([]);
 
     // 실제 DB 반영을 위한 state
     const [assignList, setAssignList] = useState([]);
     const [nonAssignList, setNonAssignList] = useState([]);
+
 
     // 검색 결과 가져오는 함수
     const search = async () => {
@@ -521,22 +536,8 @@ const ScheduleContainer = () => {
             return;
         }
 
+        // 청소요청 데이터 저장
         const searchData = result.data;
-        console.log(searchData);
-
-        // 배정된 직원 정보 가져오기
-        const company_id = getCookie('id');
-        console.log(company_id);
-        const employeeResult = await API.getPeriodCompanyEmployeeAssignment(firstDate, lastDate, company_id);
-        if (employeeResult.status !== 200) {
-            console.log(`[ScheduleContainer][search][getCompanyEmployee] Error : ${result.message}`);
-            return;
-        }
-        const { assignment_employee, non_assignment_employee } = employeeResult.data;
-
-        // 화면 출력을 위한 setState
-        setAssignedEmployeeList(assignment_employee);
-        setNonAssignmentEmployeeList(non_assignment_employee);
 
         // 정산 티켓 
         const processedDates = new Set();
@@ -549,7 +550,7 @@ const ScheduleContainer = () => {
             total_price: 0,
         };
 
-        searchData.map(data => {
+        searchData?.map(data => {
             const dateKey = new Date(data.request_date * 1000).toISOString().split('T')[0];
 
             data.request_status === 'DONE' ?
@@ -571,7 +572,7 @@ const ScheduleContainer = () => {
         // 검색 결과
         const searchResultData = [];
 
-        searchData.forEach(data => {
+        searchData?.forEach(data => {
             // request_date를 YYYY-MM-DD 형식으로 변환
             const dateKey = new Date(data.request_date * 1000).toISOString().split('T')[0];
 
@@ -610,11 +611,110 @@ const ScheduleContainer = () => {
             }
         });
 
-        // console.log(searchResultData);
+        const id = cookie.getCookie('id');
+        const nonAssignmentResult = await API.getCompanyEmployeeNonAssignment(id);
+        if (nonAssignmentResult.status !== 200) {
+            console.log(`[ScheduleContainer][search][getCompanyEmployee] Error : ${result.message}`);
+            return;
+        }
+
+        // 배정 직원 정보 저장
+        setNonAssignedEmployees(nonAssignmentResult.data);
+
         setSearchResult(searchResultData);
+        setSearchResultOriginal(searchData);
 
         setIsSearchResult(true);
         setShowSearchModal(false);
+    }
+
+    // 검색 결과 청소요청 선택
+    const handleSelectRequest = (request) => {
+        setSelectedRequest({ ...request });
+        selectedRequestRef.current = request;
+
+        setAssignedEmployees(JSON.parse(JSON.stringify(request.assigned_employees)));
+        setNonAssignedEmployees(JSON.parse(JSON.stringify(nonAssignedEmployees)));
+
+        setInitAssignEmployeeList(JSON.parse(JSON.stringify(request.assigned_employees)));
+        setInitNonAssignEmployeeList(JSON.parse(JSON.stringify(nonAssignedEmployees)));
+
+        setIsSelectRequest(true);
+    }
+
+    // 직원 배정 삭제(반영 전) => - 클릭 시
+    const handleUnAssignEmployee = (employee) => {
+        setAssignedEmployees(assignedEmployees.filter(assign => assign !== employee));
+
+        const non = nonAssignedEmployees.concat(employee);
+        setNonAssignedEmployees(non);
+
+        setAssignList(assignList.filter(assign => assign !== employee));
+        setNonAssignList(nonAssignList.concat(employee));
+    }
+
+    // 직원 배정(반영 전) => + 클릭 시
+    const handleAssignEmployee = (employee) => {
+        setNonAssignedEmployees(nonAssignedEmployees.filter(assign => assign !== employee));
+
+        const assign = assignedEmployees.concat(employee);
+        setAssignedEmployees(assign);
+        setNonAssignList(nonAssignList.filter(assign => assign !== employee));
+        setAssignList(assignList.concat(employee));
+    }
+
+    // 직원 배정 반영
+    const handleAssign = () => {
+        try {
+            const { request_clean_id } = selectedRequest;
+
+            // 직원 배정(request_clean_id, employee_id 이용)
+            if (assignList.length) {
+                assignList.map(async (employee) => {
+                    const { employee_id } = employee;
+                    const result = await API.postEmployeeAssignment({
+                        request_clean_id,
+                        employee_id
+                    })
+                    if (result.status !== 200) {
+                        throw new Error(`[postEmployeeAssignment] Error`);
+                    }
+                });
+            }
+
+            // 배정된 직원 삭제(employee_assignment_id 이용)
+            if (nonAssignList.length) {
+                nonAssignList.map(async (employee) => {
+                    const { employee_id } = employee;
+                    const result = await API.deleteAssignmentEmployee(employee_id)
+                    if (result.status !== 200) {
+                        throw new Error(`[deleteEmployeeAssignment] Error`);
+                    }
+                })
+            }
+
+            selectedRequestRef.current.assigned_employees = assignedEmployees;
+            setSearchResult([...searchResult]);
+
+            // 현재 상태를 init에 저장
+            setInitAssignEmployeeList(JSON.parse(JSON.stringify(assignedEmployees)));
+            setInitNonAssignEmployeeList(JSON.parse(JSON.stringify(nonAssignedEmployees)));
+
+            setAssignList([]);
+            setNonAssignList([]);
+            setShowAssignmentEmployee(false);
+        } catch (e) {
+            console.log(`[ScheduleContainer][handleAssign] Error: ${e.messeage}`);
+        }
+    }
+
+    // 직원 반영 취소
+    const handleCancelAssign = () => {
+        // assignedEmployees와 nonAssginedEmployees에 init을 반영한다
+        setAssignedEmployees(initAssignEmlpoyeeList);
+        setNonAssignedEmployees(initNonAssignEmployeeList);
+
+        setShowAssignmentEmployee(false);
     }
 
     return (
@@ -651,8 +751,23 @@ const ScheduleContainer = () => {
             scheduleTicket={scheduleTicket}
             completeTicket={completeTicket}
             searchResult={searchResult}
-            assignedEmployeeList={assignedEmployeeList}
-            nonAssignmentEmployeeList={nonAssignmentEmployeeList}
+            searchResultOriginal={searchResultOriginal}
+            assignedEmployees={assignedEmployees}
+            nonAssignedEmployees={nonAssignedEmployees}
+
+            // 사이드바 관련
+            isSelectRequest={isSelectRequest}
+            selectedRequest={selectedRequest}
+            handleSelectRequest={handleSelectRequest}
+
+            // 직원 반영 관련 함수
+            handleUnAssignEmployee={handleUnAssignEmployee}
+            handleAssignEmployee={handleAssignEmployee}
+            handleAssign={handleAssign}
+            handleCancelAssign={handleCancelAssign}
+
+            showAssignmentEmployee={showAssignmentEmployee}
+            setShowAssignmentEmployee={setShowAssignmentEmployee}
         />
     )
 }

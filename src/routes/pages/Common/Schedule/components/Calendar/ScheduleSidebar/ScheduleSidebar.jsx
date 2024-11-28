@@ -6,8 +6,20 @@ import './ScheduleSidebar.css';
 export const ScheduleSidebar = ({
     requestList,
     isSearchResult,
-    assignedEmployeeList,
-    nonAssignmentEmployeeList,
+    assignedEmployees,
+    nonAssignedEmployees,
+
+    isSelectRequest,
+    selectedRequest,
+
+                                
+    handleUnAssignEmployee,
+    handleAssignEmployee,
+    handleAssign,
+    handleCancelAssign,
+
+    showAssignmentEmployee,
+    setShowAssignmentEmployee,
 }) => {
 
     return (
@@ -22,8 +34,19 @@ export const ScheduleSidebar = ({
             {
                 isSearchResult ?
                     <SearchResultSidebar
-                        assignedEmployeeList={assignedEmployeeList}
-                        nonAssignmentEmployeeList={nonAssignmentEmployeeList}
+                        assignedEmployees={assignedEmployees}
+                        nonAssignedEmployees={nonAssignedEmployees}
+
+                        isSelectRequest={isSelectRequest}
+                        selectedRequest={selectedRequest}
+                                
+                        handleUnAssignEmployee={handleUnAssignEmployee}
+                        handleAssignEmployee={handleAssignEmployee}
+                        handleAssign={handleAssign}
+                        handleCancelAssign={handleCancelAssign}
+
+                        showAssignmentEmployee={showAssignmentEmployee}
+                        setShowAssignmentEmployee={setShowAssignmentEmployee}
                     /> :
                     <RequestList
                         requestList={requestList}
