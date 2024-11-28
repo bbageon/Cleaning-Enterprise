@@ -19,7 +19,6 @@ export const CalendarToolBar = ({
     search,
     isSearchResult,
 }) => {
-
     const navigate = (action) => {
         onNavigate(action);
 
@@ -33,10 +32,7 @@ export const CalendarToolBar = ({
             newDate.setMonth(newDate.getMonth() + 1);
         }
         changeMonth(newDate.getFullYear(), newDate.getMonth() + 1);
-
     }
-
-    console.log(isSearchResult)
 
     return (
         <div className="custom-rbc-toolbar">
@@ -58,15 +54,15 @@ export const CalendarToolBar = ({
             </div>
             <div className="right-side">
                 <div className="btn-group">
-                    <button type="button" onClick={toggleSearchModal}>
+                    <button type="button" onClick={() => toggleSearchModal(!isSearchResult)}>
                         <span>시작일</span>
                         <span>날짜 추가</span>
                     </button>
-                    <button type="button" onClick={toggleSearchModal}>
+                    <button type="button" onClick={() => toggleSearchModal(!isSearchResult)}>
                         <span>종료일</span>
                         <span>날짜 추가</span>
                     </button>
-                    <button type="button" onClick={search}>
+                    <button type="button" onClick={() => search()}>
                         <span>검색</span>
                     </button>
                 </div>

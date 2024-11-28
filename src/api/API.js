@@ -10,6 +10,18 @@ export const getTimeFormat = (dateFormat) => {
   return Math.floor(date.getTime() / 1000);
 }
 
+export const getPrevDate = (date) => {
+  const nextDay = new Date(date);
+  nextDay.setDate(nextDay.getDate() - 1);
+  return nextDay;
+}
+
+export const getNextDate = (date) => {
+  const nextDay = new Date(date);
+  nextDay.setDate(nextDay.getDate() + 1);
+  return nextDay;
+}
+
 export const getDate = (timestamp) => {
   return new Date(timestamp * 1000);
 }

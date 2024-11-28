@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { getDate, getTimeFormat } from '../../../../../../../api/API';
 import './SearchResultList.css';
 
@@ -7,6 +8,8 @@ export const SearchResultList = ({
 
     handleSelectRequest,
 }) => {
+    const [selectedKey, setSelectedKey] = useState(-1);
+
     return (
         <div className="search-result-list">
             {
@@ -17,7 +20,7 @@ export const SearchResultList = ({
                         <div className="search-result" key={idx}>
                             <div className="search-result-title">
                                 {`
-                                    ${search_date[0]}년  
+                                    ${search_date[0]}년 
                                     ${search_date[1]}월 
                                     ${search_date[2]}일
                                 `}
@@ -26,11 +29,14 @@ export const SearchResultList = ({
                                 requests?.map((request, idx) => {
                                     const { request_date, clean_address, clean_address_detail, service, total_price, request_status } = request;
                                     const time = new Date(request_date);
-                                    
+
                                     return (
                                         <div
-                                            className='search-result-info'
-                                            onClick={() => handleSelectRequest(request)}
+                                            className={`search-result-info ${selectedKey === idx && 'selected-search-result'}`}
+                                            onClick={() => {
+                                                handleSelectRequest(request)
+                                                setSelectedKey(idx);
+                                            }}
                                         >
                                             <div className="result-time">
                                                 {time.getHours()}:{String(time.getMinutes()).padStart(2, '0')}
