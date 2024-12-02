@@ -593,6 +593,11 @@ const API = {
   getCompanyEmployee: (company_id) => $http.get(parameterToPath('/employee/company/:company_id', { company_id })),
 
   /**
+   * 직원 채팅방 조회
+   */
+  getEmployeeChatRoom: (employee_id) => $http.get(parameterToPath('/employee/chat_room/:employee_id', { employee_id })),
+
+  /**
    * 직원 수정
    */
   putEmployee: (employee_id, body) => $http.put(parameterToPath('/employee/:employee_id', { employee_id }), body),
@@ -783,6 +788,43 @@ const API = {
    * 청소요청 삭제
    */
   deleteRequestClean: (request_clean_id) => $http.delete(parameterToPath('/request_clean/:request_clean_id', { request_clean_id })),
+
+
+  /**
+   * ============================
+   *       청 소 요 청 이 미 지
+   * ============================
+   * Hook 작성 완료
+   */
+  /**
+   * 청소요청 이미지 생성
+   */
+  postRequestCleanImage: (body) => $http.post('/request_clean_image/', body),
+
+  /**
+   * 청소요청 이미지 단일 조회
+   */
+  getOneRequestCleanImage: (request_clean_image_id) => $http.get(parameterToPath('/request_clean_image/:request_clean_image_id', { request_clean_image_id })),
+
+  /**
+   * 단일 청소요청 이미지 조회
+   */
+  getEachRequestCleanImage: (request_clean_id) => $http.get(parameterToPath('/request_clean_image/request_clean/:request_clean_id', { request_clean_id })),
+
+  /**
+   * 청소요청 이미지 전체 조회
+   */
+  getRequestCleanImage: () => $http.get(parameterToPath('/request_clean_image/')),
+
+  /**
+   * 청소요청 이미지 수정
+   */
+  putRequestCleanImage: (request_clean_image_id, body) => $http.put(parameterToPath('/request_clean_image/:request_clean_image_id', { request_clean_image_id }), body),
+
+  /**
+   * 청소요청 이미지 식제
+   */
+  deleteRequestCleanImage: (request_clean_image_id) => $http.delete(parameterToPath('/request_clean_image/:request_clean_image_id', { request_clean_image_id })),
 
 
   /**
