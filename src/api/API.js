@@ -437,6 +437,11 @@ const API = {
   getServiceCartList: (service_id) => $http.get(parameterToPath('/cart_list/service/:service_id', { service_id })),
 
   /**
+   * 회원 장바고니 목록 서비스 조회
+   */
+  getUserServiceCartList: (user_id) => $http.get(parameterToPath('/car_list/user/:user_id', { user_id })),
+
+  /**
    * 장바구니 목록 수정
    */
   putCartList: (cart_list_id, body) => $http.put(parameterToPath('/cart_list/:cart_list_id', { cart_list_id }), body),
@@ -763,6 +768,11 @@ const API = {
    * 요청 목록 특정 날짜의 청소요청 조회
    */
   getDateRequestClean: (date) => $http.get(parameterToPath('/request_clean/date/:date', { date })),
+
+  /**
+   * 직원 청소요청 조회
+   */
+  getEmployeeRequestClean: (employee_id) => $http.get(parameterToPath('/request_clean/employee/:employee_id', { employee_id })),
 
   /**
    * 청소요청 수정
