@@ -35,7 +35,7 @@ const ChatRoomContainer = ({
                     // const company = await API.getOneCompany(id);
                     // if (company.status !== 200) throw new Error(`[ChatRoomListContainer] [useEffect] Error`);
 
-                    
+
                     const result = await API.getCompanyChatRoom(id);
                     if (result.status !== 200) throw new Error(`[ChatRoomListContainer] [useEffect] Error`);
 
@@ -55,7 +55,8 @@ const ChatRoomContainer = ({
                     setCurrentRoomInfo({
                         room_id: chatMessageInfo.data.room.room_id,
                         chat_room_id: chatMessageInfo.data.room.chat_room_id,
-                    })
+                    });
+                    updateChatRoomInfo();
                 } catch (e) {
                     console.log(e.message);
                 }
@@ -67,29 +68,6 @@ const ChatRoomContainer = ({
                         reconnectionAttempts: 3, // 웹소켓이 연결되지 않을 경우 최대 3번까지 재연결 시도
                     });
                 }
-
-                // chatMesseage 메시지를 통해 메시지를 전달받은 경우 채팅 메시지 목록에 해당 내용 추가
-                socketRef.current?.on('chatMessage', (messageInfo) => {
-                    setChatList(prev => {
-                        return [
-                            ...prev,
-                            {
-                                sender: messageInfo.sender,
-                                receiver: messageInfo.receiver,
-                                message: messageInfo.message,
-                            }
-                        ]
-                    });
-
-                    // 채팅방의 마지막 메시지 띄우기
-                    setChatRoomList((prevChatRoomList) =>
-                        prevChatRoomList.map((room, idx) =>
-                            idx === selectChatIndex
-                                ? { ...room, last_chat_message: messageInfo.message }
-                                : room
-                        )
-                    );
-                });
             }
         )()
     }, []);
@@ -123,6 +101,7 @@ const ChatRoomContainer = ({
                 room_id: chatMessageInfo.data.room.room_id,
                 chat_room_id: chatMessageInfo.data.room.chat_room_id,
             })
+            updateChatRoomInfo();
         } catch (e) {
             console.log(e.message);
         }
@@ -149,6 +128,59 @@ const ChatRoomContainer = ({
         // 메시지 전달 완료 후 입력 메시지를 비우고 입력 창으로 포커스를 맞춘다
         inputChatRef.current.focus();
         setChatMessage('');
+    }
+
+    // 채팅방 정보 업데이트
+    const updateChatRoomInfo = () => {
+        // chatMesseage 메시지를 통해 메시지를 전달받은 경우 채팅 메시지 목록에 해당 내용 추가
+        socketRef.current?.on('chatMessage', (messageInfo) => {
+            // 자신이 보낸 메시지일 경우
+            if (messageInfo.sender === sender) {
+                setChatList(prev => {
+                    return [
+                        ...prev,
+                        {
+                            sender: messageInfo.sender,
+                            receiver: messageInfo.receiver,
+                            message: messageInfo.message,
+                        }
+                    ]
+                });
+
+                // 채팅방의 마지막 메시지 띄우기
+                setChatRoomList((prevChatRoomList) =>
+                    prevChatRoomList.map((room, idx) =>
+                        idx === selectChatIndex
+                            ? { ...room, last_chat_message: messageInfo.message }
+                            : room
+                    )
+                );
+
+                return;
+            }
+
+            // 수신일 경우 다른 채팅방에서 수신한 메시지는 거른다
+            if (messageInfo.chat_room_id !== currentRoomInfo.chat_room_id) return;
+            setChatList(prev => {
+                return [
+                    ...prev,
+                    {
+                        sender: messageInfo.sender,
+                        receiver: messageInfo.receiver,
+                        message: messageInfo.message,
+                    }
+                ]
+            });
+
+            // 채팅방의 마지막 메시지 띄우기
+            setChatRoomList((prevChatRoomList) =>
+                prevChatRoomList.map((room, idx) =>
+                    idx === selectChatIndex
+                        ? { ...room, last_chat_message: messageInfo.message }
+                        : room
+                )
+            );
+        });
     }
 
     return (
