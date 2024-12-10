@@ -11,6 +11,12 @@ const ChatRoomPresenter = ({
 
     sendMessage,
 
+    sendSelectPicture,
+    selectMultiPictures,
+    clearSelectPicture,
+
+    selectedPictures,
+
     selectChatIndex,
     setSelectChatIndex,
 
@@ -43,6 +49,12 @@ const ChatRoomPresenter = ({
                 setChatMessage={setChatMessage}
 
                 sendMessage={sendMessage}
+
+                sendSelectPicture={sendSelectPicture}
+                selectMultiPictures={selectMultiPictures}
+                clearSelectPicture={clearSelectPicture}
+
+                selectedPictures={selectedPictures}
 
                 clientId={clientId}
                 chatRef={chatRef}

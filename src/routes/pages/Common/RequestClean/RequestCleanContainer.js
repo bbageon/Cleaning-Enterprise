@@ -7,7 +7,7 @@ import { API } from "../../../../api";
 const RequestCleanContainer = () => {
 
     /* ===== VARIABLES ===== */
-    const companyId = 1;
+    const companyId = 4;
 
     /* ===== STATE ===== */
     const [beforeAccept, setBeforeAccept] = useState([]);

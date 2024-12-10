@@ -24,7 +24,8 @@ const ChatSidebar: React.FC<ChatSidebarProps> = ({
     selectChatIndex,
     setSelectChatIndex,
 }) => {
-    
+    const regex = /^<!.*!>$/;
+
     return (
         <div className="chat-room-sidebar">
             <div className="rooftop">
@@ -54,7 +55,13 @@ const ChatSidebar: React.FC<ChatSidebarProps> = ({
                                     </span>
                                 </div>
                                 <div className="info">
-                                    <span className="sub-name">{last_chat_message}</span>
+                                    <span className="sub-name">
+                                        {
+                                            regex.test(last_chat_message) ?
+                                                `사진을 보냈습니다` :
+                                                last_chat_message
+                                        }
+                                    </span>
                                     <span className="not-read-count">{not_read_count}</span>
                                 </div>
                                 <div className="info">

@@ -1,5 +1,6 @@
 import ChatBallon from "../ChatBallon/ChatBallon";
 import { ChatFooter } from "../ChatFooter";
+import ImagePreview from "../ImagePreview";
 import './ChatBody.css';
 
 const ChatBody = ({
@@ -9,21 +10,16 @@ const ChatBody = ({
 
     sendMessage,
 
+    sendSelectPicture,
+    selectMultiPictures,
+    clearSelectPicture,
+
+    selectedPictures,
+
     clientId,
     chatRef,
     chatList,
 }) => {
-    const chatMessages = [
-        {
-            message: '테스트',
-            sender: 'other',
-        },
-        {
-            message: '테스트2',
-            sender: 'my',
-        },
-    ]
-
     return (
         <div className="chat-room-body">
             <div
@@ -36,12 +32,27 @@ const ChatBody = ({
                 />
             </div>
 
+            {/* 이미지 미리보기 */}
+            {
+                selectedPictures.length > 0 &&
+                <ImagePreview
+                    images={selectedPictures}
+
+                    clearSelectPicture={clearSelectPicture}
+                    sendSelectPicture={sendSelectPicture}
+                />
+            }
+
             <ChatFooter
                 inputChatRef={inputChatRef}
                 chatMessage={chatMessage}
                 setChatMessage={setChatMessage}
 
                 sendMessage={sendMessage}
+
+                selectMultiPictures={selectMultiPictures}
+
+                selectedPictures={selectedPictures}
             />
         </div>
     )

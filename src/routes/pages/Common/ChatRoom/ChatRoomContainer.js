@@ -25,6 +25,9 @@ const ChatRoomContainer = ({
         chat_room_id: -1
     });
 
+    const [selectedPictures, setSelectedPictures] = useState([]);
+
+
     useEffect(() => {
         (
             async () => {
@@ -178,6 +181,65 @@ const ChatRoomContainer = ({
         setChatMessage('');
     }
 
+    // 이미지 선택(input)
+    const MAX_IMAGE_SIZE = 5;
+    const selectMultiPictures = async (e) => {
+        try {
+            const pictures = [];
+            const files = Array.from(e.target.files);
+
+            files.map((file, idx) => {
+                if (idx >= MAX_IMAGE_SIZE) return;
+
+                pictures.push(file);
+            })
+
+            setSelectedPictures(pictures);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    // 이미지 전송
+    const sendSelectPicture = async () => {
+        const { room_id, chat_room_id } = currentRoomInfo;
+        console.log(selectedPictures)
+
+        const formData = new FormData();
+        selectedPictures?.map(picture => {
+            formData.append('files', picture);
+        })
+
+        try {
+            const result = await API.postImagesTest(formData);
+
+            console.log(result);
+            if (result.status !== 200) {
+                throw new Error(`invalid upload images`);
+            }
+
+            // 이미지가 전달된 경우 ,로 이미지를 구분한 후 이미지를 뜻하는 <! !> 를 앞 뒤로 붙여준다
+            const imageUrl = "<!" + result.data.join(',') + "!>";
+
+            socketRef.current.emit('chatMessage', {
+                room_id,
+                chat_room_id,
+                message: imageUrl,
+                sender,
+                receiver,
+            });
+            setSelectedPictures([]);
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    // 선택한 이미지 초기화
+    const clearSelectPicture = () => {
+        setSelectedPictures([]);
+    }
+
+
     return (
         <ChatRoomPresenter
             inputChatRef={inputChatRef}
@@ -185,6 +247,12 @@ const ChatRoomContainer = ({
             setChatMessage={setChatMessage}
 
             sendMessage={sendMessage}
+
+            sendSelectPicture={sendSelectPicture}
+            selectMultiPictures={selectMultiPictures}
+            clearSelectPicture={clearSelectPicture}
+
+            selectedPictures={selectedPictures}
 
             selectChatIndex={selectChatIndex}
             setSelectChatIndex={setSelectChatIndex}
