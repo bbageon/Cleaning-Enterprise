@@ -29,12 +29,7 @@ const ChatRoomContainer = ({
         (
             async () => {
                 try {
-                    // const company_id = cookie.getCookie('id');
-                    // const result = await API.getCompanyChatRoom(company_id);
                     const id = `${process.env.REACT_APP_TEST_COMPANY_ID}`
-                    // const company = await API.getOneCompany(id);
-                    // if (company.status !== 200) throw new Error(`[ChatRoomListContainer] [useEffect] Error`);
-
 
                     const result = await API.getCompanyChatRoom(id);
                     if (result.status !== 200) throw new Error(`[ChatRoomListContainer] [useEffect] Error`);
@@ -43,8 +38,8 @@ const ChatRoomContainer = ({
                     setClientId(result.data.company.company_name);
                     setSender(result.data.company.company_name);
 
-                    // // 수신자 설정
-                    // setReceiver(result.data.chat_rooms[0].user.name);
+                    // 수신자 설정
+                    setReceiver(result.data.chat_rooms[0].user.name);
 
                     // 채팅방 설정
                     setChatRoomList(result.data.chat_rooms);
@@ -56,7 +51,6 @@ const ChatRoomContainer = ({
                         room_id: chatMessageInfo.data.room.room_id,
                         chat_room_id: chatMessageInfo.data.room.chat_room_id,
                     });
-                    updateChatRoomInfo();
                 } catch (e) {
                     console.log(e.message);
                 }
@@ -77,62 +71,10 @@ const ChatRoomContainer = ({
         chatRef.current.scrollTop = chatRef.current.scrollHeight;
     }, [chatList]);
 
-    // 채팅방 선택
-    const selectChatRoom = async (room_id) => {
-        try {
-            // 채팅방의 정보 가져오기
-            const chatInfo = await API.getOneChatRoom(room_id);
-            if (chatInfo.status !== 200) throw new Error(`[ChatRoomContainer][getOneChatRoom] Error`);
+    // 채팅방 정보가 갱신
+    useEffect(() => {// chatMesseage 메시지를 통해 메시지를 전달받은 경우 채팅 메시지 목록에 해당 내용 추가
+        socketRef.current?.off('chatMessage');
 
-            const { data } = chatInfo;
-
-            console.log(`발신자: ${data.company.company_name}`);
-            console.log(`수신자: ${data.user.name}`);
-
-            // 발신자 및 수신자 설정
-            setSender(data.company.company_name);
-            setReceiver(data.user.name);
-
-            // 채팅 메시지 가져오기
-            const chatMessageInfo = await API.getOneChatMessage(room_id);
-            if (chatMessageInfo.status !== 200) throw new Error(`[ChatRoomContainer][getOneChatMessage] Error`);
-            setChatList(chatMessageInfo.data.room_messages);
-            setCurrentRoomInfo({
-                room_id: chatMessageInfo.data.room.room_id,
-                chat_room_id: chatMessageInfo.data.room.chat_room_id,
-            })
-            updateChatRoomInfo();
-        } catch (e) {
-            console.log(e.message);
-        }
-    }
-
-    // 메시지 보내기
-    const sendMessage = () => {
-        // 입력창이 비어있는 경우 메시지를 전송할 수 없음
-        if (!chatMessage.length) return;
-
-        const { room_id, chat_room_id } = currentRoomInfo;
-
-        if (chat_room_id === -1) return;
-
-        // 메시지 전달 시 채팅 정보와 chatMessage 메시지를 같이 보냄
-        socketRef.current.emit('chatMessage', {
-            room_id,
-            chat_room_id,
-            message: chatMessage,
-            sender,
-            receiver,
-        });
-
-        // 메시지 전달 완료 후 입력 메시지를 비우고 입력 창으로 포커스를 맞춘다
-        inputChatRef.current.focus();
-        setChatMessage('');
-    }
-
-    // 채팅방 정보 업데이트
-    const updateChatRoomInfo = () => {
-        // chatMesseage 메시지를 통해 메시지를 전달받은 경우 채팅 메시지 목록에 해당 내용 추가
         socketRef.current?.on('chatMessage', (messageInfo) => {
             // 자신이 보낸 메시지일 경우
             if (messageInfo.sender === sender) {
@@ -181,6 +123,59 @@ const ChatRoomContainer = ({
                 )
             );
         });
+    }, [currentRoomInfo])
+
+
+    // 채팅방 선택
+    const selectChatRoom = async (room_id) => {
+        try {
+            // 채팅방의 정보 가져오기
+            const chatInfo = await API.getOneChatRoom(room_id);
+            if (chatInfo.status !== 200) throw new Error(`[ChatRoomContainer][getOneChatRoom] Error`);
+
+            const { data } = chatInfo;
+
+            console.log(`발신자: ${data.company.company_name}`);
+            console.log(`수신자: ${data.user.name}`);
+
+            // 발신자 및 수신자 설정
+            setSender(data.company.company_name);
+            setReceiver(data.user.name);
+
+            // 채팅 메시지 가져오기
+            const chatMessageInfo = await API.getOneChatMessage(room_id);
+            if (chatMessageInfo.status !== 200) throw new Error(`[ChatRoomContainer][getOneChatMessage] Error`);
+            setChatList(chatMessageInfo.data.room_messages);
+            setCurrentRoomInfo({
+                room_id: chatMessageInfo.data.room.room_id,
+                chat_room_id: chatMessageInfo.data.room.chat_room_id,
+            })
+        } catch (e) {
+            console.log(e.message);
+        }
+    }
+
+    // 메시지 보내기
+    const sendMessage = () => {
+        // 입력창이 비어있는 경우 메시지를 전송할 수 없음
+        if (!chatMessage.length) return;
+
+        const { room_id, chat_room_id } = currentRoomInfo;
+
+        if (chat_room_id === -1) return;
+
+        // 메시지 전달 시 채팅 정보와 chatMessage 메시지를 같이 보냄
+        socketRef.current.emit('chatMessage', {
+            room_id,
+            chat_room_id,
+            message: chatMessage,
+            sender,
+            receiver,
+        });
+
+        // 메시지 전달 완료 후 입력 메시지를 비우고 입력 창으로 포커스를 맞춘다
+        inputChatRef.current.focus();
+        setChatMessage('');
     }
 
     return (

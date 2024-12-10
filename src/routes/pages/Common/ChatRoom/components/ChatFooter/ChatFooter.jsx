@@ -23,6 +23,7 @@ const ChatFooter = ({
                         sendMessage()
                     }
                 }}
+                autoFocus
             />
             <div className='icons'>
                 <ImageIcon />
