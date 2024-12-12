@@ -1,2 +1,2 @@
-import './AdminHeader.style.css';
+import AdminHeader from './AdminHeader';
 export default AdminHeader;

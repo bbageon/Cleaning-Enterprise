@@ -126,7 +126,7 @@ export const useUpdateEstimateServiceList = (onSuccess?: (data: any) => void, on
 };
 
 /**
- * [EstimateServiceList] 견적서 서비스 목록 삭제 수정
+ * [EstimateServiceList] 견적서 서비스 목록 삭제
  * --
  */
 export const useDeleteEstimateServiceList = (onSuccess?: (data: any) => void, onError?: (error: any) => void) => {
@@ -157,7 +157,7 @@ export const useDeleteEstimateServiceList = (onSuccess?: (data: any) => void, on
         },
 
         onSuccess: (data) => {
-            console.log('견적서 서비스 목록 삭제 완료: ', data);
+            // console.log('견적서 서비스 목록 삭제 완료: ', data);
 
             queryClient.invalidateQueries(estimateServiceListQueryKeys.getEstimateServiceLists());
 
@@ -166,7 +166,7 @@ export const useDeleteEstimateServiceList = (onSuccess?: (data: any) => void, on
             }
         },
         onError: (error, variables, context) => {
-            console.error('견적서 서비스 목록 삭제 실패: ', error);
+            // console.error('견적서 서비스 목록 삭제 실패: ', error);
 
             // 이전 캐시 데이터로 롤백
             if (context?.previousData) {

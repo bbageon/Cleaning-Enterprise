@@ -1,4 +1,4 @@
-.admin_header_layout {
+.admin-header-layout {
     width: 100%;
     height: 100%;
     position: relative;
@@ -7,7 +7,7 @@
     background: #FFFFFF;
 }
 
-.admin_header_container {
+.admin-header-container {
     width: 100%;
     height: 100%;
     background: #FFFFFF;
@@ -17,12 +17,12 @@
     justify-content: space-between;
 }
 
-.admin_info {
+.admin-info {
     display: flex;
     align-items: center;
 }
 
-.admin_info p {
+.admin-info p {
     font-size: 16px;
     font-weight: 600;
     color: var(--black-color);

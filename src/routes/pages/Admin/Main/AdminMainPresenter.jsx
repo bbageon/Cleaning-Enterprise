@@ -6,9 +6,11 @@ const AdminMainPresenter = ({
 
     /* ===== RENDER ===== */
     return (
-        <AdminLayout>
+        // <AdminLayout>
         
-        </AdminLayout>
+        // </AdminLayout>
+        <>
+        </>
     );
 };
 
