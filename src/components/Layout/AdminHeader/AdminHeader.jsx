@@ -1,9 +1,31 @@
-import { Breadcrumb } from 'antd';
 import './AdminHeader.style.css';
+import { Avatar, Badge, Button, Popover } from 'antd';
+import { Breadcrumb } from '../../Text';
+import { LogoutOutlined, UserOutlined } from '@ant-design/icons';
 
 const buttonStyle = {
     width: '100%',
     textAlign: 'left',
+};
+
+const PopoverContent = ({ onLogout }) => {
+    return (
+        <>
+            <ul>
+                <li>
+                    <Button
+                        type="text"
+                        danger
+                        icon={<LogoutOutlined />}
+                        style={{ ...buttonStyle }}
+                        onClick={() => onLogout()}
+                    >
+                        로그아웃
+                    </Button>
+                </li>
+            </ul>
+        </>
+    );
 };
 
 const AdminHeader = ({
@@ -15,6 +37,7 @@ const AdminHeader = ({
     count,
     size = 32,
     avatarStyle,
+    onLogout,
 }) => {
 
     /* ===== RENDER ===== */
@@ -34,6 +57,20 @@ const AdminHeader = ({
                             style={{ fontSize: 16 }}
                         />
                     </div>
+                    <Popover
+                        content={<PopoverContent onLogout={onLogout} />}
+                        trigger={'click'}
+                        placement='bottom'
+                    >
+                        <Badge count={count}>
+                            <Avatar
+                                size={size}
+                                icon={<UserOutlined />}
+                                src={profile}
+                                style={{ background: '#EEEEEE', ...avatarStyle }}
+                            />
+                        </Badge>
+                    </Popover>
                 </div>
             </div>
         </div>

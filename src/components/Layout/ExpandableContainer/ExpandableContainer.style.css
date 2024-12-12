@@ -1,0 +1,18 @@
+.expandable-content {
+    overflow: hidden;
+    height: 100%;
+    transition: max-height 0.3s ease-out;
+}
+
+.expand-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    position: relative;
+    top: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+.expand-button span {
+    margin-left: 4px;
+}

@@ -1,0 +1,9 @@
+.breadcrumb_layout {
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb_layout li {
+    font-weight: 400;
+    font-size: 16px;
+}

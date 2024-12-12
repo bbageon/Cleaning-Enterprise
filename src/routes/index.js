@@ -1,5 +1,5 @@
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { ScrollToTop } from "../components";
+import { AdminLayout, ScrollToTop } from "../components";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
@@ -22,6 +22,7 @@ import {
     // ADMIN
     AdminMain,
 } from "./pages";
+import AdminRoutes from './pages/Admin';
 import { cookie, getCookie, isLogin } from "../util";
 
 const Router = () => {
@@ -161,8 +162,12 @@ const Router = () => {
                     element={<AdminMain />}
                 />
             </Routes>
+
+            <Routes>
+                <Route index path='/admin/*' element={<AdminRoutes />} />
+            </Routes>
         </div>
-    )
-}
+    );
+};
 
 export default Router;
