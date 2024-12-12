@@ -118,7 +118,7 @@ const EmployeeSidebar = ({
 
     /* ===== RENDER ===== */
     return (
-        <div className="employee-sidebar">
+        <div className="employee-sidebar sidebar">
             <div className="profile">
                 <img src={Profile} alt="프로필 이미지" className='profile-image' />
                 <div className="user-profile-info">

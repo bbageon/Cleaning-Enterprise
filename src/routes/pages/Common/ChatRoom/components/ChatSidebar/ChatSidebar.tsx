@@ -27,7 +27,7 @@ const ChatSidebar: React.FC<ChatSidebarProps> = ({
     const regex = /^<!.*!>$/;
 
     return (
-        <div className="chat-room-sidebar">
+        <div className="chat-room-sidebar sidebar">
             <div className="rooftop">
                 Message
             </div>

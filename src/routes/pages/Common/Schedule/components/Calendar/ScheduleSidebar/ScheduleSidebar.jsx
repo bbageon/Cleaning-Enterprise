@@ -23,7 +23,7 @@ export const ScheduleSidebar = ({
 }) => {
 
     return (
-        <div className="schedule-sidebar">
+        <div className="schedule-sidebar sidebar">
             <div className="profile">
                 <img src={Profile} alt="프로필 이미지" className='profile-image' />
                 <div className="user-profile-info">

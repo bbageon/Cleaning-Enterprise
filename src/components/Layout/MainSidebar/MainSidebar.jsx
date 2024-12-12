@@ -11,7 +11,7 @@ const MainSidebar = ({
     return (
 
         <div
-            className={`main-sidebar ${className}`}
+            className={`main-sidebar ${className} sidebar`}
             style={{
                 height: isFull ? '100%' : '',
                 borderTopLeftRadius: isRight ? '0' : '',

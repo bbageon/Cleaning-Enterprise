@@ -25,7 +25,7 @@ const EmployeePresenter = ({
     setSelectedLevel,
 }) => {
 
-    if (isLoading) return null;
+    // if (isLoading) return <div></div>;
 
     /* ===== RENDER ===== */
     return (

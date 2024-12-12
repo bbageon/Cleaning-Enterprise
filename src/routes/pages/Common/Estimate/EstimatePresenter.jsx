@@ -24,7 +24,7 @@ const EstimatePresenter = ({
     estimateServiceList,
 }) => {
     
-    if (isLoading) return null;
+    // if (isLoading) return null;
 
     /* ===== RENDER ===== */
     return (
