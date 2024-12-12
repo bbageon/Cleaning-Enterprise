@@ -38,8 +38,8 @@ export const ScheduleCalendar = ({
     });
 
     const formats = {
-        dayFormat: (date, culture, localizer) =>
-            localizer.format(date, 'E', culture), // 'E'는 한 글자 요일 ('월', '화' 등)
+        weekdayFormat: (date, culture, localizer) =>
+            localizer.format(date, 'EEE', culture), // 'E'는 한 글자 요일 ('월', '화' 등)
     };
 
     return (

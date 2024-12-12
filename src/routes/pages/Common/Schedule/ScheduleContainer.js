@@ -4,261 +4,22 @@ import SchedulePresenter from "./SchedulePresenter";
 import { ScheduleInfo } from "./components";
 import moment from "moment";
 
-import API, { getDate, getTimeFormat, getToday } from "../../../../api/API";
+import API, { getDate, getNextDate, getPrevDate, getTimeFormat, getToday } from "../../../../api/API";
 import { cookie, getCookie } from "../../../../util";
 
 const ScheduleContainer = () => {
     const { navigate } = useCustomContext();
-
-    /**
-     * @deprecated 일정관리 페이지
-     */
-    // 수락전, 진행중, 청소완료 목록을 보여주기 위한 state
-    // const [beforeAccept, setBeforeAccept] = useState([
-    //     {
-    //         request_date: 172990409,
-    //         quantity: 2,
-    //         total_price: 50000,
-    //         clean_address: '부산 사상구 주례로 47',
-    //         clean_address_detail: '상세주소',
-    //     },
-    //     {
-    //         request_date: 172990409,
-    //         quantity: 2,
-    //         total_price: 50000,
-    //         clean_address: '부산 사상구 주례로 47',
-    //         clean_address_detail: '상세주소',
-    //     },
-    //     {
-    //         request_date: 172990409,
-    //         quantity: 2,
-    //         total_price: 45000,
-    //         clean_address: '부산 사상구 주례로 47',
-    //         clean_address_detail: '상세주소',
-    //     },
-    // ]);
-    // const [cleaning, setCleaning] = useState([
-    //     {
-    //         request_date: 12949503,
-    //         quantity: 2,
-    //         total_price: 60000,
-    //         clean_address: '부산 사상구 주례로 47',
-    //         clean_address_detail: '상세주소',
-    //     },
-    //     {
-    //         request_date: 12949503,
-    //         quantity: 2,
-    //         total_price: 50000,
-    //         clean_address: '부산 사상구 주례로 47',
-    //         clean_address_detail: '상세주소',
-    //     },
-    //     {
-    //         request_date: 12949503,
-    //         quantity: 2,
-    //         total_price: 48000,
-    //         clean_address: '부산 사상구 주례로 47',
-    //         clean_address_detail: '상세주소',
-    //     },
-    // ]);
-    // const [cleanDone, setCleanDone] = useState([
-    //     {
-    //         request_date: 123484357,
-    //         quantity: 2,
-    //         total_price: 60000,
-    //         clean_address: '부산 사상구 주례로 47',
-    //         clean_address_detail: '상세주소',
-    //     },
-    //     {
-    //         request_date: 123484357,
-    //         quantity: 2,
-    //         total_price: 50000,
-    //         clean_address: '부산 사상구 주례로 47',
-    //         clean_address_detail: '상세주소',
-    //     },
-    //     {
-    //         request_date: 123484357,
-    //         quantity: 2,
-    //         total_price: 48000,
-    //         clean_address: '부산 사상구 주례로 47',
-    //         clean_address_detail: '상세주소',
-    //     },
-    // ]);
-
-    // const [tabList, setTabs] = useState({
-    //     tabs: [
-    //         {
-    //             title: '수락전',
-    //             type: 'beforeAccept',
-    //             onClick: () => {
-    //                 setTabs(prev => {
-    //                     return {
-    //                         ...prev,
-    //                         current_tab: '수락전'
-    //                     }
-    //                 })
-    //             },
-    //         },
-    //         {
-    //             title: '진행중',
-    //             type: 'cleaning',
-    //             onClick: () => {
-    //                 setTabs(prev => {
-    //                     return {
-    //                         ...prev,
-    //                         current_tab: '진행중'
-    //                     }
-    //                 })
-    //             },
-    //         },
-    //         {
-    //             title: '청소 완료',
-    //             type: 'cleanDone',
-    //             onClick: () => {
-    //                 setTabs(prev => {
-    //                     return {
-    //                         ...prev,
-    //                         current_tab: '청소 완료'
-    //                     }
-    //                 })
-    //             },
-    //         },
-    //     ],
-    //     current_tab: '수락전',
-    // });
-
 
     // 달력에 청소요청을 표시하기 위한 state
     const [events, setEvents] = useState([]);
 
 
     // 사이드바에 청소요청을 표시하기 위한 state
-    const [requestList, setRequestList] = useState([
-        // {
-        //     date: '11월 4일',
-        //     requests: [
-        //         {
-        //             element:
-        //                 <div className={`calculate complete`}>
-        //                     <div className="calculate-text">
-        //                         <div className='main-text'>
-        //                             <span>정산완료</span>
-        //                             <span>
-        //                                 <span>2</span>건
-        //                             </span>
-        //                         </div>
-        //                         <div className='sub-text'>100,000원</div>
-        //                     </div>
-        //                 </div>
-        //             // <div className={`calculate ${request_status === 'DONE' ? 'complete' : 'schedule'}`}>
-        //             //     <div className="calculate-text">
-        //             //         <div className='main-text'>
-        //             //             <span>{request_status === 'DONE' ? '정산완료' : '정산예정'}</span>
-        //             //             <span>{parseInt(count).toLocaleString()}건</span>
-        //             //         </div>
-        //             //         <div className='sub-text'>{parseInt(total_price_sum).toLocaleString()}원</div>
-        //             //     </div>
-        //             // </div>
-        //         },
-        //         {
-        //             element:
-        //                 <div className={`calculate schedule`}>
-        //                     <div className="calculate-text">
-        //                         <div className='main-text'>
-        //                             <span>정산예정</span>
-        //                             <span>
-        //                                 <span>2</span>건
-        //                             </span>
-        //                         </div>
-        //                         <div className='sub-text'>100,000원</div>
-        //                     </div>
-        //                 </div>
-        //         },
-        //     ],
-        // },
-        // {
-        //     date: '11월 6일',
-        //     requests: []
-        // },
-        // {
-        //     date: '11월 13일',
-        //     requests: [
-        //         {
-        //             element:
-        //                 <div className={`calculate schedule`}>
-        //                     <div className="calculate-text">
-        //                         <div className='main-text'>
-        //                             <span>정산예정</span>
-        //                             <span>
-        //                                 <span>2</span>건
-        //                             </span>
-        //                         </div>
-        //                         <div className='sub-text'>100,000원</div>
-        //                     </div>
-        //                 </div>
-        //         },
-        //     ]
-        // },
-        // {
-        //     date: '11월 23일',
-        //     requests: [
-        //         {
-        //             element:
-        //                 <div className={`calculate schedule`}>
-        //                     <div className="calculate-text">
-        //                         <div className='main-text'>
-        //                             <span>정산예정</span>
-        //                             <span>
-        //                                 <span>2</span>건
-        //                             </span>
-        //                         </div>
-        //                         <div className='sub-text'>100,000원</div>
-        //                     </div>
-        //                 </div>
-        //         },
-        //     ]
-        // },
-        // {
-        //     date: '11월 26일',
-        //     requests: [
-        //         {
-        //             element:
-        //                 <div className={`calculate schedule`}>
-        //                     <div className="calculate-text">
-        //                         <div className='main-text'>
-        //                             <span>정산예정</span>
-        //                             <span>
-        //                                 <span>2</span>건
-        //                             </span>
-        //                         </div>
-        //                         <div className='sub-text'>100,000원</div>
-        //                     </div>
-        //                 </div>
-        //         },
-        //     ]
-        // },
-    ]);
+    const [requestList, setRequestList] = useState([]);
 
     // 청소요청을 임시로 담아놓기 위한 state
     const [eventDatas, setEventDatas] = useState([]);
     const [requestListDatas, setRequestListDatas] = useState([]);
-
-
-    /**
-     * @deprecated 일정관리 페이지
-     */
-    // 가져온 청소요청이 수락전, 진행중, 청소완료 어디에 포함되는지 판단하는 함수
-    // const getScheduleInfos = (type) => {
-    //     switch (type) {
-    //         case 'beforeAccept':
-    //             return beforeAccept;
-    //         case 'cleaning':
-    //             return cleaning;
-    //         case 'cleanDone':
-    //             return cleanDone;
-    //         default:
-    //             return [];
-    //     }
-    // };
 
     // 처음 페이지가 로딩되면 달력과 사이드바에 띄울 요청을 가지고 온다.
     useEffect(() => {
@@ -356,38 +117,6 @@ const ScheduleContainer = () => {
         setRequestList(formattedRequestList);
     }, [requestListDatas]);
 
-    /**
-     * @deprecated 일정관리 페이지
-     */
-    // // 수락전, 진행중, 청소완료를 실제로 사용자에게 보여주기 위한 작업
-    // useEffect(() => {
-    //     setTabs((prev) => ({
-    //         ...prev,
-    //         tabs: prev.tabs.map((tab) => ({
-    //             ...tab,
-    //             children: (
-    //                 <ScheduleInfo
-    //                     scheduleInfos={getScheduleInfos(tab.type)}
-    //                     type={tab.type}
-    //                 />
-    //             ),
-    //         })),
-    //     }));
-    // }, [beforeAccept, cleaning, cleanDone]);
-
-    // 달력 날짜 선택 시 해당 날짜에 대한 청소 요청을 가져온다.
-    // const onSelected = async (e) => {
-    //     const date = getTimeFormat(e.slots[0]);
-
-    //     // 시간에 맞는 청소요청 정보 가져오기
-    //     const result = await API.getDateRequestClean(date);
-
-    //     setBeforeAccept(result.data.beforeAccept);
-    //     setCleaning(result.data.cleaning);
-    //     setCleanDone(result.data.cleanDone);
-    // }
-
-
     const last_day_each_date = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; // 1월 ~ 12월까지의 마지막 날을 저장하는 배열
 
     // 달력을 넘길 시 해당 월의 청소요청 정보를 가져오는 함수
@@ -431,10 +160,9 @@ const ScheduleContainer = () => {
     const [currentEndDate, setCurrentEndDate] = useState(new Date(currentStartDate.getFullYear(), currentStartDate.getMonth() + 1, currentStartDate.getDate()));
 
     // 검색창을 띄우는 함수
-    const toggleSearchModal = () => {
+    const toggleSearchModal = (isInitDay = true) => {
         setShowSearchModal(!showSearchModal);
-        setSelectedStartDate(-1);
-        setSelectedEndDate(-1);
+        isInitDay && initSearchDate();
     }
 
     /**
@@ -481,6 +209,42 @@ const ScheduleContainer = () => {
         else if (type === 'end') setCurrentEndDate(date);
     }
 
+    // 검색 시작일, 종료일 초기화
+    const initSearchDate = () => {
+        setSelectedStartDate(-1);
+        setSelectedEndDate(-1);
+    }
+
+    // 이전 결과 검색
+    const prevDaySearch = () => {
+        console.log('prevDaySearch');
+        const prevDate = getPrevDate(selectedStartDate);
+
+        search(
+            getTimeFormat(
+                prevDate
+            )
+        )
+
+        setSelectedStartDate(prevDate);
+        setSelectedEndDate(-1);
+    }
+
+    // 다음 결과 검색
+    const nextDaySearch = () => {
+        console.log('nextDaySearch');
+        const nextDate = getNextDate(selectedEndDate === -1 ? selectedStartDate : selectedEndDate)
+
+        search(
+            getTimeFormat(
+                nextDate
+            )
+        )
+
+        setSelectedStartDate(nextDate);
+        setSelectedEndDate(-1);
+    }
+
     /**
      * 검색창 관련
      */
@@ -521,18 +285,26 @@ const ScheduleContainer = () => {
 
 
     // 검색 결과 가져오는 함수
-    const search = async () => {
+    const search = async (date) => {
+        console.log(date)
         if (selectedStartDate === -1) {
             alert('날짜를 선택해주세요');
             return;
         }
 
-        const firstDate = getTimeFormat(selectedStartDate);
-        const lastDate = getTimeFormat(selectedEndDate === -1 ? selectedStartDate : selectedEndDate);
+        let firstDate;
+        let lastDate;
+
+        if (!date) {
+            firstDate = getTimeFormat(selectedStartDate);
+            lastDate = getTimeFormat(selectedEndDate === -1 ? selectedStartDate : selectedEndDate);
+        } else {
+            firstDate = lastDate = date;
+        }
         // 기간에 해당하는 청소 요청 가져오기
         const result = await API.getSearchPeriodRequestClean(firstDate, lastDate);
         if (result.status !== 200) {
-            console.log(`[ScheduleContainer][serach][getSearchPeriodRequestClean] Error : ${result.message}`);
+            console.log(`[ScheduleContainer][search][getSearchPeriodRequestClean] Error : ${result.message}`);
             return;
         }
 
@@ -550,6 +322,7 @@ const ScheduleContainer = () => {
             total_price: 0,
         };
 
+        // 정산 완료 및 정산 예정 계산
         searchData?.map(data => {
             const dateKey = new Date(data.request_date * 1000).toISOString().split('T')[0];
 
@@ -572,6 +345,7 @@ const ScheduleContainer = () => {
         // 검색 결과
         const searchResultData = [];
 
+        // 검색 결과 전처리
         searchData?.forEach(data => {
             // request_date를 YYYY-MM-DD 형식으로 변환
             const dateKey = new Date(data.request_date * 1000).toISOString().split('T')[0];
@@ -611,6 +385,7 @@ const ScheduleContainer = () => {
             }
         });
 
+        // 배정 안된 직원 정보 가져오기
         const id = cookie.getCookie('id');
         const nonAssignmentResult = await API.getCompanyEmployeeNonAssignment(id);
         if (nonAssignmentResult.status !== 200) {
@@ -740,7 +515,10 @@ const ScheduleContainer = () => {
             customDayPropGetter={customDayPropGetter}
             toggleSearchModal={toggleSearchModal}
 
+            // 검색 관련
             search={search}
+            prevDaySearch={prevDaySearch}
+            nextDaySearch={nextDaySearch}
             isSearchResult={isSearchResult}
             setIsSearchResult={setIsSearchResult}
 

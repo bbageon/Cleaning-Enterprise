@@ -8,6 +8,7 @@
 
 .search-result-list .search-result .search-result-title {
     font-size: 28px;
+    margin-bottom: 10px;
 }
 
 .search-result-list .search-result-info {
@@ -24,6 +25,10 @@
     padding: 20px 20px 20px 40px;
 
     cursor: pointer;
+}
+
+.search-result-list .search-result-info.selected-search-result {
+    background-color: #fafafa77;
 }
 
 .search-result-list .search-result-info:first-child {

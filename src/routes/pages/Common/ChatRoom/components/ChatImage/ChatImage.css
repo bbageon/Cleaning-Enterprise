@@ -1,0 +1,28 @@
+.chat-image-ballon-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    height: 100%;
+}
+
+.chat-image-ballon-wrap .chat-image-ballon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 0.25rem;
+}
+
+.chat-image-ballon-wrap .chat-image-ballon {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.chat-image-ballon-wrap .chat-image {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    object-position: center;
+    transform: scale(1.5);
+}

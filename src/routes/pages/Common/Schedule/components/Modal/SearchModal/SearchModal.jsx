@@ -18,59 +18,23 @@ export const SearchModal = ({
     isSearchResult,
 
     handleSelectRequest,
-}) => {
-    /**
-     * @deprecated 이전 탭 리스트
-     */
-    const testList = [
-        {
-            date: '2024년 10월 4일',
-            requests: [
-                {
-                    time: '13:22',
-                    address: '경상남도 양산시 물금읍 범구로 14, 101동 4101호',
-                    service_count: 3,
-                    total_service_price: 20000,
-                    status: 'DONE',
-                    services: [
-                        '김재모의 슈퍼 청소',
-                        '김재모의 닦기',
-                        '김재모의 세척'
-                    ]
-                },
-            ]
-        },
-        {
-            date: '2024년 10월 5일',
-            requests: [
-                {
-                    time: '13:22',
-                    address: '경상남도 양산시 물금읍 범구로 14, 101동 4101호',
-                    service_count: 3,
-                    total_service_price: 20000,
-                    status: 'CALCELED',
-                    services: [
-                        '김재모의 슈퍼 청소',
-                        '김재모의 닦기',
-                        '김재모의 세척'
-                    ]
-                },
-                {
-                    time: '13:22',
-                    address: '경상남도 양산시 물금읍 범구로 14, 101동 4101호',
-                    service_count: 3,
-                    total_service_price: 20000,
-                    status: 'PAY_WAITING',
-                    services: [
-                        '김재모의 슈퍼 청소',
-                        '김재모의 닦기',
-                        '김재모의 세척'
-                    ]
-                },
-            ]
-        },
-    ]
 
+    // 검색 관련
+    showSearchModal,
+    currentStartDate,
+    currentEndDate,
+
+    selectDate,
+    selectMonth,
+    selectSearchDay,
+
+    customDayPropGetter,
+    toggleSearchModal,
+
+    search,
+    prevDaySearch,
+    nextDaySearch,
+}) => {
     const startDate = new Date(selectedStartDate);
     const endDate = new Date(selectedEndDate);
 
@@ -79,11 +43,28 @@ export const SearchModal = ({
             <CalendarToolBar
                 date={searchDate}
                 isSearchResult={isSearchResult}
+
+                // 검색 관련
+                showSearchModal={showSearchModal}
+                currentStartDate={currentStartDate}
+                currentEndDate={currentEndDate}
+
+                selectDate={selectDate}
+                selectMonth={selectMonth}
+                selectSearchDay={selectSearchDay}
+
+                customDayPropGetter={customDayPropGetter}
+                toggleSearchModal={toggleSearchModal}
+                search={search}
             />
             <div className="search-modal">
                 <div className="modal-header">
                     <div className="search-date">
-                        <button>{'<'}</button>
+                        <button
+                            onClick={prevDaySearch}
+                        >
+                            {'<'}
+                        </button>
                         {/* <div className="date">2024년 10월 4일</div> */}
                         {
                             selectedEndDate === -1 ?
@@ -108,7 +89,11 @@ export const SearchModal = ({
                                     `}
                                 </div>
                         }
-                        <button>{'>'}</button>
+                        <button
+                            onClick={nextDaySearch}
+                        >
+                            {'>'}
+                        </button>
                     </div>
                     <div
                         className="search-close"

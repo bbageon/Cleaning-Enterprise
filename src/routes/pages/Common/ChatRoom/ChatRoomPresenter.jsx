@@ -11,6 +11,12 @@ const ChatRoomPresenter = ({
 
     sendMessage,
 
+    sendSelectPicture,
+    selectMultiPictures,
+    clearSelectPicture,
+
+    selectedPictures,
+
     selectChatIndex,
     setSelectChatIndex,
 
@@ -21,37 +27,6 @@ const ChatRoomPresenter = ({
     chatList,
     selectChatRoom,
 }) => {
-    // const roomInfos = [
-    //     {
-    //         chat_room_name: '김재모의 카피바라 청소',
-    //         sub_name: '무엇을 도와드릴까요?',
-    //         updated_at: 1730027342,
-    //         status: 'DONE',
-    //         not_read_count: 12,
-    //     },
-    //     {
-    //         chat_room_name: '김재모의 카피바라 청소',
-    //         sub_name: '무엇을 도와드릴까요?',
-    //         updated_at: 17283845,
-    //         status: 'CLEANING',
-    //         not_read_count: 12,
-    //     },
-    //     {
-    //         chat_room_name: '김재모의 카피바라 청소',
-    //         sub_name: '무엇을 도와드릴까요?',
-    //         updated_at: 17200025,
-    //         status: 'ERROR',
-    //         not_read_count: 12,
-    //     },
-    //     {
-    //         chat_room_name: '김재모의 카피바라 청소',
-    //         sub_name: '무엇을 도와드릴까요?',
-    //         updated_at: 172838945,
-    //         status: 'NEW',
-    //         not_read_count: 12,
-    //     },
-    // ]
-
     return (
         <MainLayout
             page='대화방 관리'
@@ -74,6 +49,12 @@ const ChatRoomPresenter = ({
                 setChatMessage={setChatMessage}
 
                 sendMessage={sendMessage}
+
+                sendSelectPicture={sendSelectPicture}
+                selectMultiPictures={selectMultiPictures}
+                clearSelectPicture={clearSelectPicture}
+
+                selectedPictures={selectedPictures}
 
                 clientId={clientId}
                 chatRef={chatRef}

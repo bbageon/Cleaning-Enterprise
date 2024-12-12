@@ -32,6 +32,8 @@ const SchedulePresenter = ({
     toggleSearchModal,
 
     search,
+    prevDaySearch,
+    nextDaySearch,
     isSearchResult,
     setIsSearchResult,
 
@@ -59,11 +61,6 @@ const SchedulePresenter = ({
     showAssignmentEmployee,
     setShowAssignmentEmployee,
 }) => {
-    // moment.locale('ko-KR');
-    // const localizer = momentLocalizer(moment);
-
-
-
     return (
         <MainLayout
             page='일정 관리'
@@ -110,6 +107,22 @@ const SchedulePresenter = ({
                                 isSearchResult={isSearchResult}
 
                                 handleSelectRequest={handleSelectRequest}
+
+                                // 검색 관련
+                                showSearchModal={showSearchModal}
+                                currentStartDate={currentStartDate}
+                                currentEndDate={currentEndDate}
+
+                                selectDate={selectDate}
+                                selectMonth={selectMonth}
+                                selectSearchDay={selectSearchDay}
+
+                                customDayPropGetter={customDayPropGetter}
+                                toggleSearchModal={toggleSearchModal}
+
+                                search={search}
+                                prevDaySearch={prevDaySearch}
+                                nextDaySearch={nextDaySearch}
                             /> :
                             <ScheduleCalendar
                                 events={events}
@@ -117,6 +130,7 @@ const SchedulePresenter = ({
 
                                 changeMonth={changeMonth}
 
+                                // 검색 관련
                                 showSearchModal={showSearchModal}
                                 currentStartDate={currentStartDate}
                                 currentEndDate={currentEndDate}

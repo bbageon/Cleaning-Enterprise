@@ -37,6 +37,6 @@
     gap: 10px;
 }
 
-.chat-room-footer .icons svg:last-child {
+.chat-room-footer .icons svg {
     cursor: pointer;
 }

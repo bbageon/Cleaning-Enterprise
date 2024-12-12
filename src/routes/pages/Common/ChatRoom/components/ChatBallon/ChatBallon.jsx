@@ -1,3 +1,4 @@
+import ChatImage from '../ChatImage';
 import './ChatBallon.css';
 
 const ChatBallon = ({
@@ -7,10 +8,18 @@ const ChatBallon = ({
     return (
         chatMessages?.map(msg => {
             const { message, sender } = msg;
-            
+            const regex = /^<!.*!>$/;
+
             return (
                 <div className={`chat-message ${clientId === sender ? 'my' : 'other'}`}>
-                    {message}
+                    {
+                        regex.test(message) ?
+                            <ChatImage
+                                imageMessage={message}
+                            />
+                            :
+                            message
+                    }
                 </div>
             )
         })
