@@ -1,10 +1,8 @@
 import './RequestClean.css';
-import { MainLayout } from '../../../../components';
+import { ImageModal, MainLayout } from '../../../../components';
 import RequestList from './components/RequestList/RequestList';
 
 const RequestCleanPresenter = ({
-    isLoading,
-    // 탭
     tabList,
 
     beforeAccept,
@@ -14,10 +12,12 @@ const RequestCleanPresenter = ({
 
     activeCardId,
 
-}) => {
+    isModalOpen,
+    selectedImage,
+    handleOpenImageModal,
+    handleCloseImageModal,
 
-    /* ===== FUNCTION ===== */
-    // if (isLoading) return null;
+}) => {
 
     /* ===== RENDER ===== */
     return (
@@ -33,9 +33,16 @@ const RequestCleanPresenter = ({
                 activeCardId={activeCardId}
 
                 beforeAccept={beforeAccept}
-                
+
                 setBeforeAccept={setBeforeAccept}
                 setCleaning={setCleaning}
+
+                handleOpenImageModal={handleOpenImageModal}
+            />
+            <ImageModal
+                isOpen={isModalOpen}
+                onClose={handleCloseImageModal}
+                imageUrl={selectedImage}
             />
         </MainLayout>
     );

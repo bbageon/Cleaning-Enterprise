@@ -1,53 +1,147 @@
+/* 전체 카드 컨테이너 */
 .request-clean-card-container {
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    max-width: 800px;
+    margin: 1.5rem auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.request-clean-card-container .request-card-container {
-    width: 100%;
+.request-clean-card-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
 
-    background-color: #FFFFFF;
+/* 타이틀 영역 */
+.request-clean-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.request-clean-title-info span {
+    display: block;
+    font-size: 1rem;
+}
+
+/* 카드 메인 정보 */
+.request-card-wrap {
+    display: flex;
+    gap: 16px;
     padding: 1.5rem;
 }
 
-.request-clean-card-container .request-card-title {
-    width: 50%;
-
-    padding-bottom: 1.5rem;
-
-    border-bottom: 1px solid var(--gray2-color);
+.request-card-info-wrap {
+    flex: 1;
 }
 
-.request-clean-card-container .request-card-info-box {
-    width: 50%;
+/* 상세 내역 정보 */
+.request-card-info-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 10px 0;
+}
 
-    padding: 1.5rem 0.5rem 2rem 0.5rem;
+.request-card-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.request-card-service-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* 이미지 컨테이너 */
+.request-card-img-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 10px;
+    max-height: 250px;
+}
+
+.request-card-img-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.request-card-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
     
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
 }
 
-.request-clean-card-container .request-card-info {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-.request-clean-card-container .request-card-service-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+.request-card-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    
 }
 
-.request-clean-card-container .request-card-button-wrap {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.request-card-img img:hover {
+    transform: scale(1.1);
 }
-.request-clean-card-container .request-card-button-wrap button {
+
+/* 버튼 영역 */
+.request-card-button-wrap {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #e0e0e0;
+    background-color: #f9f9f9;
+}
+
+.request-card-button-wrap button {
+    flex: 1;
+    margin: 0 5px;
+    padding: 0.8rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
     border: none;
-    background-color: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.request-card-button-wrap button:hover {
+    transform: translateY(-2px);
+}
+
+.request-card-button-wrap button:first-child {
+    background-color: #4caf50; /* 수락 버튼 색상 */
+}
+
+.request-card-button-wrap button:first-child:hover {
+    background-color: #45a049;
+}
+
+.request-card-button-wrap button:last-child {
+    background-color: #f44336; /* 거절 버튼 색상 */
+}
+
+.request-card-button-wrap button:last-child:hover {
+    background-color: #e53935;
 }

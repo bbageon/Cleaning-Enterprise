@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { useUpdateRequestClean } from '../../../../../../hooks/RequestCleanHooks';
+import { useGetEachRequestCleanImage, useGetOneRequestCleanImage } from '../../../../../../hooks/RequestCleanImageHooks';
 import { formatFullDate } from '../../../../../../utils/dateUtils';
 import './RequestCard.css';
 
@@ -9,7 +11,14 @@ const RequestCard = ({
 
     setBeforeAccept,
     setCleaning,
+
+    handleOpenImageModal,
+
 }) => {
+
+    /* ===== QUERY ===== */
+    const { data: requestImagesRes, isLoading: requestImagesLoading, isError: requestImagesError } = useGetEachRequestCleanImage(request.request_clean_id);
+    const requestImages = requestImagesRes?.data || [];
 
     /* ===== MUTATE ===== */
     const { mutate: updateRequest } = useUpdateRequestClean(
@@ -72,47 +81,63 @@ const RequestCard = ({
                     <span className='bold'>{formatFullDate(request?.request_date)}</span>
                 </div>
             </div>
+
             <div className='request-card-container'>
+                <div className='request-card-wrap'>
+                    <div className='request-card-info-wrap'>
 
-                {/* 상세 내역 제목 */}
-                <div className='request-card-title'>
-                    <span className='bold'>상세 내역</span>
-                </div>
-
-                {/* 상세 내역 정보 */}
-                <div className='request-card-info-box'>
-                    <div className='request-card-info'>
-                        <span className='bold'>청소 시작 날짜</span>
-                        <span>{formatFullDate(request?.start_clean_date)}</span>
-                    </div>
-                    <div className='request-card-info'>
-                        <span className='bold'>서비스 이름</span>
-                        <div className='request-card-service-info'>
-                            {
-                                request.services.map((service, index) => (
-                                    <span key={index} >{service.service_name}</span>
-                                ))
-                            }
+                        {/* 상세 내역 정보 */}
+                        <div className='request-card-info-box'>
+                            <div className='request-card-info'>
+                                <span className='bold'>청소 시작 날짜</span>
+                                <span>{formatFullDate(request?.start_clean_date)}</span>
+                            </div>
+                            <div className='request-card-info'>
+                                <span className='bold'>서비스 이름</span>
+                                <div className='request-card-service-info'>
+                                    {
+                                        request.services.map((service, index) => (
+                                            <span key={index} >{service.service_name}</span>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+                            <div className='request-card-info'>
+                                <span className='bold'>주소</span>
+                                <span>{request.clean_address}</span>
+                            </div>
+                            <div className='request-card-info'>
+                                <span className='bold'>상세 주소</span>
+                                <span>{request.clean_address_detail}</span>
+                            </div>
+                            <div className='request-card-info'>
+                                <span className='bold'>요구사항</span>
+                                {
+                                    request.requirements ? (
+                                        <span>{request.requirements}</span>
+                                    ) : (
+                                        <span>추가 요구사항이 없습니다.</span>
+                                    )
+                                }
+                            </div>
                         </div>
                     </div>
-                    <div className='request-card-info'>
-                        <span className='bold'>주소</span>
-                        <span>{request.clean_address}</span>
+
+                    <div className='request-card-img-container'>
+                        <div className='request-card-img-wrap'>
+                            {requestImages.map((image, index) => (
+                                <div className='request-card-img'>
+                                    <img
+                                        key={index}
+                                        src={image.request_clean_image}
+                                        alt='Request Clean Images'
+                                        onClick={() => handleOpenImageModal(image.request_clean_image)}
+                                    />
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                    <div className='request-card-info'>
-                        <span className='bold'>상세 주소</span>
-                        <span>{request.clean_address_detail}</span>
-                    </div>
-                    <div className='request-card-info'>
-                        <span className='bold'>요구사항</span>
-                        {
-                            request.requirements ? (
-                                <span>{request.requirements}</span>
-                            ) : (
-                                <span>추가 요구사항이 없습니다.</span>
-                            )
-                        }
-                    </div>
+
                 </div>
 
                 {/* 요청 목록 버튼 */}

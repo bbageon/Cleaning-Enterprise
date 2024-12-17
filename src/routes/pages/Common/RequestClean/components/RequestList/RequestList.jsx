@@ -6,8 +6,7 @@ const RequestList = ({
 
     beforeAccept,
 
-    setBeforeAccept,
-    setCleaning,
+    handleOpenImageModal,
 }) => {
 
     /* ===== RENDER ===== */
@@ -19,11 +18,8 @@ const RequestList = ({
                         <RequestCard
                             key={request.request_clean_id}
                             isActive={request.request_clean_id === activeCardId}
-
                             request={request}
-
-                            setBeforeAccept={setBeforeAccept}
-                            setCleaning={setCleaning}
+                            handleOpenImageModal={handleOpenImageModal}
                         />
                     ))
                 }

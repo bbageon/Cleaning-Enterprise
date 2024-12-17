@@ -43,10 +43,10 @@ export const useGetOneRequestCleanImage = (request_clean_image_id: number) => {
  * [RequestCleanImage] 단일 청소요청 이미지 조회
  * --
  */
-export const useGetCompanyRequestCleanImage = (request_clean_id: number) => {
+export const useGetEachRequestCleanImage = (request_clean_id: number) => {
     return useQuery({
         queryKey: requestCleanImageQueryKeys.getRequestCleanImage(request_clean_id).queryKey,
-        queryFn: () => API.getEachRequestCleanImage(request_clean_id),
+        queryFn: async () => await API.getEachRequestCleanImage(request_clean_id),
         enabled: !!request_clean_id,
     });
 };

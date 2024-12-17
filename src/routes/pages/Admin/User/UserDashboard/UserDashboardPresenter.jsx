@@ -11,6 +11,7 @@ import {
 } from '../../../../../components';
 
 const UserDashboardPresenter = ({  
+    users,
     // 검색어
     setKeywordCategory,
 
@@ -205,17 +206,17 @@ const UserDashboardPresenter = ({
                                 }}
                             >
                                 <h4 style={{ fontSize: 14, fontWeight: 500, marginRight: 20 }}>
-                                    검색 결과 총 <span>0</span>건
+                                    검색 결과 총 <span>{users.length}</span>건
                                 </h4>
                             </div>
                         </div>
 
                         <Table
-                            // data={newdata}
+                            data={users}
                             columns={[
                                 {
                                     title: '회원번호',
-                                    key: 'id',
+                                    key: 'user_id',
                                 },
                                 {
                                     title: '회원명',

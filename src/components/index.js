@@ -1,4 +1,13 @@
 /**
+ * Common Components
+ * --
+ */
+export {
+    Skeleton,
+    ImageModal,
+} from './common'
+
+/**
  * Form Components
  * --
  */

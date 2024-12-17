@@ -7,7 +7,7 @@ import { API } from "../../../../api";
 const RequestCleanContainer = () => {
 
     /* ===== VARIABLES ===== */
-    const companyId = 4;
+    const companyId = 1;
 
     /* ===== STATE ===== */
     const [beforeAccept, setBeforeAccept] = useState([]);
@@ -15,6 +15,9 @@ const RequestCleanContainer = () => {
     const [cleanDone, setCleanDone] = useState([]);
 
     const [activeCardId, setActiveCardId] = useState(null);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
 
     const [tabList, setTabs] = useState({
         tabs: [
@@ -143,17 +146,32 @@ const RequestCleanContainer = () => {
         }
     };
 
+    const handleOpenImageModal = (image) => {
+        setSelectedImage(image);
+        setIsModalOpen(true);
+    };
+
+    const handleCloseImageModal = () => {
+        setSelectedImage(null);
+        setIsModalOpen(false);
+    };
+
     /* ===== RENDER ===== */
     return (
         <RequestCleanPresenter
-            isLoading={isLoading}
             tabList={tabList}
+
             activeCardId={activeCardId}
 
             beforeAccept={beforeAccept}
 
             setBeforeAccept={setBeforeAccept}
             setCleaning={setCleaning}
+
+            isModalOpen={isModalOpen}
+            selectedImage={selectedImage}
+            handleOpenImageModal={handleOpenImageModal}
+            handleCloseImageModal={handleCloseImageModal}
         />
     );
 };

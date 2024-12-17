@@ -60,6 +60,16 @@ export const useGetCompanyRequestClean = (company_id: number) => {
         queryKey: requestCleanQueryKeys.getRequestClean(company_id).queryKey,
         queryFn: () => API.getCompanyRequestClean(company_id),
         enabled: !!company_id,
+        select: (data) => {
+            const sortedRequests = [...data.data.request_cleans].sort((a: any, b: any) => b.request_clean_id - a.request_clean_id);
+            return {
+                ...data,
+                data: {
+                    ...data.data,
+                    request_cleans: sortedRequests,
+                },
+            };
+        },
     });
 };
 

@@ -11,9 +11,8 @@ import {
 } from '../../../../../components';
 
 const ServiceDashboardPresenter = ({
-    // 검색어
+    services,
     setKeywordCategory,
-
 }) => {
     /* ===== STYLES ===== */
     const styles = {
@@ -105,7 +104,7 @@ const ServiceDashboardPresenter = ({
                     >
                         {[
                             { title: '신규 서비스', value: 123 },
-                            { title: '전체 서비스', value: 123 },
+                            { title: '전체 서비스', value: services.length },
                             { title: '대표 서비스', value: 123 },
                             { title: '미이용 서비스', value: 123 },
                         ].map((_item, _index) => (
@@ -204,33 +203,33 @@ const ServiceDashboardPresenter = ({
                                 }}
                             >
                                 <h4 style={{ fontSize: 14, fontWeight: 500, marginRight: 20 }}>
-                                    검색 결과 총 <span>0</span>건
+                                    검색 결과 총 <span>{services.length}</span>건
                                 </h4>
                             </div>
                         </div>
 
                         <Table
-                            // data={newdata}
+                            data={services}
                             columns={[
                                 {
-                                    title: '업체번호',
-                                    key: 'id',
+                                    title: '서비스번호',
+                                    key: 'service_id',
                                 },
                                 {
-                                    title: '업체명',
-                                    key: 'name',
+                                    title: '서비스명',
+                                    key: 'service_name',
                                 },
                                 {
-                                    title: '대표자명',
-                                    key: 'ceo',
+                                    title: '서비스 카테고리',
+                                    key: 'service_category',
                                 },
                                 {
-                                    title: '대표전화번호',
-                                    key: 'phone',
+                                    title: '평당 가격',
+                                    key: 'price_per_meter',
                                 },
                                 {
-                                    title: '사업자등록번호',
-                                    key: 'business',
+                                    title: '시간당 가격',
+                                    key: 'price_per_time',
                                 },
                                 {
                                     title: '업체전화번호',

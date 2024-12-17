@@ -23,7 +23,6 @@ export const RequestInfo: React.FC<RequestInfoProps> = ({
         <>
             {
                 requestInfos?.map(requestInfo => {
-                    console.log(requestInfo.services)
                     return (
                         <div
                             key={requestInfo.request_clean_id}

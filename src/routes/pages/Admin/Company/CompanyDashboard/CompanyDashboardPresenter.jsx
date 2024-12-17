@@ -10,10 +10,10 @@ import {
     Title
 } from '../../../../../components';
 
-const CompanyDashboardPresenter = ({  
-    // 검색어
-    setKeywordCategory,
+const CompanyDashboardPresenter = ({
+    companies,
 
+    setKeywordCategory,
 }) => {
     /* ===== STYLES ===== */
     const styles = {
@@ -106,7 +106,7 @@ const CompanyDashboardPresenter = ({
                     >
                         {[
                             { title: '신규 청소업체', value: 123 },
-                            { title: '전체 청소업체', value: 123 },
+                            { title: '전체 청소업체', value: companies.length },
                             { title: '서비스 미등록 청소업체', value: 123 },
                         ].map((_item, _index) => (
                             <div
@@ -204,37 +204,37 @@ const CompanyDashboardPresenter = ({
                                 }}
                             >
                                 <h4 style={{ fontSize: 14, fontWeight: 500, marginRight: 20 }}>
-                                    검색 결과 총 <span>0</span>건
+                                    검색 결과 총 <span>{companies.length}</span>건
                                 </h4>
                             </div>
                         </div>
 
                         <Table
-                            // data={newdata}
+                            data={companies}
                             columns={[
                                 {
                                     title: '업체번호',
-                                    key: 'id',
+                                    key: 'company_id',
                                 },
                                 {
                                     title: '업체명',
-                                    key: 'name',
+                                    key: 'company_name',
                                 },
                                 {
                                     title: '대표자명',
-                                    key: 'ceo',
+                                    key: 'ceo_name',
                                 },
                                 {
                                     title: '대표전화번호',
-                                    key: 'phone',
+                                    key: 'ceo_phone',
                                 },
                                 {
                                     title: '사업자등록번호',
-                                    key: 'business',
+                                    key: 'business_number',
                                 },
                                 {
                                     title: '업체전화번호',
-                                    key: 'tel',
+                                    key: 'company_phone',
                                 },
                             ]}
                         />
