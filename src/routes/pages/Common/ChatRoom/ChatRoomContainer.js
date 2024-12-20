@@ -4,6 +4,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { API } from "../../../../api";
 import { io } from "socket.io-client";
 import { cookie } from "../../../../util";
+import { messaging } from "../../../../fcm/firebase-messaging";
 
 const ChatRoomContainer = ({
     socketRef,
@@ -29,6 +30,7 @@ const ChatRoomContainer = ({
 
 
     useEffect(() => {
+        let chat_room_id = -1;
         (
             async () => {
                 try {
@@ -54,9 +56,13 @@ const ChatRoomContainer = ({
                         room_id: chatMessageInfo.data.room.room_id,
                         chat_room_id: chatMessageInfo.data.room.chat_room_id,
                     });
+                    chat_room_id = chatMessageInfo.data.room.chat_room_id;
                 } catch (e) {
                     console.log(e.message);
                 }
+
+                const fcm_token = cookie.getCookie('fcm-token');
+                console.log('fcm-token', fcm_token)
 
                 // 웹소켓 설정
                 if (!socketRef.current) {
@@ -64,9 +70,39 @@ const ChatRoomContainer = ({
                         transports: ['websocket'],
                         reconnectionAttempts: 3, // 웹소켓이 연결되지 않을 경우 최대 3번까지 재연결 시도
                     });
+
+                    socketRef.current.on('connect', () => {
+                        console.log('채팅방 연결됨');
+                        console.log(chat_room_id);
+                        console.log(clientId);
+                        socketRef.current.emit('enterChatroom', {
+                            chat_room_id,
+                            clientId,
+                            type: 'USER',
+                            token: fcm_token,
+                        });
+                    })
+
+                    socketRef.current.on('disconnect', () => {
+                        console.log('채팅방 연결 끊김');
+                        console.log(chat_room_id);
+                        console.log(clientId);
+                        socketRef.current.emit('leaveChatroom', {
+                            chat_room_id,
+                            clientId,
+                            type: 'USER',
+                        });
+                    })
                 }
             }
         )()
+
+        // FCM 설정
+        setFCM();
+
+        return () => {
+            socketRef.current.close();
+        }
     }, []);
 
     // 채팅방의 스크롤을 맨 밑으로 자동 이동
@@ -126,6 +162,9 @@ const ChatRoomContainer = ({
                 )
             );
         });
+
+        // FCM 설정
+        setFCM();
     }, [currentRoomInfo])
 
 
@@ -237,6 +276,64 @@ const ChatRoomContainer = ({
     // 선택한 이미지 초기화
     const clearSelectPicture = () => {
         setSelectedPictures([]);
+    }
+
+    // FCM 설정
+    const setFCM = () => {
+        messaging.onMessage((payload) => {
+            console.log(`Message Received`);
+            console.log(payload)
+
+            const messageInfo = payload.data;
+
+            // 채팅방으로 전송
+            // 자신이 보낸 메시지일 경우
+            if (messageInfo.sender === sender) {
+                setChatList(prev => {
+                    return [
+                        ...prev,
+                        {
+                            sender: messageInfo.sender,
+                            receiver: messageInfo.receiver,
+                            message: messageInfo.message,
+                        }
+                    ]
+                });
+
+                // 채팅방의 마지막 메시지 띄우기
+                setChatRoomList((prevChatRoomList) =>
+                    prevChatRoomList.map((room, idx) =>
+                        idx === selectChatIndex
+                            ? { ...room, last_chat_message: messageInfo.message }
+                            : room
+                    )
+                );
+
+                return;
+            }
+
+            // 수신일 경우 다른 채팅방에서 수신한 메시지는 거른다
+            if (messageInfo.chat_room_id !== currentRoomInfo.chat_room_id) return;
+            setChatList(prev => {
+                return [
+                    ...prev,
+                    {
+                        sender: messageInfo.sender,
+                        receiver: messageInfo.receiver,
+                        message: messageInfo.message,
+                    }
+                ]
+            });
+
+            // 채팅방의 마지막 메시지 띄우기
+            setChatRoomList((prevChatRoomList) =>
+                prevChatRoomList.map((room, idx) =>
+                    idx === selectChatIndex
+                        ? { ...room, last_chat_message: messageInfo.message }
+                        : room
+                )
+            );
+        })
     }
 
 

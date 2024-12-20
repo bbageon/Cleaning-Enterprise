@@ -68,26 +68,26 @@ const Router = () => {
     }
 
 
-    useEffect(() => {
-        socketRef.current = io(`${process.env.REACT_APP_CHAT_SERVER}/cleaning_chat`, {
-            transports: ['websocket'],
-            reconnectionAttempts: 3,
-        });
+    // useEffect(() => {
+    //     socketRef.current = io(`${process.env.REACT_APP_CHAT_SERVER}/cleaning_chat`, {
+    //         transports: ['websocket'],
+    //         reconnectionAttempts: 3,
+    //     });
 
-        const socket = socketRef.current;
+    //     const socket = socketRef.current;
 
-        socket.on('connect', () => {
-            console.log('Connected to WebSocket server');
-        });
+    //     socket.on('connect', () => {
+    //         console.log('Connected to WebSocket server');
+    //     });
 
-        socket.on('disconnect', () => {
-            console.log('Disconnected from WebSocket server');
-        });
+    //     socket.on('disconnect', () => {
+    //         console.log('Disconnected from WebSocket server');
+    //     });
 
-        return () => {
-            socket.disconnect();
-        }
-    }, []);
+    //     return () => {
+    //         socket.disconnect();
+    //     }
+    // }, []);
 
     // 라우터 변경 감지 (로그인 확인용)
     useEffect(() => {
