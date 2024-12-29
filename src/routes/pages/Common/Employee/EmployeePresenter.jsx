@@ -10,6 +10,9 @@ const EmployeePresenter = ({
     // 직원
     employees,
 
+    // 회사
+    company,
+
     // 직원 선택 핸들러
     onSelectEmployee,
 
@@ -37,6 +40,7 @@ const EmployeePresenter = ({
             CustomSidebar={
                 <EmployeeSidebar
                     selectedEmployee={selectedEmployee}
+                    company={company}
                 />
             }
             articleStyle={{
@@ -49,7 +53,8 @@ const EmployeePresenter = ({
         >
             <EmployeeHeader
                 employees={employees}
-                
+                company={company}
+
                 selectedDepartment={selectedDepartment}
                 setSelectedDepartment={setSelectedDepartment}
 
@@ -59,6 +64,7 @@ const EmployeePresenter = ({
             />
             <EmployeeList
                 employees={employees}
+                company={company}
                 onSelectEmployee={onSelectEmployee}
                 selectedEmployee={selectedEmployee}
             />

@@ -3,6 +3,7 @@ import { Dropdown } from '../../../../../components';
 
 const EmployeeHeader = ({
     employees,
+    company,
 
     selectedDepartment,
     setSelectedDepartment,
@@ -19,7 +20,7 @@ const EmployeeHeader = ({
         <div className='employee-header-container'>
             <span className='top'>직원관리</span>
             <div className='bottom'>
-                <span className='bold'>김재모의 카피바라({employees?.length})</span>
+                <span className='bold'>{company.company_name}({employees?.length})</span>
                 <div className='employee-header-dropdown'>
                     <Dropdown
                         placeholder={'소속을 선택해 주세요.'}

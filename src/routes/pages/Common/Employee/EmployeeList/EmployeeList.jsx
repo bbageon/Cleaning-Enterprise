@@ -3,6 +3,7 @@ import './EmployeeList.css';
 
 const EmployeeList = ({
     employees,
+    company,
     onSelectEmployee,
     selectedEmployee,
 }) => {
