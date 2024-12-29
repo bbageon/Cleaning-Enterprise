@@ -57,7 +57,7 @@ export const RequestInfo: React.FC<RequestInfoProps> = ({
                                         })
                                     }
                                 </div>
-                                <div className="address-info">
+                                <div className="request-info-address-info">
                                     <span>
                                         {requestInfo.clean_address}
                                     </span>

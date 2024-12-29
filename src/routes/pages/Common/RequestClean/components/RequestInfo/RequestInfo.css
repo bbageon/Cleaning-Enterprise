@@ -29,14 +29,17 @@
     gap: 10px;
 
     font-size: 11px;
-    word-break: keep-all;
 }
 
 .request-info .info .menu-info {
     width: 100%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    align-content: flex-end;
     gap: 5px;
+    text-wrap: nowrap;
+    flex-wrap: wrap;
 }
 
 .request-info .info .menu-info span:first-child,
@@ -63,4 +66,10 @@
 
 .request-info .requirements-info span:first-child {
     color: var(--gray3-color);
+}
+
+.request-info .request-info-address-info {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
 }

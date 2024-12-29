@@ -3,100 +3,40 @@ import { useCustomContext } from "../../../../context/CustomContext";
 import { ScheduleInfo } from "./components";
 import API, { getTimeFormat, getToday } from "../../../../api/API";
 import MainPresenter from "./MainPresenter";
+import { useGetCompanyRequestClean } from '../../../../hooks/RequestCleanHooks';
 
 const MainContainer = () => {
-    const [beforeAccept, setBeforeAccept] = useState([
-        {
-            request_date: 172990409,
-            quantity: 2,
-            total_price: 50000,
-            clean_address: '부산 사상구 주례로 47',
-            clean_address_detail: '상세주소',
-        },
-        {
-            request_date: 172990409,
-            quantity: 2,
-            total_price: 50000,
-            clean_address: '부산 사상구 주례로 47',
-            clean_address_detail: '상세주소',
-        },
-        {
-            request_date: 172990409,
-            quantity: 2,
-            total_price: 45000,
-            clean_address: '부산 사상구 주례로 47',
-            clean_address_detail: '상세주소',
-        },
-    ]);
-    const [cleaning, setCleaning] = useState([
-        {
-            request_date: 12949503,
-            quantity: 2,
-            total_price: 60000,
-            clean_address: '부산 사상구 주례로 47',
-            clean_address_detail: '상세주소',
-        },
-        {
-            request_date: 12949503,
-            quantity: 2,
-            total_price: 50000,
-            clean_address: '부산 사상구 주례로 47',
-            clean_address_detail: '상세주소',
-        },
-        {
-            request_date: 12949503,
-            quantity: 2,
-            total_price: 48000,
-            clean_address: '부산 사상구 주례로 47',
-            clean_address_detail: '상세주소',
-        },
-    ]);
-    const [cleanDone, setCleanDone] = useState([
-        {
-            request_date: 123484357,
-            quantity: 2,
-            total_price: 60000,
-            clean_address: '부산 사상구 주례로 47',
-            clean_address_detail: '상세주소',
-        },
-        {
-            request_date: 123484357,
-            quantity: 2,
-            total_price: 50000,
-            clean_address: '부산 사상구 주례로 47',
-            clean_address_detail: '상세주소',
-        },
-        {
-            request_date: 123484357,
-            quantity: 2,
-            total_price: 48000,
-            clean_address: '부산 사상구 주례로 47',
-            clean_address_detail: '상세주소',
-        },
-    ]);
+
+    /* ===== VARIABLES ===== */
+    const companyId = 1;
+
+    /* ===== STATE ===== */
+    const [beforeAccept, setBeforeAccept] = useState([]);
+    const [cleaning, setCleaning] = useState([]);
+    const [cleanDone, setCleanDone] = useState([]);
 
     const [tabList, setTabs] = useState({
         tabs: [
             {
-                title: '수락전',
+                title: '수락 전',
                 type: 'beforeAccept',
                 onClick: () => {
                     setTabs(prev => {
                         return {
                             ...prev,
-                            current_tab: '수락전'
+                            current_tab: '수락 전'
                         }
                     })
                 },
             },
             {
-                title: '진행중',
+                title: '진행 중',
                 type: 'cleaning',
                 onClick: () => {
                     setTabs(prev => {
                         return {
                             ...prev,
-                            current_tab: '진행중'
+                            current_tab: '진행 중'
                         }
                     })
                 },
@@ -114,111 +54,45 @@ const MainContainer = () => {
                 },
             },
         ],
-        current_tab: '수락전',
+        current_tab: '수락 전',
     });
 
 
-    const [events, setEvents] = useState([
-        // {
-        //     title:
-        //         <div className='calculate complete'>
-        //             <div className='sub-text'>540,000원</div>
-        //             <div className='main-text'>
-        //                 <span>정산완료</span>
-        //                 <span>12건</span>
-        //             </div>
-        //         </div>,
-        //     start: new Date('2024-10-23T13:45:00-05:00'),
-        //     end: new Date('2024-10-23T14:00:00-05:00')
-        // },
-        // {
-        //     title:
-        //         <div className='calculate schedule'>
-        //             <div className='sub-text'>240,000원</div>
-        //             <div className='main-text'>
-        //                 <span>정산예정</span>
-        //                 <span>7건</span>
-        //             </div>
-        //         </div>,
-        //     start: new Date('2024-10-23T13:45:00-05:00'),
-        //     end: new Date('2024-10-23T14:00:00-05:00')
-        // },
-        // {
-        //     title:
-        //         <div className='calculate complete'>
-        //             <div className='sub-text'>540,000원</div>
-        //             <div className='main-text'>
-        //                 <span>정산완료</span>
-        //                 <span>12건</span>
-        //             </div>
-        //         </div>,
-        //     start: new Date('2024-10-05T13:45:00-05:00'),
-        //     end: new Date('2024-10-05T14:00:00-05:00')
-        // },
-        // {
-        //     title:
-        //         <div className='calculate schedule'>
-        //             <div className='sub-text'>240,000원</div>
-        //             <div className='main-text'>
-        //                 <span>정산예정</span>
-        //                 <span>7건</span>
-        //             </div>
-        //         </div>,
-        //     start: new Date('2024-10-05T13:45:00-05:00'),
-        //     end: new Date('2024-10-05T14:00:00-05:00')
-        // },
-        // {
-        //     title:
-        //         <div className='calculate complete'>
-        //             <div className='sub-text'>540,000원</div>
-        //             <div className='main-text'>
-        //                 <span>정산완료</span>
-        //                 <span>12건</span>
-        //             </div>
-        //         </div>,
-        //     start: new Date('2024-10-01T13:45:00-05:00'),
-        //     end: new Date('2024-10-01T14:00:00-05:00')
-        // },
-        // {
-        //     title:
-        //         <div className='calculate schedule'>
-        //             <div className='sub-text'>240,000원</div>
-        //             <div className='main-text'>
-        //                 <span>정산예정</span>
-        //                 <span>7건</span>
-        //             </div>
-        //         </div>,
-        //     start: new Date('2024-10-01T13:45:00-05:00'),
-        //     end: new Date('2024-10-01T14:00:00-05:00')
-        // },
-        // {
-        //     title:
-        //         <div className='calculate schedule'>
-        //             <div className='sub-text'>240,000원</div>
-        //             <div className='main-text'>
-        //                 <span>정산예정</span>
-        //                 <span>7건</span>
-        //             </div>
-        //         </div>,
-        //     start: new Date('2024-10-27T13:45:00-05:00'),
-        //     end: new Date('2024-10-27T14:00:00-05:00')
-        // },
-    ]);
+    const [events, setEvents] = useState([]);
 
     const [eventDatas, setEventDatas] = useState([])
 
-    const getScheduleInfos = (type) => {
-        switch (type) {
-            case 'beforeAccept':
-                return beforeAccept;
-            case 'cleaning':
-                return cleaning;
-            case 'cleanDone':
-                return cleanDone;
-            default:
-                return [];
+
+
+    /* ===== QUERY ===== */
+    const { data: requestCleansRes, isLoading: requestCleansLoading, isError: requestCleansError } = useGetCompanyRequestClean(companyId);
+    const requestCleans = requestCleansRes?.data || [];
+
+
+
+    /* ===== EFFECT ===== */
+
+    useEffect(() => {
+        if (requestCleans?.request_cleans) {
+            const fetchServiceList = async () => {
+                const requestWithServices = await Promise.all(
+                    requestCleans.request_cleans.map(async (request) => {
+                        const result = await API.getCleanRequestCleanServiceList(request.request_clean_id);
+                        return {
+                            ...request,
+                            services: result?.data?.request_clean_service_lists || [],
+                        };
+                    })
+                );
+
+                setBeforeAccept(requestWithServices.filter(req => req.request_status === 'WAITING'));
+                setCleaning(requestWithServices.filter(req => req.request_status === 'CLEANING'));
+                setCleanDone(requestWithServices.filter(req => req.request_status === 'DONE'));
+            };
+
+            fetchServiceList();
         }
-    };
+    }, [requestCleans]);
 
     useEffect(() => {
         (
@@ -276,6 +150,22 @@ const MainContainer = () => {
         }));
     }, [beforeAccept, cleaning, cleanDone]);
 
+
+
+    /* ===== FUNCTION ===== */
+    const getScheduleInfos = (type) => {
+        switch (type) {
+            case 'beforeAccept':
+                return beforeAccept;
+            case 'cleaning':
+                return cleaning;
+            case 'cleanDone':
+                return cleanDone;
+            default:
+                return [];
+        }
+    };
+
     const onSelected = async (e) => {
         try {
             const date = getTimeFormat(e.slots[0]);
@@ -295,6 +185,9 @@ const MainContainer = () => {
         }
     }
 
+
+
+    /* ===== RENDER ===== */
     return (
         <MainPresenter
             events={events}

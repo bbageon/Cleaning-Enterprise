@@ -130,7 +130,7 @@ const RequestCleanContainer = () => {
                 )
             }))
         }))
-    }, [activeCardId, beforeAccept, cleaning, cleanDone]);
+    }, [beforeAccept, cleaning, cleanDone]);
 
     /* ===== FUNCTION ===== */
     const getRequestInfos = (type) => {
