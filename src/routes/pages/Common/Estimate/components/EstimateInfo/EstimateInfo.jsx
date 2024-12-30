@@ -6,7 +6,7 @@ export const EstimateInfo = ({
     onCardClick,
 }) => {
 
-    
+
 
     /* ===== RENDER ===== */
     return (
@@ -24,7 +24,8 @@ export const EstimateInfo = ({
                         >
                             <div className="date">
                                 {
-                                    new Date(estimateInfo.request_date * 1000).toLocaleTimeString('ko-KR', {
+                                    new Date(estimateInfo.created_at * 1000).toLocaleTimeString('ko-KR', {
+                                        timeZone: 'Asia/Seoul', // 명시적으로 한국 시간대 설정
                                         hour: '2-digit',
                                         minute: '2-digit',
                                         hour12: false,

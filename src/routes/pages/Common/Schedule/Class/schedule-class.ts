@@ -18,6 +18,9 @@ export class CScheduleInfo {
 
     // 요청 상세 주소
     clean_address_detail: string = '상세주소';
+
+    // 서비스
+    services: any = null;
 }
 
 export class CChatRoomInfo {

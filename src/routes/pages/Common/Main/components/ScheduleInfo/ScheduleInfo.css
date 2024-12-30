@@ -1,54 +1,70 @@
 .schedule-info {
+    width: 100%;
+
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    gap: 10px;
+    justify-content: flex-start;
+    flex-direction: row;
+    gap: 2rem;
 
-    position: relative;
+    padding: 1rem 1rem;
 
-    padding: 10px 0;
-}
-
-.schedule-info::after {
-    content: '';
-    position: absolute;
-    width: 85%;
-    height: 100%;
-    padding: 0 10px;
-    border-bottom: 1px solid #C2C5FF21;
+    border-bottom: 1px solid rgba(194, 187, 255, 0.15);
 }
 
 .schedule-info .date {
     font-size: 24px;
-    padding: 10px;
 }
 
 .schedule-info .info {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    flex: 1;
     gap: 10px;
 
     font-size: 11px;
-    word-break: keep-all;
 }
 
 .schedule-info .info .menu-info {
+    width: 100%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    align-content: flex-end;
     gap: 5px;
+    text-wrap: nowrap;
+    flex-wrap: wrap;
 }
 
-.schedule-info .info .menu-info span:first-child {
-    font-size: 12px;
+.schedule-info .info .menu-info span:first-child,
+.schedule-info .info .menu-info span:nth-child(2) {
+    font-size: 0.85rem;
 }
 
 .schedule-info .info .menu-info span:last-child {
     text-align: center;
-    border: 1px solid white;
+    border: 1px solid #FFFFFF;
     padding: 1px;
 }
 
 .schedule-info .info .sub-menu-info {
     color: #969696;
+}
+
+.schedule-info .requirements-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0.5rem;
+}
+
+.schedule-info .requirements-info span:first-child {
+    color: var(--gray3-color);
+}
+
+.schedule-info .schedule-info-address-info {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
 }

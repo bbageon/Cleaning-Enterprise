@@ -12,7 +12,7 @@ export const ScheduleSidebar = ({
     isSelectRequest,
     selectedRequest,
 
-                                
+
     handleUnAssignEmployee,
     handleAssignEmployee,
     handleAssign,
@@ -27,8 +27,8 @@ export const ScheduleSidebar = ({
             <div className="profile">
                 <img src={Profile} alt="프로필 이미지" className='profile-image' />
                 <div className="user-profile-info">
-                    <div className="name">김건우 님</div>
-                    <div className="english-name">Kim Guenwoo</div>
+                    <div className="name">백승우 님</div>
+                    <div className="english-name">Baek seungwoo</div>
                 </div>
             </div>
             {
@@ -39,7 +39,7 @@ export const ScheduleSidebar = ({
 
                         isSelectRequest={isSelectRequest}
                         selectedRequest={selectedRequest}
-                                
+
                         handleUnAssignEmployee={handleUnAssignEmployee}
                         handleAssignEmployee={handleAssignEmployee}
                         handleAssign={handleAssign}

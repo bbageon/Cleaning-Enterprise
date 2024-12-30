@@ -15,12 +15,13 @@ export const ScheduleInfo: React.FC<ScheduleInfoProps> = ({
     scheduleInfos,
     type = 'beforeAccept',
 }) => {
-    
+
     return (
         <>
             {
                 scheduleInfos?.map(scheduleInfo => {
-                    const { request_date, quantity, total_price, request_status, clean_address, clean_address_detail } = scheduleInfo;
+                    const { request_date, total_price, request_status, clean_address, clean_address_detail } = scheduleInfo;
+                    const quantity = scheduleInfo.services.length;
                     return (
                         <div className="schedule-info">
                             <div className="date">
@@ -34,7 +35,7 @@ export const ScheduleInfo: React.FC<ScheduleInfoProps> = ({
                             </div>
                             <div className="info">
                                 <div className="menu-info">
-                                    <span>메뉴{quantity}개</span>
+                                    <span>메뉴 {quantity}개</span>
                                     <span>{total_price?.toLocaleString()}원</span>
                                     {type === 'beforeAccept' &&
                                         <span>수락전</span>}
@@ -44,10 +45,13 @@ export const ScheduleInfo: React.FC<ScheduleInfoProps> = ({
                                         <span>청소 완료</span>}
                                 </div>
                                 <div className="sub-menu-info">
-                                    메뉴 1 / 메뉴 2 / 메뉴 3
+                                    {scheduleInfo?.services.map((service: any) => (
+                                        <div>{service.service_name}</div>
+                                    ))}
                                 </div>
-                                <div className="address-info">
-                                    {clean_address} {clean_address_detail}
+                                <div className="schedule-info-address-info">
+                                    <span>{clean_address}</span>
+                                    <span>{clean_address_detail}</span>
                                 </div>
                             </div>
                         </div>

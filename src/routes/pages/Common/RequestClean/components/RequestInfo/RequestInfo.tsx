@@ -49,21 +49,13 @@ export const RequestInfo: React.FC<RequestInfoProps> = ({
                                         <span>청소 완료</span>}
                                 </div>
                                 <div className="sub-menu-info">
-                                    {
-                                        requestInfo.services.map((service: any) => {
-                                            return (
-                                                <div>{service.service_name}</div>
-                                            )
-                                        })
-                                    }
+                                    {requestInfo.services.map((service: any) => (
+                                        <div>{service.service_name}</div>
+                                    ))}
                                 </div>
                                 <div className="request-info-address-info">
-                                    <span>
-                                        {requestInfo.clean_address}
-                                    </span>
-                                    <span>
-                                        {requestInfo.clean_address_detail}
-                                    </span>
+                                    <span>{requestInfo.clean_address}</span>
+                                    <span>{requestInfo.clean_address_detail}</span>
                                 </div>
                             </div>
                         </div>
