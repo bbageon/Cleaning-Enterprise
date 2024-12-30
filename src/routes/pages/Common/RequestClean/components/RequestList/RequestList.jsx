@@ -6,6 +6,9 @@ const RequestList = ({
 
     beforeAccept,
 
+    setCleaning,
+    setBeforeAccept,
+
     handleOpenImageModal,
 }) => {
 
@@ -20,6 +23,8 @@ const RequestList = ({
                             isActive={request.request_clean_id === activeCardId}
                             request={request}
                             handleOpenImageModal={handleOpenImageModal}
+                            setBeforeAccept={setBeforeAccept}
+                            setCleaning={setCleaning}
                         />
                     ))
                 }

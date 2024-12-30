@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 
 // React Query
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 // Context
 import { CustomProvider } from './context/CustomContext';
@@ -28,8 +27,6 @@ if (rootElement) {
       <Router>
         <CustomProvider>
           <App />
-          {/* React Query Devtools: 추후 삭제 */}
-          <ReactQueryDevtools />
         </CustomProvider>
       </Router>
     </QueryClientProvider>

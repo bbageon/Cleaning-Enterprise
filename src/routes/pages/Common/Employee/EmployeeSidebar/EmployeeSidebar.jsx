@@ -37,11 +37,11 @@ const TaskSummary = ({
             </div>
             <div className='task-summary yellowbar'>
                 <span>진행 업무</span>
-                <span>186</span>
+                <span>{selectedEmployee.in_progress_tasks}</span>
             </div>
             <div className='task-summary greenbar'>
                 <span>완료 업무</span>
-                <span>186</span>
+                <span>{selectedEmployee.completed_tasks}</span>
             </div>
         </div>
     );
@@ -114,6 +114,7 @@ const TaskComplete = ({
 // EmployeeSidebar
 const EmployeeSidebar = ({
     selectedEmployee,
+    company,
 }) => {
 
     /* ===== RENDER ===== */
@@ -122,8 +123,8 @@ const EmployeeSidebar = ({
             <div className="profile">
                 <img src={Profile} alt="프로필 이미지" className='profile-image' />
                 <div className="user-profile-info">
-                    <div className="name">김건우 님</div>
-                    <div className="english-name">Kim Guenwoo</div>
+                    <div className="name">{company.ceo_name} 님</div>
+                    <div className="english-name">Baek seungwoo</div>
                 </div>
             </div>
             {

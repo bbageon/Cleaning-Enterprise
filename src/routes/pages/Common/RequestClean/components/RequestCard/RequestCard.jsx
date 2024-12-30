@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { useUpdateRequestClean } from '../../../../../../hooks/RequestCleanHooks';
-import { useGetEachRequestCleanImage, useGetOneRequestCleanImage } from '../../../../../../hooks/RequestCleanImageHooks';
+import { useGetEachRequestCleanImage } from '../../../../../../hooks/RequestCleanImageHooks';
 import { formatFullDate } from '../../../../../../utils/dateUtils';
 import './RequestCard.css';
 
@@ -38,7 +37,7 @@ const RequestCard = ({
         updateRequest({
             request_clean_id: request.request_clean_id,
             body: {
-                request_status: 'DONE',
+                request_status: 'CLEANING',
             }
         }, {
             onError: () => {

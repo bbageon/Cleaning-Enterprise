@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useGetCompanyEmployee } from "../../../../hooks/EmployeeHooks";
 import EmployeePresenter from "./EmployeePresenter";
+import { useGetCompany } from '../../../../hooks/CompanyHooks';
 
 const EmployeeContainer = () => {
     /* ===== STATE ===== */
@@ -12,6 +13,10 @@ const EmployeeContainer = () => {
     /* ===== VARIABLES ===== */
 
     /* ===== QUERY ===== */
+
+    const { data: companyDataRes, isLoading: companyLoading, isError: companyError } = useGetCompany(1);
+    const companyData = companyDataRes?.data || [];
+
     const { data: employeesDataRes, isLoading: employeesDataLoading, isError: employeesDataError } = useGetCompanyEmployee(1);
     const employeeData = employeesDataRes?.data.employees || [];
 
@@ -33,6 +38,9 @@ const EmployeeContainer = () => {
 
             // 직원
             employees={employeeData}
+
+            // 회사
+            company={companyData}
 
             // 직원 선택 핸들러
             onSelectEmployee={handleSelectEmployee}
