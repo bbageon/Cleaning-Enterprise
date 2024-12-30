@@ -394,7 +394,7 @@ const ScheduleContainer = () => {
         }
 
         // 배정 직원 정보 저장
-        setNonAssignedEmployees(nonAssignmentResult.data);
+        setNonAssignedEmployees(nonAssignmentResult.data.non_assignment_employee);
 
         setSearchResult(searchResultData);
         setSearchResultOriginal(searchData);
