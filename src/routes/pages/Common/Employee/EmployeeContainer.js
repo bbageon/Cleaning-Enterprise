@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetCompanyEmployee } from "../../../../hooks/EmployeeHooks";
 import EmployeePresenter from "./EmployeePresenter";
 import { useGetCompany } from '../../../../hooks/CompanyHooks';
@@ -7,8 +7,13 @@ const EmployeeContainer = () => {
     /* ===== STATE ===== */
     const [selectedEmployee, setSelectedEmployee] = useState(null);
 
+    const [filteredEmployees, setFilteredEmployees] = useState(null);
+
     const [selectedDepartment, setSelectedDepartment] = useState(null);
     const [selectedLevel, setSelectedLevel] = useState(null);
+
+    const [departmentOptions, setDepartmentOptions] = useState(null);
+    const [levelOptions, setLevelOptions] = useState(null);
 
     /* ===== VARIABLES ===== */
 
@@ -25,6 +30,38 @@ const EmployeeContainer = () => {
     /* ===== MUTATE ===== */
 
     /* ===== EFFECT ===== */
+    useEffect(() => {
+        if (employeeData.length && !isLoading) {
+            const departments = employeeData
+                .map(employee => employee.department)
+                .filter(Boolean); // 빈 값 제거
+
+            const uniqueDepartments = [... new Set(departments)];
+            setDepartmentOptions(['전체', ...uniqueDepartments]);
+
+            const levels = employeeData
+                .map(employee => employee.level)
+                .filter(Boolean);
+
+            const uniqueLevels = [... new Set(levels)];
+            setLevelOptions(['전체', ...uniqueLevels]);
+        }
+    }, [isLoading, employeeData]);
+
+    useEffect(() => {
+        const filteredEmployee = employeeData.map(employee => employee.department === selectedDepartment);
+        setFilteredEmployees(filteredEmployee);
+    }, [setSelectedDepartment, setSelectedLevel]);
+
+    useEffect(() => {
+        
+        const filtered = employeeData.filter(employee => {
+            const matchesDepartment = selectedEmployee === '전체' || employee.department === selectedDepartment;
+            const matchesLevel = selectedLevel === '전체' || employee.level === selectedLevel;
+            return matchesDepartment && matchesLevel;
+        });
+        setFilteredEmployees(filtered);
+    }, [selectedDepartment, selectedLevel, employeeData]);
 
     /* ===== FUNCTION ===== */
     const handleSelectEmployee = (employee) => {
@@ -37,9 +74,9 @@ const EmployeeContainer = () => {
             isLoading={isLoading}
 
             // 직원
-            employees={employeeData}
+            employees={!selectedDepartment && !selectedDepartment ? employeeData : filteredEmployees}
 
-            // 회사
+            // 업체
             company={companyData}
 
             // 직원 선택 핸들러
@@ -47,6 +84,12 @@ const EmployeeContainer = () => {
 
             // 선택된 직원
             selectedEmployee={selectedEmployee}
+
+            // 소속 옵션
+            departmentOptions={departmentOptions}
+
+            // 직급 옵션
+            levelOptions={levelOptions}
 
             // 소속 선택
             selectedDepartment={selectedDepartment}

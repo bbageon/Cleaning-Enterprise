@@ -105,9 +105,9 @@ const CompanyDashboardPresenter = ({
                         style={{ marginBottom: 40, display: 'flex' }}
                     >
                         {[
-                            { title: '신규 청소업체', value: 123 },
+                            { title: '신규 청소업체', value: 0 },
                             { title: '전체 청소업체', value: companies.length },
-                            { title: '서비스 미등록 청소업체', value: 123 },
+                            { title: '서비스 미등록 청소업체', value: 0 },
                         ].map((_item, _index) => (
                             <div
                                 key={`${_item.title}-${_index}`}

@@ -1,5 +1,4 @@
 import './EmployeeSidebar.css';
-import Profile from '../../../../../assets/profile.png';
 
 /**
  * 업무 담당자 정보
@@ -12,7 +11,7 @@ const EmployeeInfo = ({
         <div className='task-container'>
             <span className='title'>업무 담당자 정보</span>
             <div className='task-profile'>
-                <img src={Profile} alt='프로필 이미지' className='profile-image' />
+                <img src={selectedEmployee.image} alt='프로필 이미지' className='profile-image' />
                 <div className='employee-info'>
                     <span>{selectedEmployee.name}</span>
                     <span>{selectedEmployee.department}/{selectedEmployee.level}</span>
@@ -116,12 +115,12 @@ const EmployeeSidebar = ({
     selectedEmployee,
     company,
 }) => {
-
+    
     /* ===== RENDER ===== */
     return (
         <div className="employee-sidebar sidebar">
             <div className="profile">
-                <img src={Profile} alt="프로필 이미지" className='profile-image' />
+                <img src='https://cleaning-image.s3.ap-northeast-2.amazonaws.com/default_profile.jpeg' alt="프로필 이미지" className='profile-image' />
                 <div className="user-profile-info">
                     <div className="name">{company.ceo_name} 님</div>
                     <div className="english-name">Baek seungwoo</div>

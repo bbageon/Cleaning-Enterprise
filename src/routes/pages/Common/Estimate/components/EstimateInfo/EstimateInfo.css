@@ -62,7 +62,8 @@
     gap: 0.5rem;
 }
 
-.estimate-info .requirements-info span:first-child {
+.estimate-info .requirements-info span:first-child,
+.estimate-info .requirements-info span:nth-child(2) {
     color: var(--gray3-color);
 }
 .estimate-info .requirements-info span:last-child {

@@ -229,9 +229,9 @@ const AdminLayout = (props) => {
                                     onClick: () =>
                                         handleOpenToggleMenu(isOpened ? 'close' : 'open')
                                 },
-                                { title: '공지사항' },
-                                { title: '메뉴얼' },
-                                { title: <span style={{ fontWeight: 600 }}>{brand}</span> },
+                                // { title: '공지사항' },
+                                // { title: '메뉴얼' },
+                                // { title: <span style={{ fontWeight: 600 }}>{brand}</span> },
                             ]}
                         />
                     )

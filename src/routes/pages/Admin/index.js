@@ -63,12 +63,12 @@ const AdminRoutes = () => {
                     icon: null,
                     onClick: () => navigate('admin/users/list'),
                 },
-                {
-                    key: 'users-register',
-                    label: '회원 등록/수정',
-                    icon: null,
-                    onClick: () => navigate('admin/users/register'),
-                },
+                // {
+                //     key: 'users-register',
+                //     label: '회원 등록/수정',
+                //     icon: null,
+                //     onClick: () => navigate('admin/users/register'),
+                // },
             ],
         },
 
@@ -90,12 +90,12 @@ const AdminRoutes = () => {
                     icon: null,
                     onClick: () => navigate('admin/companies/list'),
                 },
-                {
-                    key: 'companies-register',
-                    label: '청소업체 등록/수정',
-                    icon: null,
-                    onClick: () => navigate('admin/companies/register'),
-                }
+                // {
+                //     key: 'companies-register',
+                //     label: '청소업체 등록/수정',
+                //     icon: null,
+                //     onClick: () => navigate('admin/companies/register'),
+                // }
             ],
         },
 
@@ -117,12 +117,12 @@ const AdminRoutes = () => {
                     icon: null,
                     onClick: () => navigate('admin/services/list'),
                 },
-                {
-                    key: 'services-register',
-                    label: '서비스 등록/수정',
-                    icon: null,
-                    onClick: () => navigate('admin/services/register'),
-                },
+                // {
+                //     key: 'services-register',
+                //     label: '서비스 등록/수정',
+                //     icon: null,
+                //     onClick: () => navigate('admin/services/register'),
+                // },
             ],
         },
 

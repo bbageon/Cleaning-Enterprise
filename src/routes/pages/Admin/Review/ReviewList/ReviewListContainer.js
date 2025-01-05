@@ -4,7 +4,9 @@ const ReviewListContainer = () => {
 
     /* ===== RENDER ===== */
     return (
-        <ReviewListPresenter />
+        <ReviewListPresenter
+        
+        />
     );
 };
 

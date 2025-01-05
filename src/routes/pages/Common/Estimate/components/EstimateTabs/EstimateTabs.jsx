@@ -31,6 +31,7 @@ const EstimateTab = ({
 const EstimateContent = ({
     title,
     onClick,
+    estimate,
     estimateServiceList,
     estimateStatus,
 }) => {
@@ -38,7 +39,7 @@ const EstimateContent = ({
     /* ===== VARIABLES ===== */
     const totalPrice = estimateServiceList?.reduce((sum, service) => {
         const servicePrice = service.price_per_meter === 0 ? service.price_per_time : service.price_per_meter;
-        return sum + servicePrice;
+        return sum + (servicePrice * estimate.quantity);
     }, 0);
 
     /* ===== MUTATE ===== */
@@ -75,7 +76,9 @@ const EstimateContent = ({
                                     >
                                         <span>{service.service_name}</span>
                                         <div>
-                                            <span>+ {formatPrice(service.price_per_meter === 0 ? service.price_per_time : service.price_per_meter)}원</span>
+                                            <span>
+                                                + {formatPrice(service.price_per_meter === 0 ? service.price_per_time : service.price_per_meter)} x {estimate.quantity} = {formatPrice((service.price_per_meter === 0 ? service.price_per_time : service.price_per_meter) * estimate.quantity)} 원
+                                            </span>
                                             {
                                                 estimateStatus === 'ANSWER_COMPLETE' ? (
                                                     null
@@ -133,9 +136,12 @@ const EstimateContent = ({
 };
 
 const EstimateTabs = ({
+    estimate,
     estimateServiceList,
     estimateStatus,
 }) => {
+
+    console.log(estimateStatus);
 
     /* ===== STATE ===== */
     const [activeTab, setActiveTab] = useState(0);
@@ -149,6 +155,7 @@ const EstimateTabs = ({
                 <EstimateContent
                     title='최종 견적서'
                     estimateServiceList={estimateServiceList}
+                    estimate={estimate}
                 />,
         },
         {
@@ -159,6 +166,7 @@ const EstimateTabs = ({
                     title='서비스 목록'
                     estimateServiceList={estimateServiceList}
                     estimateStatus={estimateStatus}
+                    estimate={estimate}
                 />,
         },
     ];
@@ -186,22 +194,24 @@ const EstimateTabs = ({
             {tabs[activeTab].content}
 
             {/* 서비스 버튼 */}
-            <div className='estimate-service-button'>
-                <button
-                    style={{
-                        backgroundColor: '#1E90FF'
-                    }}
-                >
-                    견적서 전송
-                </button>
-                <button
+            {estimateStatus === 'ANSWER_COMPLETE' ? null : (
+                <div className='estimate-service-button'>
+                    <button
+                        style={{
+                            backgroundColor: '#1E90FF'
+                        }}
+                    >
+                        견적서 전송
+                    </button>
+                    {/* <button
                     style={{
                         backgroundColor: '#87CEEB'
                     }}
                 >
                     견적서 저장
-                </button>
-            </div>
+                </button> */}
+                </div>
+            )}
         </div>
     );
 };

@@ -14,6 +14,9 @@ const ReviewDashboardPresenter = ({
     // 검색어
     setKeywordCategory,
 
+    reviews,
+    requestCleans,
+
 }) => {
     /* ===== STYLES ===== */
     const styles = {
@@ -77,17 +80,16 @@ const ReviewDashboardPresenter = ({
                         style={{ marginBottom: 40, display: 'flex' }}
                     >
                         {[
-                            { title: '총 요청 건수', value: 123, suffix: '건' },
-                            { title: '총 리뷰 개수', value: 123, suffix: '개' },
-                            { title: '리뷰 작성률', value: 45, suffix: '%' },
-                            { title: '평균 리뷰 점수', value: 3.5, suffix: '점' },
+                            { title: '총 요청 건수', value: requestCleans.length, suffix: '건' },
+                            { title: '총 리뷰 개수', value: reviews.length, suffix: '개' },
+                            { title: '리뷰 작성률', value: Math.floor(reviews.length / requestCleans.length * 100), suffix: '%' },
                         ].map((_item, _index) => (
                             <div
                                 key={`${_item.title}-${_index}`}
                                 style={{
                                     background: '#FFFFFF',
                                     borderRadius: 4,
-                                    width: `calc(100% / 4)`, // 전체 너비에서 항목 갯수만큼 나누기
+                                    width: `calc(100% / 3)`, // 전체 너비에서 항목 갯수만큼 나누기
                                     marginRight: _index === 3 ? 0 : 3,
                                     padding: 20,
                                 }}
@@ -183,31 +185,23 @@ const ReviewDashboardPresenter = ({
                         </div>
 
                         <Table
-                            // data={newdata}
+                            data={reviews}
                             columns={[
                                 {
-                                    title: '업체번호',
-                                    key: 'id',
+                                    title: '리뷰번호',
+                                    key: 'review_id',
                                 },
                                 {
-                                    title: '업체명',
-                                    key: 'name',
+                                    title: '리뷰점수',
+                                    key: 'rating',
                                 },
                                 {
-                                    title: '대표자명',
-                                    key: 'ceo',
+                                    title: '회원번호',
+                                    key: 'user_id',
                                 },
                                 {
-                                    title: '대표전화번호',
-                                    key: 'phone',
-                                },
-                                {
-                                    title: '사업자등록번호',
-                                    key: 'business',
-                                },
-                                {
-                                    title: '업체전화번호',
-                                    key: 'tel',
+                                    title: '리뷰내용',
+                                    key: 'review_message',
                                 },
                             ]}
                         />

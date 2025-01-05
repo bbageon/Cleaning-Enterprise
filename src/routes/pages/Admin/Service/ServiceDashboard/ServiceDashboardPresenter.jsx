@@ -103,10 +103,10 @@ const ServiceDashboardPresenter = ({
                         style={{ marginBottom: 40, display: 'flex' }}
                     >
                         {[
-                            { title: '신규 서비스', value: 123 },
+                            { title: '신규 서비스', value: 0 },
                             { title: '전체 서비스', value: services.length },
-                            { title: '대표 서비스', value: 123 },
-                            { title: '미이용 서비스', value: 123 },
+                            { title: '대표 서비스', value: 1 },
+                            { title: '미이용 서비스', value: 0 },
                         ].map((_item, _index) => (
                             <div
                                 key={`${_item.title}-${_index}`}
@@ -232,8 +232,8 @@ const ServiceDashboardPresenter = ({
                                     key: 'price_per_time',
                                 },
                                 {
-                                    title: '업체전화번호',
-                                    key: 'tel',
+                                    title: '업체번호',
+                                    key: 'company_id',
                                 },
                             ]}
                         />

@@ -436,7 +436,7 @@ const ScheduleContainer = () => {
         setAssignedEmployees(assign);
         setNonAssignList(nonAssignList.filter(assign => assign !== employee));
         setAssignList(assignList.concat(employee));
-    }
+    };
 
     // 직원 배정 반영
     const handleAssign = () => {

@@ -68,6 +68,33 @@ const ReviewListPresenter = ({
             ]
         },
         {
+            label: '리뷰 점수',
+            form: [
+                {
+                    input: (
+                        <>
+                            <Radio.Group
+                                defaultValue={'all'}
+                                options={[
+                                    { label: '전체', value: 'all' },
+                                ]}
+                            />
+                            <Checkbox.Group
+                                defaultValue={'used'}
+                                options={[
+                                    { label: '5점', value: 5 },
+                                    { label: '4점', value: 4 },
+                                    { label: '3점', value: 3 },
+                                    { label: '2점', value: 2 },
+                                    { label: '1점', value: 1 },
+                                ]}
+                            />
+                        </>
+                    ),
+                }
+            ]
+        },
+        {
             label: '리뷰 작성일',
             form: [
                 {
@@ -177,24 +204,20 @@ const ReviewListPresenter = ({
                             // data={newdata}
                             columns={[
                                 {
+                                    title: '라뷰번호',
+                                    key: 'review_id',
+                                },
+                                {
+                                    title: '리뷰점수',
+                                    key: 'rating',
+                                },
+                                {
                                     title: '회원번호',
-                                    key: 'id',
+                                    key: 'user_id',
                                 },
                                 {
-                                    title: '회원명',
-                                    key: 'name',
-                                },
-                                {
-                                    title: '소셜아이디',
-                                    key: 'social_id',
-                                },
-                                {
-                                    title: '이메일',
-                                    key: 'email',
-                                },
-                                {
-                                    title: '전화번호',
-                                    key: 'phone',
+                                    title: '리뷰내용',
+                                    key: 'review_message',
                                 },
                             ]}
                         />

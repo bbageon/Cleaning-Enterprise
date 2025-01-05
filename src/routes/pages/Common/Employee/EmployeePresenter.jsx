@@ -5,8 +5,6 @@ import EmployeeList from './EmployeeList';
 import EmployeeSidebar from './EmployeeSidebar';
 
 const EmployeePresenter = ({
-    isLoading,
-
     // 직원
     employees,
 
@@ -19,6 +17,12 @@ const EmployeePresenter = ({
     // 선택된 직원
     selectedEmployee,
 
+    // 소속 옵션
+    departmentOptions,
+
+    // 직급 옵션
+    levelOptions,
+
     // 소속 선택
     selectedDepartment,
     setSelectedDepartment,
@@ -27,8 +31,6 @@ const EmployeePresenter = ({
     selectedLevel,
     setSelectedLevel,
 }) => {
-
-    // if (isLoading) return <div></div>;
 
     /* ===== RENDER ===== */
     return (
@@ -54,6 +56,9 @@ const EmployeePresenter = ({
             <EmployeeHeader
                 employees={employees}
                 company={company}
+
+                departmentOptions={departmentOptions}
+                levelOptions={levelOptions}
 
                 selectedDepartment={selectedDepartment}
                 setSelectedDepartment={setSelectedDepartment}

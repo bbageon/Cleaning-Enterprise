@@ -90,19 +90,19 @@ const Router = () => {
     // }, []);
 
     // 라우터 변경 감지 (로그인 확인용)
-    // useEffect(() => {
-    //     const { pathname } = location;
-    //     if (pathname === '/') return;
+    useEffect(() => {
+        const { pathname } = location;
+        if (pathname === '/') return;
 
-    //     // 만약 로그인 되어있지 않다면 메인 화면으로 이동
-    //     if (!isLogin()) {
-    //         alert(`로그인이 필요합니다`);
-    //         document.getElementById('root').style.visibility = 'hidden';
-    //         navigate('/')
-    //         document.getElementById('root').style.visibility = 'visible';
-    //         return;
-    //     }
-    // }, [location]);
+        // 만약 로그인 되어있지 않다면 메인 화면으로 이동
+        if (!isLogin()) {
+            alert(`로그인이 필요합니다`);
+            document.getElementById('root').style.visibility = 'hidden';
+            navigate('/')
+            document.getElementById('root').style.visibility = 'visible';
+            return;
+        }
+    }, [location]);
 
     return (
         <div className="app">

@@ -16,6 +16,7 @@ const EstimateContainer = () => {
     const [selectedEstimate, setSelectedEstimate] = useState(null);
     // 견적서 서비스 목록
     const [filteredEstimateServiceList, setFilteredEstimateServiceList] = useState([]);
+    // 업체 서비스 목록
 
     // 탭
     const [tabList, setTabs] = useState({

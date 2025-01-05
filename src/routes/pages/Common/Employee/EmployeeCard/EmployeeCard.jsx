@@ -1,13 +1,10 @@
 import './EmployeeCard.css';
-import Profile from '../../../../../assets/profile.png';
-import { useState } from 'react';
 
 const EmployeeCard = ({
     employee,
     onSelectEmployee,
     isSelected,
 }) => {
-    /* ===== STATE ===== */
 
     /* ===== VARIABLES ===== */
     const Status = {
@@ -26,14 +23,16 @@ const EmployeeCard = ({
         >
             <button
                 className={`employee-card-select ${isSelected ? 'selected' : ''}`}
-            >
-
-            </button>
+            />
             <div className='employee-card-profile'>
-                <img src={Profile} />
+                {employee.image ? (
+                    <img src={employee.image} alt='Employee Image' />
+                ) : (
+                    <img src='https://cleaning-image.s3.ap-northeast-2.amazonaws.com/default_profile.jpeg' />
+                )}
             </div>
             <div className='employee-card-info'>
-                <span>{employee.name}</span>
+                <span style={{ fontSize: '1rem'}}>{employee.name}</span>
                 <span>{employee.email}</span>
                 <span>{employee.department}</span>
                 <span>{employee.level}</span>

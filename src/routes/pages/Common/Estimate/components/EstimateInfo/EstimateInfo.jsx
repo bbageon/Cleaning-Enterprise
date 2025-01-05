@@ -45,8 +45,10 @@ export const EstimateInfo = ({
                                 </div>
                                 <div className="requirements-info">
                                     <span>
-                                        {/* {estimateInfo.clean_address_detail} */}
-                                        화장실/변기/아파트/25평
+                                        {estimateInfo.clean_address}
+                                    </span>
+                                    <span>
+                                        {estimateInfo.clean_address_detail}
                                     </span>
                                     <span>
                                         {estimateInfo.requirements}

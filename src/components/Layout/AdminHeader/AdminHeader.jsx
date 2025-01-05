@@ -57,7 +57,7 @@ const AdminHeader = ({
                             style={{ fontSize: 16 }}
                         />
                     </div>
-                    <Popover
+                    {/* <Popover
                         content={<PopoverContent onLogout={onLogout} />}
                         trigger={'click'}
                         placement='bottom'
@@ -70,7 +70,7 @@ const AdminHeader = ({
                                 style={{ background: '#EEEEEE', ...avatarStyle }}
                             />
                         </Badge>
-                    </Popover>
+                    </Popover> */}
                 </div>
             </div>
         </div>

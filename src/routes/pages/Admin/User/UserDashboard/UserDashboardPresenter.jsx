@@ -107,9 +107,9 @@ const UserDashboardPresenter = ({
                         style={{ marginBottom: 40, display: 'flex' }}
                     >
                         {[
-                            { title: '신규 회원', value: 123 },
-                            { title: '전체 회원', value: 123 },
-                            { title: '미이용 회원', value: 123 },
+                            { title: '신규 회원', value: 0 },
+                            { title: '전체 회원', value: users.length },
+                            { title: '미이용 회원', value: 0 },
                         ].map((_item, _index) => (
                             <div
                                 key={`${_item.title}-${_index}`}

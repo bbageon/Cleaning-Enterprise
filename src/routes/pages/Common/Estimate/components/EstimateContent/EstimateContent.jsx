@@ -8,8 +8,6 @@ const EstimateContent = ({
     estimate,
 }) => {
 
-    console.log(estimate);
-
     /* ===== VARIABLES ===== */
     const category = {
         1: '이사/입주청소',

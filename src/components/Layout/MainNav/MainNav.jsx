@@ -51,13 +51,13 @@ const MainNav = ({
                     <ChatRoomIcon />
                     대화방 관리
                 </li>
-                <li
+                {/* <li
                     className={`${page === '리뷰 관리 및 청소 내역' ? 'current-page' : ''}`}
                     onClick={() => { navigate('/review') }}
                 >
                     <ReviewIcon />
                     리뷰 관리 및 청소 내역
-                </li>
+                </li> */}
                 <li
                     className={`${page === '일정 관리' ? 'current-page' : ''}`}
                     onClick={() => { navigate('/schedule') }}
@@ -72,13 +72,13 @@ const MainNav = ({
                     <EmplayeeManageIcon />
                     직원 관리
                 </li>
-                <li
+                {/* <li
                     className={`divide ${page === '업체 정보 관리' ? 'current-page' : ''}`}
                     onClick={() => { navigate('/company') }}
                 >
                     <ListIcon />
                     업체 정보 관리
-                </li>
+                </li> */}
                 <li
                     className={`${page === '견적서 요청 관리' ? 'current-page' : ''}`}
                     onClick={() => { navigate('/estimate') }}

@@ -12,7 +12,7 @@ export const RequestList = ({
                     return (
                         <div className="request-wrap" key={idx}>
                             <div className="request-date">
-                                {date}
+                                12월
                             </div>
                             <div className="request-elements">
                                 {

@@ -44,6 +44,7 @@ const EstimatePresenter = ({
                     />
                     <div className='estimate-container row'>
                         <EstimateTabs
+                            estimate={selectedEstimate}
                             estimateServiceList={estimateServiceList}
                             estimateStatus={selectedEstimate && selectedEstimate.estimate_status}
                         />

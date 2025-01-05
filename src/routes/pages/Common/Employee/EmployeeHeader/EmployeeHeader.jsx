@@ -10,10 +10,13 @@ const EmployeeHeader = ({
 
     selectedLevel,
     setSelectedLevel,
+
+    // 소속 옵션
+    departmentOptions,
+
+    // 직급 옵션
+    levelOptions,
 }) => {
-    /* ===== VARIABLES ===== */
-    const departmentOptions =['없음', '소속1', '소속2', '소속3', '소속4', '소속5'];
-    const levelOptions = ['없음', '직급1', '직급2', '직급3', '직급4', '직급5'];
 
     /* ===== RENDER ===== */
     return (
