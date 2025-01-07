@@ -107,7 +107,7 @@ const ReviewDashboardPresenter = ({
                     {/* 요약 끝 */}
 
                     {/* 검색 필터 */}
-                    <AdminContent
+                    {/* <AdminContent
                         maxWidth={'100%'}
                         padding={0}
                         backgroundColor={'none'}
@@ -135,10 +135,10 @@ const ReviewDashboardPresenter = ({
                                     </div>
                                 </div>
                             ))}
-                        </ExpandableContainer>
+                        </ExpandableContainer> */}
 
                         {/* 검색/초기화 버튼 */}
-                        <div
+                        {/* <div
                             style={{
                                 display: 'flex',
                                 justifyContent: 'center',
@@ -157,9 +157,9 @@ const ReviewDashboardPresenter = ({
                             <Button size='large' style={{ ...styles.button }}>
                                 초기화
                             </Button>
-                        </div>
+                        </div> */}
                         {/* 검색/초기화 버튼 끝 */}
-                    </AdminContent>
+                    {/* </AdminContent> */}
                     {/* 검색필터 끝 */}
 
                     {/* 검색 결과 */}
