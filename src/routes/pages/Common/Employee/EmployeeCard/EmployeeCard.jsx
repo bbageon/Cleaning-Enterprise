@@ -25,11 +25,7 @@ const EmployeeCard = ({
                 className={`employee-card-select ${isSelected ? 'selected' : ''}`}
             />
             <div className='employee-card-profile'>
-                {employee.image ? (
-                    <img src={employee.image} alt='Employee Image' />
-                ) : (
-                    <img src='https://cleaning-image.s3.ap-northeast-2.amazonaws.com/default_profile.jpeg' />
-                )}
+                <img src={employee.image.length === 0 ? employee.image : 'https://cleaning-image.s3.ap-northeast-2.amazonaws.com/default_profile.jpeg'} alt='profile image' />
             </div>
             <div className='employee-card-info'>
                 <span style={{ fontSize: '1rem'}}>{employee.name}</span>

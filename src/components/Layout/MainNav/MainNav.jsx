@@ -10,17 +10,18 @@ import {
     ScheduleManageIcon,
     LogOutIcon,
 } from '../../../assets/icons';
-import { useCustomContext } from '../../../context/CustomContext';
-import { cookie } from '../../../util';
-
-
 import './MainNav.css';
+import { useNavigate } from 'react-router-dom';
+import { cookie } from '../../../util';
 
 const MainNav = ({
     page,
 }) => {
-    const { navigate } = useCustomContext();
 
+    /* ===== ROUTER ===== */
+    const navigate = useNavigate();
+
+    /* ===== FUNCTION ===== */
     const logOut = () => {
         cookie.remove('id', { path: '/' }, 1000);
         cookie.remove('token', { path: '/' }, 1000);
@@ -31,10 +32,15 @@ const MainNav = ({
         navigate('/');
     }
 
+    /* ===== RENDER ===== */
     return (
         <nav className="nav-container">
             <div className="nav-header title">
-                CLEAN KONG
+                <span
+                    onClick={() => navigate('/main')}
+                    style={{ cursor: 'pointer' }}
+                >
+                    CLEAN KONG</span>
             </div>
             <ul className="main-nav">
                 <li
