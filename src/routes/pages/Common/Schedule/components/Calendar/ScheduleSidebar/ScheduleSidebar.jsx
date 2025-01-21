@@ -22,10 +22,11 @@ export const ScheduleSidebar = ({
     setShowAssignmentEmployee,
 }) => {
 
+    /* ===== RENDER ===== */
     return (
         <div className="schedule-sidebar sidebar">
             <div className="profile">
-                <img src={Profile} alt="프로필 이미지" className='profile-image' />
+                <img src='https://cleaning-image.s3.ap-northeast-2.amazonaws.com/default_profile.jpeg' alt="프로필 이미지" className='profile-image' />
                 <div className="user-profile-info">
                     <div className="name">백승우 님</div>
                     <div className="english-name">Baek seungwoo</div>

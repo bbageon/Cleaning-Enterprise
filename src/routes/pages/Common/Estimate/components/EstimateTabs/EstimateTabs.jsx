@@ -58,79 +58,80 @@ const EstimateContent = ({
             {/* 타이틀 */}
             <div className='estimate-content-top'>
                 <span className='bold large'>{title}</span>
-                <button
+                {/* <button
                     className='download'
                     onClick={onClick}
-                >다운로드</button>
+                >다운로드</button> */}
             </div>
-            {
-                title === '서비스 목록' ? (
-                    // 서비스 목록
-                    <>
-                        <div className='estimate-content-list'>
-                            {
-                                estimateServiceList?.map((service, index) => (
-                                    <div
-                                        key={index}
-                                        className='estimate-content'
-                                    >
+            {title === '서비스 목록' ? (
+                // 서비스 목록
+                <>
+                    <div className='estimate-content-list'>
+                        {estimateServiceList?.map((service, index) => (
+                            <div
+                                key={index}
+                                className='estimate-content'
+                            >
+                                {estimateServiceList.length === 0 ? (
+                                    <span>등록된 서비스가 없습니다.</span>
+                                ) : (
+                                    <>
                                         <span>{service.service_name}</span>
                                         <div>
                                             <span>
                                                 + {formatPrice(service.price_per_meter === 0 ? service.price_per_time : service.price_per_meter)} x {estimate.quantity} = {formatPrice((service.price_per_meter === 0 ? service.price_per_time : service.price_per_meter) * estimate.quantity)} 원
                                             </span>
-                                            {
-                                                estimateStatus === 'ANSWER_COMPLETE' ? (
-                                                    null
-                                                ) : (
-                                                    <button
-                                                        className='estimate-delete'
-                                                        onClick={() => handleDeleteService(service.estimate_service_list_id)}
-                                                    >X</button>
-                                                )
-                                            }
+                                            {estimateStatus === 'ANSWER_COMPLETE' ? (
+                                                null
+                                            ) : (
+                                                <button
+                                                    className='estimate-delete'
+                                                    onClick={() => handleDeleteService(service.estimate_service_list_id)}
+                                                >X</button>
+                                            )}
                                         </div>
-                                    </div>
-                                ))
-                            }
-                        </div>
-                        <div
-                            className='estimate-content'
-                            style={{
-                                paddingTop: '1rem',
-                                paddingBottom: '0.5rem',
-                            }}
-                        >
-                            <span className='bold large'>총 금액</span>
-                            <span className='bold large'>{formatPrice(totalPrice)}원</span>
-                        </div>
-                    </>
-                ) : (
-                    // 견적서 내용
-                    <>
-                        <div className='estimate-content-list'>
-                            <div className='estimate-content'>
-                                <span>서비스 항목 {estimateServiceList?.length}건</span>
-                                <span>+ {formatPrice(totalPrice)}원</span>
+                                    </>
+                                )}
+
                             </div>
-                            <div className='estimate-content'>
-                                <span>출장비</span>
-                                <span>+ 2,500원</span>
-                            </div>
+                        ))}
+                    </div>
+                    <div
+                        className='estimate-content'
+                        style={{
+                            paddingTop: '1rem',
+                            paddingBottom: '0.5rem',
+                        }}
+                    >
+                        <span className='bold large'>총 금액</span>
+                        <span className='bold large'>{formatPrice(totalPrice)}원</span>
+                    </div>
+                </>
+            ) : (
+                // 견적서 내용
+                <>
+                    <div className='estimate-content-list'>
+                        <div className='estimate-content'>
+                            <span>서비스 항목 {estimateServiceList?.length}건</span>
+                            <span>+ {formatPrice(totalPrice)}원</span>
                         </div>
-                        <div
-                            className='estimate-content'
-                            style={{
-                                paddingTop: '1rem',
-                                paddingBottom: '0.5rem',
-                            }}
-                        >
-                            <span className='bold large'>총 금액</span>
-                            <span className='bold large'>{formatPrice(totalPrice + 2500)}원</span>
+                        <div className='estimate-content'>
+                            <span>출장비</span>
+                            <span>+ 2,500원</span>
                         </div>
-                    </>
-                )
-            }
+                    </div>
+                    <div
+                        className='estimate-content'
+                        style={{
+                            paddingTop: '1rem',
+                            paddingBottom: '0.5rem',
+                        }}
+                    >
+                        <span className='bold large'>총 금액</span>
+                        <span className='bold large'>{formatPrice(totalPrice + 2500)}원</span>
+                    </div>
+                </>
+            )}
         </div>
     );
 };
@@ -140,8 +141,6 @@ const EstimateTabs = ({
     estimateServiceList,
     estimateStatus,
 }) => {
-
-    console.log(estimateStatus);
 
     /* ===== STATE ===== */
     const [activeTab, setActiveTab] = useState(0);
