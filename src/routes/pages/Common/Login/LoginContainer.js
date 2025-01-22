@@ -45,6 +45,8 @@ const LoginContainer = ({
 
             signinUserInfo={signinUserInfo}
             setSigninUserInfo={setSigninUserInfo}
+
+            navigate={navigate}
         />
     )
 }

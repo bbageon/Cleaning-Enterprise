@@ -55,19 +55,19 @@ const AdminRoutes = () => {
                     key: 'users-dashboard',
                     label: '대시보드',
                     icon: null,
-                    onClick: () => navigate('admin/users/dashboard'),
+                    onClick: () => navigate('users/dashboard'),
                 },
                 {
                     key: 'users-list',
                     label: '회원 목록',
                     icon: null,
-                    onClick: () => navigate('admin/users/list'),
+                    onClick: () => navigate('users/list'),
                 },
                 // {
                 //     key: 'users-register',
                 //     label: '회원 등록/수정',
                 //     icon: null,
-                //     onClick: () => navigate('admin/users/register'),
+                //     onClick: () => navigate('users/register'),
                 // },
             ],
         },
@@ -82,19 +82,19 @@ const AdminRoutes = () => {
                     key: 'companies-dashboard',
                     label: '대시보드',
                     icon: null,
-                    onClick: () => navigate('admin/companies/dashboard'),
+                    onClick: () => navigate('companies/dashboard'),
                 },
                 {
                     key: 'companies-list',
                     label: '청소업체 목록',
                     icon: null,
-                    onClick: () => navigate('admin/companies/list'),
+                    onClick: () => navigate('companies/list'),
                 },
                 // {
                 //     key: 'companies-register',
                 //     label: '청소업체 등록/수정',
                 //     icon: null,
-                //     onClick: () => navigate('admin/companies/register'),
+                //     onClick: () => navigate('companies/register'),
                 // }
             ],
         },
@@ -109,19 +109,19 @@ const AdminRoutes = () => {
                     key: 'services-dashboard',
                     label: '대시보드',
                     icon: null,
-                    onClick: () => navigate('admin/services/dashboard'),
+                    onClick: () => navigate('services/dashboard'),
                 },
                 {
                     key: 'services-list',
                     label: '서비스 목록',
                     icon: null,
-                    onClick: () => navigate('admin/services/list'),
+                    onClick: () => navigate('services/list'),
                 },
                 // {
                 //     key: 'services-register',
                 //     label: '서비스 등록/수정',
                 //     icon: null,
-                //     onClick: () => navigate('admin/services/register'),
+                //     onClick: () => navigate('services/register'),
                 // },
             ],
         },
@@ -136,13 +136,13 @@ const AdminRoutes = () => {
                     key: 'reviews-dashboard',
                     label: '대시보드',
                     icon: null,
-                    onClick: () => navigate('admin/reviews/dashboard'),
+                    onClick: () => navigate('reviews/dashboard'),
                 },
                 {
                     key: 'reviews-list',
                     label: '리뷰 목록',
                     icon: null,
-                    onClick: () => navigate('admin/reviews/list'),
+                    onClick: () => navigate('reviews/list'),
                 },
             ],
         },
@@ -160,7 +160,7 @@ const AdminRoutes = () => {
             <Routes>
 
                 {/* 회원 관리 */}
-                <Route path='admin/users'>
+                <Route path='users'>
                     <Route
                         index
                         path='dashboard'
@@ -178,7 +178,7 @@ const AdminRoutes = () => {
                 </Route>
 
                 {/* 청소업체 관리 */}
-                <Route path='admin/companies'>
+                <Route path='companies'>
                     <Route
                         index
                         path='dashboard'
@@ -196,7 +196,7 @@ const AdminRoutes = () => {
                 </Route>
 
                 {/* 서비스 관리 */}
-                <Route path='admin/services'>
+                <Route path='services'>
                     <Route
                         index
                         path='dashboard'
@@ -214,7 +214,7 @@ const AdminRoutes = () => {
                 </Route>
 
                 {/* 리뷰 관리 */}
-                <Route path='admin/reviews'>
+                <Route path='reviews'>
                     <Route
                         index
                         path='dashboard'

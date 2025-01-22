@@ -92,7 +92,7 @@ const Router = () => {
     // 라우터 변경 감지 (로그인 확인용)
     useEffect(() => {
         const { pathname } = location;
-        if (pathname === '/') return;
+        if (pathname === '/' || pathname.startsWith('/admin')) return;
 
         // 만약 로그인 되어있지 않다면 메인 화면으로 이동
         if (!isLogin()) {

@@ -10,10 +10,15 @@ const LoginPresenter = ({
 
     signinUserInfo,
     setSigninUserInfo,
+
+    navigate,
 }) => {
     return (
         <div
             className="login-container"
+            style={{
+                position: 'relative',
+            }}
         >
             <div className="login-wrap">
                 {
@@ -30,6 +35,18 @@ const LoginPresenter = ({
                             setSigninUserInfo={setSigninUserInfo}
                         />
                 }
+                <span
+                    style={{
+                        position: 'absolute',
+                        top: 10,
+                        right: 10,
+                        color: '#FFFFFF',
+                        borderBottom: '1px solid #FFFFFF',
+                        paddingBottom: '3px',
+                        cursor: 'pointer'
+                    }}
+                    onClick={() => navigate('/admin')}
+                >관리자이신가요?</span>
             </div>
         </div>
     )
