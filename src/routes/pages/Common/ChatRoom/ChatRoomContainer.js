@@ -34,7 +34,8 @@ const ChatRoomContainer = ({
         (
             async () => {
                 try {
-                    const id = `${process.env.REACT_APP_TEST_COMPANY_ID}`
+                    // const id = `${process.env.REACT_APP_TEST_COMPANY_ID}`
+                    const id = cookie.getCookie('id');
 
                     const result = await API.getCompanyChatRoom(id);
                     if (result.status !== 200) throw new Error(`[ChatRoomListContainer] [useEffect] Error`);
